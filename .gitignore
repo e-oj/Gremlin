@@ -1,0 +1,5 @@
+# auto generated config folder for Jetbrains IDEs
+.idea/
+
+# Dependency directories
+node_modules/
