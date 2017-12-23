@@ -5,15 +5,21 @@
 
 let moduleId = "/api/user/auth";
 
-let response = require("../../utils/response");
-let http = require("../../utils/HttpStats");
-let auth = require("../../utils/authToken");
-let User = require("../models/User").User;
+let response = require("../../../utils/response");
+let http = require("../../../utils/HttpStats");
+let auth = require("../../../utils/authToken");
+let User = require("../../models/User").User;
 
 exports.createUser = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
   let props = ["alias", "password"];
+  let userExists = !!await User.findOne().exec();
+
+  if(userExists){
+    return respondErr(http.FORBIDDEN, "User cannot be created");
+  }
+
   let user = new User();
 
   for(let prop of props){
@@ -22,11 +28,13 @@ exports.createUser = async (req, res) => {
 
   try{
     user = await user.save();
-    let token = auth.createToken(user);
+    let token = await auth.createToken(user);
 
     respond(http.CREATED, "User created", {user, token});
+    console.log(token);
   }
   catch(err){
+    console.log(err);
     respondErr(http.SERVER_ERROR, err.message, err);
   }
 };
