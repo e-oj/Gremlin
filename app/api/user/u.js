@@ -10,6 +10,14 @@ let http = require("../../../utils/HttpStats");
 let auth = require("../../../utils/authToken");
 let User = require("../../models/User").User;
 
+/**
+ * Route handler for creating users
+ *
+ * @param req the request
+ * @param res the response
+ *
+ * @returns {Promise.<*>}
+ */
 exports.createUser = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
@@ -31,10 +39,8 @@ exports.createUser = async (req, res) => {
     let token = await auth.createToken(user);
 
     respond(http.CREATED, "User created", {user, token});
-    console.log(token);
   }
   catch(err){
-    console.log(err);
     respondErr(http.SERVER_ERROR, err.message, err);
   }
 };

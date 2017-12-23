@@ -9,8 +9,7 @@ let jwt = Promise.promisifyAll(require("jsonwebtoken"));
 let chai = require("chai");
 let expect = chai.expect;
 
-// let User = require("../models/index").User;
-// let http = require("../../utils/HttpStats");
+let http = require("../../utils/HttpStats");
 let config = require("../../config");
 let mock = require("./mock.users");
 let SERVER_URL = `http://localhost:${config.PORT}`;
@@ -31,6 +30,18 @@ module.exports = describe("Authentication Tests", () => {
       expect(bcrypt.compareSync(mock.user1.password, user.password)).to.be.true;
 
       expect(mock.user1.alias).to.equal(d_alias);
+    });
+
+    it("should not allow the creation of a second user", async () => {
+      try{
+        res = await request.post("/api/u").send(mock.user2);
+      }
+      catch(err){
+        let msg = err.response.body.message;
+
+        expect(err).to.have.status(http.FORBIDDEN);
+        expect(msg.includes("cannot be created")).to.be.true;
+      }
     });
   });
 });
