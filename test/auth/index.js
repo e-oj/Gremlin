@@ -17,30 +17,51 @@ let SERVER_URL = `http://localhost:${config.PORT}`;
 module.exports = describe("Authentication Tests", () => {
   let request = chai.request(SERVER_URL);
 
-  context("Creating a User", () => {
-    let res;
-
+  context("User Creation", () => {
     it("should return a user and a jwt with user's _id and alias", async () => {
-      res = await request.post("/api/u").send(mock.user1);
+      let res = await request.post("/api/u").send(mock.user1);
       let {user, token} = res.body.result;
       let decoded = await jwt.verifyAsync(token, config.SECRET);
-      let {alias: d_alias} = decoded;
 
       expect(mock.user1.alias).to.equal(user.alias);
       expect(bcrypt.compareSync(mock.user1.password, user.password)).to.be.true;
 
-      expect(mock.user1.alias).to.equal(d_alias);
+      expect(mock.user1.alias).to.equal(decoded.alias);
+      expect(decoded._id).to.exist;
     });
 
     it("should not allow the creation of a second user", async () => {
       try{
-        res = await request.post("/api/u").send(mock.user2);
+        await request.post("/api/u").send(mock.user2);
       }
       catch(err){
         let msg = err.response.body.message;
 
         expect(err).to.have.status(http.FORBIDDEN);
         expect(msg.includes("cannot be created")).to.be.true;
+      }
+    });
+  });
+
+  context("Log in", () => {
+    it("should return a jwt with user's _id and alias", async () => {
+      let res = await request.post("/api/u/login").send(mock.user1);
+      let {token} = res.body.result;
+      let decoded = await jwt.verifyAsync(token, config.SECRET);
+
+      expect(decoded._id).to.exist;
+      expect(decoded.alias).to.equal(mock.user1.alias);
+    });
+
+    it("should fail for an invalid user", async () => {
+      try{
+        await request.post("/api/u/login").send(mock.user2);
+      }
+      catch(err){
+        let msg = err.response.body.message;
+
+        expect(msg.includes("Invalid User")).to.be.true;
+        expect(err).to.have.status(http.UNAUTHORIZED);
       }
     });
   });

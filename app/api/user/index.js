@@ -13,4 +13,6 @@ let userRouter = express.Router();
 userRouter.route("/")
   .post(user.createUser);
 
+userRouter.post("/login", user.login);
+
 module.exports = userRouter;
