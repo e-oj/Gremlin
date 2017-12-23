@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise = require("bluebird");
 let cors = require("cors");
 
 let config = require("./config");
+let apiRouter = require("./app/api");
 
 mongoose.connect(config.DB_URL, {useMongoClient: true});
 
@@ -25,6 +26,8 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
+
+app.use("/api", apiRouter);
 
 app.use("/", (req, res) => {
   res.send("hello world");
