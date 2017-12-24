@@ -24,19 +24,20 @@ exports.createUser = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
   let props = ["alias", "password"];
-  let userExists = !!await User.findOne().exec();
-
-  if(userExists){
-    return respondErr(http.FORBIDDEN, "User cannot be created");
-  }
-
-  let user = new User();
-
-  for(let prop of props){
-    user[prop] = req.body[prop];
-  }
 
   try{
+    let userExists = !!await User.findOne().exec();
+
+    if(userExists){
+      return respondErr(http.FORBIDDEN, "User cannot be created");
+    }
+
+    let user = new User();
+
+    for(let prop of props){
+      user[prop] = req.body[prop];
+    }
+
     user = await user.save();
     let token = await auth.createToken(user);
 
@@ -47,18 +48,25 @@ exports.createUser = async (req, res) => {
   }
 };
 
+/**
+ * Login route handler
+ *
+ * @param req request
+ * @param res response
+ *
+ * @returns {Promise.<*>}
+ */
 exports.login = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
   let {alias, password} = req.body;
   let fail = () => respondErr(http.UNAUTHORIZED, "Invalid User");
-  let user = await User.findOne({alias}).exec();
-
-  if(!user) fail();
 
   try{
-    let validPass = await bcrypt.compare(password, user.password);
+    let user = await User.findOne({alias}).exec();
+    if(!user) fail();
 
+    let validPass = await bcrypt.compare(password, user.password);
     if(!validPass) fail();
 
     let token = await auth.createToken(user);
