@@ -66,5 +66,5 @@ exports.checkAdmin = (req, res, next) => {
 exports.createToken = async (user) => {
   let {_id, alias} = user;
 
-  return await jwt.signAsync({_id, alias}, config.SECRET, {expiresIn: "600h"});
+  return await jwt.signAsync({_id, alias}, config.SECRET, {expiresIn: "168h"});
 };
