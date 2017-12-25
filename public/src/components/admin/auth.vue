@@ -2,7 +2,7 @@
   <form class="auth">
     <div>
       <input type="text" v-model="alias" placeholder="alias"/>
-      <input type="text" v-model="password" placeholder="password"/>
+      <input type="password" v-model="password" placeholder="password"/>
     </div>
 
     <div>
