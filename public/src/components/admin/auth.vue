@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import config from "../../../../config/index"
+  import config from "../../../../config"
   const ERR = "Something fucked up!";
 
   export default {
