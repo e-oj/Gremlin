@@ -5,9 +5,17 @@
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import config from "./config"
+
+  export default {
+    name: 'app',
+    created(){
+      let store = this.$store;
+      let token = localStorage.getItem(config.AUTH);
+
+      if(token) store.commit("token", token);
+    }
+  }
 </script>
 
 <style>
@@ -16,8 +24,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+body{
+  font-size: 20px;
 }
 
 h1, h2 {
@@ -36,5 +46,9 @@ li {
 
 a {
   color: #42b983;
+}
+
+.err {
+  color: red;
 }
 </style>

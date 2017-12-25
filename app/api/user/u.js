@@ -35,7 +35,7 @@ exports.createUser = async (req, res) => {
     let user = new User();
 
     for(let prop of props){
-      user[prop] = req.body[prop];
+      user[prop] = req.body[prop].toString().trim();
     }
 
     user = await user.save();

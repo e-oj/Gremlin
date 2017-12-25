@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  export default {
+  export default{
     data(){
       return {
-        msg: "Admin Console"
+        msg: "Homepage"
       }
     }
   }
