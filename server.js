@@ -29,10 +29,6 @@ app.use(cors());
 
 app.use("/api", apiRouter);
 
-app.use("/", (req, res) => {
-  res.send("hello world");
-});
-
 app.use("*", (req, res) => {
   res.sendFile(`${STATIC}/index.html`);
 });

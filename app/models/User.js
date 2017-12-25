@@ -9,8 +9,8 @@ let Schema = mongoose.Schema;
 const REQUIRED = "{PATH} is required";
 
 let UserSchema = new Schema({
-  alias: {type: String, required: REQUIRED}
-  , password: {type: String, required: REQUIRED}
+  alias: {type: String, required: REQUIRED, minlength: 2}
+  , password: {type: String, required: REQUIRED, minlength: 2}
 });
 
 UserSchema.pre("save", async function(next){
