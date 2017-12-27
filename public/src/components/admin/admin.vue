@@ -10,7 +10,7 @@
 
 <script>
   import Auth from "./auth.vue";
-  import AdminNav from "./admin.nav.vue"
+  import AdminNav from "./nav.admin.vue"
 
   export default {
     data(){

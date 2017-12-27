@@ -9,6 +9,7 @@
 
   export default {
     name: 'app',
+
     created(){
       let store = this.$store;
       let token = localStorage.getItem(config.AUTH);

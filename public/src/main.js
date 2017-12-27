@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Vue from "vue";
 import VueResource from "vue-resource";
 import Vuex from "vuex";
@@ -61,6 +62,15 @@ new Vue({
   el: "#app",
   template: "<App/>"
   , components: {App}
+  , created(){
+    const FONT_RATIO = 0.013;
+    let fontSize = (window.screen.availWidth * FONT_RATIO) + "px";
+    let $body = $("body");
+
+    $body.css({fontSize});
+
+    console.log(fontSize);
+  }
   , router
   , store
 });

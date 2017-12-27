@@ -65,12 +65,13 @@
     flex-direction: column;
     font-size: 1.3em;
     width: 80%;
-    height: 800px;
+    height: 70%;
     justify-content: space-evenly;
     font-family: 'Amaranth', sans-serif;
   }
 
   .splash-text{
+    width: 46%;
     max-width: 700px;
     font-family: 'Text Me One', sans-serif;
   }
@@ -81,12 +82,12 @@
 
   .intro a{
     text-decoration: none;
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid #ffff00;
     transition: all 0.2s linear;
   }
 
   .intro a:hover{
-    border-color: #ffff00;
+    color: #ffff00
   }
 
   .links a{
