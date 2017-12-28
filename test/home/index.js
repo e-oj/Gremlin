@@ -45,10 +45,7 @@ module.exports = describe("Home Tests", () => {
       });
 
       it("should modify existing home (only one home)", async () => {
-        let res = await request.post("/api/u/login").send(users.user1);
-        token = res.body.result.token;
-
-        res = await request.put("/api/h")
+        let res = await request.put("/api/h")
           .set(config.AUTH_TOKEN, token)
           .send(homes.home2);
 
