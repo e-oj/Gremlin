@@ -15,7 +15,7 @@ exports.setHome = async (req, res) => {
 
   try{
     let home = await Home.findOne().exec();
-    let text = res.body.text.trim();
+    let text = req.body.text.trim();
 
     if(!home) home = new Home();
 
@@ -26,6 +26,7 @@ exports.setHome = async (req, res) => {
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);
+    console.log(err);
   }
 };
 

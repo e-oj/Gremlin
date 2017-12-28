@@ -9,7 +9,7 @@ let user = require("./u");
 
 let userRouter = express.Router();
 
-userRouter.post("/", user.createUser);
 userRouter.post("/login", user.login);
+userRouter.post("/", user.createUser);
 
 module.exports = userRouter;

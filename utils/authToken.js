@@ -25,23 +25,22 @@ let moduleId = "utils/authToken";
 exports.checkToken = async (req, res, next) => {
   let respondErr = response.failure(res, moduleId);
   let authToken = req.get(config.AUTH_TOKEN);
+  let fail = () => respondErr(http.UNAUTHORIZED, config.AUTH_ERR_MSG);
 
-  if(!authToken) return respondErr(http.UNAUTHORIZED, "Missing u_auth token");
+  if(!authToken) return fail();
 
   try {
     let user = await jwt.verifyAsync(authToken, config.SECRET);
     user = await Users.findById(user._id);
 
-    if(!user){
-      return respondErr(http.UNAUTHORIZED, "User no longer exists");
-    }
+    if(!user) return fail();
 
     req.user = user;
 
     next();
   }
   catch(err){
-    respondErr(http.UNAUTHORIZED, config.DEFAULT_ERR_MSG, err);
+    respondErr(http.UNAUTHORIZED, config.AUTH_ERR_MSG, err);
   }
 };
 
@@ -50,7 +49,7 @@ exports.checkAdmin = (req, res, next) => {
   let user = req.user;
 
   if(!user.admin){
-    return respondErr(http.UNAUTHORIZED, "You're UNAUTHORIZED!!!!");
+    return respondErr(http.UNAUTHORIZED, config.AUTH_ERR_MSG);
   }
 
   next();
