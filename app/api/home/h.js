@@ -9,6 +9,15 @@ let Home = require("../../models/Home").Home;
 let response = require("../../../utils/response");
 let http = require("../../../utils/HttpStats");
 
+/**
+ * route handler for creating/editing
+ * home objects
+ *
+ * @param req request
+ * @param res response
+ *
+ * @returns {Promise.<void>}
+ */
 exports.setHome = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
@@ -30,6 +39,15 @@ exports.setHome = async (req, res) => {
   }
 };
 
+/**
+ * route handler for retrieving a
+ * home object
+ *
+ * @param req request
+ * @param res response
+ *
+ * @returns {Promise.<*>}
+ */
 exports.getHome = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
