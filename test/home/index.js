@@ -30,7 +30,7 @@ module.exports = describe("Home Tests", () => {
       }
     });
 
-    context("After Authentication", async () => {
+    context("After Authentication", () => {
       let token;
 
       it("should return a new home object", async () => {
@@ -54,6 +54,14 @@ module.exports = describe("Home Tests", () => {
         expect(res.body.result.home.text).to.equal(homes.home2.text);
         expect(dbHomes).to.have.length(1);
       });
+    });
+  });
+
+  context("Home retrieval", () => {
+    it("should return the home object", async () => {
+      let res = await request.get("/api/h");
+
+      expect(res.body.result.home.text).to.equal(homes.home2.text);
     });
   });
 });
