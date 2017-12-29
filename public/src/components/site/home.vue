@@ -23,7 +23,6 @@
         <a href="https://medium.com/@emmanuelolaojo">
           <i class="fab fa-medium"></i>
         </a>
-
       </div>
     </div>
   </div>
