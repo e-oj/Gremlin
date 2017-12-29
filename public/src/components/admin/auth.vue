@@ -94,7 +94,7 @@
     width: 300px;
     height: 200px;
     margin: 40px auto;
-    border: 2px solid #336699;
+    border: 2px solid #42b983;
   }
 
   .auth div{

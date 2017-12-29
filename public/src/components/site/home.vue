@@ -8,7 +8,7 @@
       </div>
 
       <div class="splash-text">
-        {{msg}}
+        {{text}}
       </div>
 
       <div class="links">
@@ -32,17 +32,32 @@
 <script>
   import Nav from "./nav.vue"
 
+  const DEFAULT_TEXT = "I'm a full-stack developer and Computer " +
+    "Science major at Rochester Institute of Technology. Check out " +
+    "my work on Github, follow me on Medium or connect on LinkedIn.";
+
   export default{
     data(){
       return {
-        msg: "You found Me! I'll let you know right away, if it's " +
-        "money you want, I haven't got any. If, however, you're looking " +
-        "for a very talented full-stack developer, I welcome you."
+        text: ""
       }
     },
 
     components: {
       "nav-bar": Nav
+    },
+
+    async created(){
+      let self = this;
+
+      try{
+        let res = await self.$http.get("/api/h");
+
+        self.text = res.body.result.home.text;
+      }
+      catch(err){
+        self.text = DEFAULT_TEXT;
+      }
     }
   }
 </script>
@@ -59,7 +74,7 @@
     justify-content: center;
   }
 
-  .content{
+  .home .content{
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -70,38 +85,38 @@
     font-family: 'Amaranth', sans-serif;
   }
 
-  .splash-text{
+  .home .splash-text{
     width: 46%;
     max-width: 700px;
     font-family: 'Text Me One', sans-serif;
   }
 
-  .intro{
+  .home .intro{
     font-weight: bold;
   }
 
-  .intro a{
+  .home .intro a{
     text-decoration: none;
     border-bottom: 3px solid #ffff00;
     transition: all 0.2s linear;
   }
 
-  .intro a:hover{
+  .home .intro a:hover{
     color: #ffff00
   }
 
-  .links a{
+  .home .links a{
     text-decoration: none;
     color: #42b983;
     transition: all 0.2s linear;
     margin-right: 35px;
   }
 
-  .links a:last-child{
+  .home .links a:last-child{
     margin-right: 0;
   }
 
-  .links a:hover{
+  .home .links a:hover{
     color: #ffff00;
   }
 </style>
