@@ -5,11 +5,13 @@
 
 let express = require("express");
 
-let UserRouter = require("./user");
+let userRouter = require("./user");
+let homeRouter = require("./home");
 
 let apiRouter = express.Router();
 
-apiRouter.use("/u", UserRouter);
+apiRouter.use("/u", userRouter);
+apiRouter.use("/h", homeRouter);
 
 apiRouter.get("/", (req, res) => {
   res.send("welcome to ze api");

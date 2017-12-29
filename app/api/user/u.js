@@ -64,10 +64,10 @@ exports.login = async (req, res) => {
 
   try{
     let user = await User.findOne({alias}).exec();
-    if(!user) fail();
+    if(!user) return fail();
 
     let validPass = await bcrypt.compare(password, user.password);
-    if(!validPass) fail();
+    if(!validPass) return fail();
 
     let token = await auth.createToken(user);
     return respond(http.OK, "Logged In!", {token});

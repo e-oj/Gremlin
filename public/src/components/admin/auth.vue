@@ -1,11 +1,11 @@
 <template>
   <form class="auth">
-    <div>
+    <div class="fields">
       <input type="text" v-model="alias" placeholder="alias"/>
       <input type="password" v-model="password" placeholder="password"/>
     </div>
 
-    <div>
+    <div class="action">
       <button @click.prevent="login">Login</button>
       <button @click.prevent="signup">Create</button>
     </div>
@@ -94,7 +94,21 @@
     width: 300px;
     height: 200px;
     margin: 40px auto;
-    border: 2px solid #336699;
+    border: 2px solid #42b983;
+  }
+
+  .auth div{
+    display: flex;
+    align-items: center;
+  }
+
+  .auth .fields{
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .auth .action{
+    justify-content: space-evenly;
   }
 
   .auth input{
@@ -102,6 +116,7 @@
     font-size: 0.8em;
     border: 1px solid #336699;
     color: #204060;
+    width: 90%;
   }
 
   .auth input:first-child{

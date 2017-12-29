@@ -4,3 +4,4 @@
  */
 
 exports.User = require("../../app/models/User").User;
+exports.Home = require("../../app/models/Home").Home;

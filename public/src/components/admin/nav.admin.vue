@@ -2,6 +2,9 @@
   <div id="admin-nav">
     <ul>
       <li>
+        <router-link to="/admin" tag="button">Home</router-link>
+      </li>
+      <li>
         <button @click.prevent="logout">Logout</button>
       </li>
     </ul>
@@ -27,5 +30,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+
+  #admin-nav li{
+    display: inline-flex;
+  }
+
+  #admin-nav .router-link-active{
+    background-color: #42b983;
+    color: white;
   }
 </style>

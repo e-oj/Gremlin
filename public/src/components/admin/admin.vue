@@ -1,7 +1,9 @@
 <template>
-  <div id="admin">
-    <div v-if="loggedIn">
+  <div class="admin">
+    <div v-if="loggedIn" class="content">
       <admin-nav></admin-nav>
+
+      <router-view></router-view>
     </div>
 
     <auth v-else></auth>
@@ -10,7 +12,7 @@
 
 <script>
   import Auth from "./auth.vue";
-  import AdminNav from "./admin.nav.vue"
+  import AdminNav from "./nav.admin.vue"
 
   export default {
     data(){
@@ -35,7 +37,18 @@
 </script>
 
 <style>
-  #admin button{
+  .admin{
+    background-color: #33334d;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .admin .content{
+    height: 95%;
+  }
+
+  .admin button{
     width: 80px;
     height: 30px;
     border: 1px solid #336699;
@@ -46,8 +59,8 @@
     transition: all linear 0.2s;
   }
 
-  #admin button:hover{
-    background-color: #3366cc;
+  .admin button:hover, .admin .admin{
+    background-color: #42b983;
     color: white;
   }
 </style>

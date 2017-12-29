@@ -18,4 +18,5 @@ describe("All Tests", () => {
   });
 
   require("./auth");
+  require("./home");
 });
