@@ -24,6 +24,7 @@ export default new Router({
         path: "/",
         component: AdminHome
       }]
-    }
+    },
+    {path: "*", component: Home}
   ]
 });
