@@ -58,18 +58,36 @@ let store = new Vuex.Store({
   }
 });
 
+const FONT_RATIO = 0.013;
+const MIN_FONT_RATIO = 0.0096;
+const MIN_FONT_SIZE = window.screen.availWidth * MIN_FONT_RATIO;
+
+$("body").css({
+  transition: "font-size 0.2s ease-in-out"
+});
+
 new Vue({
   el: "#app",
   template: "<App/>"
   , components: {App}
+  , methods: {
+    setFontSize(){
+      let $body = $("body");
+      let calcSize = $body.width() * FONT_RATIO;
+      let fSize = calcSize < MIN_FONT_SIZE ? MIN_FONT_SIZE : calcSize;
+      let fontSize = fSize + "px";
+
+      $body.css({fontSize});
+
+      console.log(fontSize, MIN_FONT_SIZE);
+    }
+  }
   , created(){
-    const FONT_RATIO = 0.013;
-    let fontSize = (window.screen.availWidth * FONT_RATIO) + "px";
-    let $body = $("body");
+    let self = this;
+    let $window = $(window);
 
-    $body.css({fontSize});
-
-    console.log(fontSize);
+    self.setFontSize();
+    $window.resize(self.setFontSize);
   }
   , router
   , store
