@@ -9,7 +9,8 @@ import Router from "vue-router";
 import Home from "../components/site/home.vue";
 
 import Admin from "../components/Admin/admin.vue";
-import AdminHome from "../components/Admin/home.admin.vue";
+import AdminHome from "../components/admin/home/home.admin.vue";
+import AdminBlog from "../components/admin/blog/blog.vue";
 
 Vue.use(Router);
 
@@ -20,10 +21,16 @@ export default new Router({
     {
       path: "/admin",
       component: Admin,
-      children: [{
-        path: "/",
-        component: AdminHome
-      }]
+      children: [
+        {
+          path: "/",
+          component: AdminHome
+        },
+        {
+          path: "blog",
+          component: AdminBlog
+        }
+      ]
     },
     {path: "*", component: Home}
   ]
