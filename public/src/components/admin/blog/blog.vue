@@ -24,6 +24,7 @@
 
         console.log(self.quill.getContents());
         console.log(self.quill.getText());
+        console.log($(".ql-editor").html());
       }
     },
 
