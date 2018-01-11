@@ -36,7 +36,7 @@ exports.saveBlogPost = async (req, res) => {
     }
 
     for(let prop of props){
-      if(body[prop]) blog[prop] = body[prop];
+      if(body.hasOwnProperty(prop)) blog[prop] = body[prop];
     }
 
     for(let i = 0; i < blog.tags.length; i++){
@@ -45,13 +45,14 @@ exports.saveBlogPost = async (req, res) => {
 
     blog.createdAt = Date.now();
 
-    await saveBlogFile(blog._id, body.html);
+    await saveBlogFile(blog._id.toString(), body.html);
     await blog.save();
 
-    respond(http.CREATED, "post created!", blog);
+    respond(http.CREATED, "post created!", {blog});
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);
+    console.log(err, blog, body);
   }
 };
 
