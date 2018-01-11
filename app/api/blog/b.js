@@ -25,7 +25,7 @@ exports.saveBlogPost = async (req, res) => {
       blog = await Blog.findById(body._id).exec();
 
       if(!body.draft && blog.draft) {
-        blog.createdAt = blog.updatedAt;
+        blog.createdAt = Date.now();
       }
       else if(body.draft && blog.draft === false){
         return respondErr(http.BAD_REQUEST, "Post already published");
@@ -36,8 +36,14 @@ exports.saveBlogPost = async (req, res) => {
     }
 
     for(let prop of props){
-      blog[prop] = body[prop];
+      if(body[prop]) blog[prop] = body[prop];
     }
+
+    for(let i = 0; i < blog.tags.length; i++){
+      blog.tags[i] = blog.tags[i].trim().toLowerCase();
+    }
+
+    blog.createdAt = Date.now();
 
     await saveBlogFile(blog._id, body.html);
     await blog.save();

@@ -10,7 +10,8 @@ let BlogSchema = new Schema({
   title: {type: String, required: true},
   text: {type: String, required: true},
   tags: {type: [String], required: true},
-  draft: {type: Boolean, default: null}
-}, {timestamps: true});
+  draft: {type: Boolean, default: null, required: true},
+  createdAt: {type: Date, required: true}
+});
 
 exports.Blog = mongoose.model("Blog", BlogSchema);
