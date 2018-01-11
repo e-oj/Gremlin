@@ -5,6 +5,9 @@
         <router-link to="/admin" tag="button">Home</router-link>
       </li>
       <li>
+        <router-link to="/admin/blog" tag="button">Blog</router-link>
+      </li>
+      <li>
         <button @click.prevent="logout">Logout</button>
       </li>
     </ul>
@@ -36,7 +39,7 @@
     display: inline-flex;
   }
 
-  #admin-nav .router-link-active{
+  #admin-nav .router-link-exact-active{
     background-color: #42b983;
     color: white;
   }
