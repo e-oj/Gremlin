@@ -17,6 +17,10 @@ let BlogSchema = new Schema({
   createdAt: {type: Date, required: true}
 });
 
+/**
+ * html virtual property gotten from
+ * the blog's file.
+ */
 BlogSchema.virtual("html")
   .get(function(){
     let self = this;
