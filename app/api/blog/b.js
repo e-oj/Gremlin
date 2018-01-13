@@ -13,6 +13,20 @@ let Blog = require("../../models/Blog").Blog;
 let response = require("../../../utils/response");
 let http = require("../../../utils/HttpStats");
 
+/**
+ * Route handler for creating/editing posts.
+ * A post is a draft if the draft property is
+ * set to true. A draft can be saved as a post
+ * by setting the value of draft to false. Once
+ * a draft is published as a post, It cannot be
+ * converted back to a draft. Both drafts and
+ * published posts can be edited.
+ *
+ * @param req request
+ * @param res response
+ *
+ * @returns {Promise.<*>}
+ */
 exports.saveBlogPost = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
@@ -46,16 +60,24 @@ exports.saveBlogPost = async (req, res) => {
     blog.createdAt = Date.now();
 
     await saveBlogFile(blog._id.toString(), body.html);
-    await blog.save();
+    blog = (await blog.save()).toObject();
 
     respond(http.CREATED, "post created!", {blog});
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);
-    console.log(err, blog, body);
   }
 };
 
+/**
+ * Helper function to save blog markup
+ * in a file
+ *
+ * @param id the blog's _id
+ * @param html the markup
+ *
+ * @returns {Promise.<void>}
+ */
 async function saveBlogFile(id, html){
   let filePath = path.join(__dirname, "data", id);
 

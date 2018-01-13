@@ -3,7 +3,10 @@
  * @since 1/9/18
  */
 
+let fs = Promise.promisifyAll(require("fs"));
+let path = require("path");
 let mongoose = require("mongoose");
+
 let Schema = mongoose.Schema;
 
 let BlogSchema = new Schema({
@@ -13,5 +16,21 @@ let BlogSchema = new Schema({
   draft: {type: Boolean, default: null, required: true},
   createdAt: {type: Date, required: true}
 });
+
+/**
+ * html virtual property gotten from
+ * the blog's file.
+ */
+BlogSchema.virtual("html")
+  .get(function(){
+    let self = this;
+
+    let blogPath = path.join("./app/api/blog/data", self._id.toString());
+    let text = fs.readFileSync(blogPath);
+
+    return text.toString();
+  });
+
+BlogSchema.set("toObject", {virtuals: true});
 
 exports.Blog = mongoose.model("Blog", BlogSchema);
