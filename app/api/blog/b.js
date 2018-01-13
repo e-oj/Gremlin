@@ -46,7 +46,7 @@ exports.saveBlogPost = async (req, res) => {
     blog.createdAt = Date.now();
 
     await saveBlogFile(blog._id.toString(), body.html);
-    await blog.save();
+    blog = (await blog.save()).toObject();
 
     respond(http.CREATED, "post created!", {blog});
   }
