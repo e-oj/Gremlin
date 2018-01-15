@@ -6,6 +6,7 @@
 let fs = Promise.promisifyAll(require("fs"));
 let path = require("path");
 let mongoose = require("mongoose");
+let leanVirtuals = require("mongoose-lean-virtuals");
 
 let Schema = mongoose.Schema;
 
@@ -32,5 +33,6 @@ BlogSchema.virtual("html")
   });
 
 BlogSchema.set("toObject", {virtuals: true});
+BlogSchema.plugin(leanVirtuals);
 
 exports.Blog = mongoose.model("Blog", BlogSchema);

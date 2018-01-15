@@ -10,6 +10,8 @@ let blog = require("./b");
 
 let blogRouter = express.Router();
 
-blogRouter.put("/", auth.checkToken, blog.saveBlogPost);
+blogRouter.route("/")
+  .put(auth.checkToken, blog.saveBlogPost)
+  .get(blog);
 
 module.exports = blogRouter;
