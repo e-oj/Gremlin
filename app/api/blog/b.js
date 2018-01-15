@@ -32,37 +32,66 @@ exports.saveBlogPost = async (req, res) => {
   let respondErr = response.failure(res, moduleId);
   let body = req.body;
   let props = ["title", "text", "tags", "draft"];
-  let blog;
+  let post;
 
   try{
     if(body._id){
-      blog = await Blog.findById(body._id).exec();
+      post = await Blog.findById(body._id).exec();
 
-      if(!body.draft && blog.draft) {
-        blog.createdAt = Date.now();
+      if(!body.draft && post.draft) {
+        post.createdAt = Date.now();
       }
-      else if(body.draft && blog.draft === false){
+      else if(body.draft && post.draft === false){
         return respondErr(http.BAD_REQUEST, "Post already published");
       }
     }
     else{
-      blog = new Blog();
+      post = new Blog();
     }
 
     for(let prop of props){
-      if(body.hasOwnProperty(prop)) blog[prop] = body[prop];
+      if(body.hasOwnProperty(prop)) post[prop] = body[prop];
     }
 
-    for(let i = 0; i < blog.tags.length; i++){
-      blog.tags[i] = blog.tags[i].trim().toLowerCase();
+    for(let i = 0; i < post.tags.length; i++){
+      post.tags[i] = post.tags[i].trim().toLowerCase();
     }
 
-    blog.createdAt = Date.now();
+    post.createdAt = Date.now();
 
-    await saveBlogFile(blog._id.toString(), body.html);
-    blog = (await blog.save()).toObject();
+    await saveBlogFile(post._id.toString(), body.html);
+    post = (await post.save()).toObject();
 
-    respond(http.CREATED, "post created!", {blog});
+    respond(http.CREATED, "post created!", {blog: post});
+  }
+  catch(err){
+    respondErr(http.SERVER_ERROR, err.message, err);
+  }
+};
+
+/**
+ * Route handler for getting posts.
+ * If an _id is provided in the request,
+ * the specific post with that _id is returned
+ *
+ * @param req request
+ * @param res response
+ *
+ * @returns {Promise.<void>}
+ */
+exports.getPosts = async (req, res) => {
+  let respond = response.success(res);
+  let respondErr = response.failure(res, moduleId);
+  let _id = req.query._id;
+  let condition = _id ? {_id} : {};
+
+  try{
+    let posts = await Blog.find(condition)
+      .sort("-date")
+      .lean({virtuals: true})
+      .exec();
+
+    respond(http.OK, `${posts.length} posts found`, {posts});
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);
