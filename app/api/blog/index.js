@@ -12,6 +12,6 @@ let blogRouter = express.Router();
 
 blogRouter.route("/")
   .put(auth.checkToken, blog.saveBlogPost)
-  .get(blog);
+  .get(blog.getPosts);
 
 module.exports = blogRouter;

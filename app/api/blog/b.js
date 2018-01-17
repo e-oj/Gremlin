@@ -62,7 +62,7 @@ exports.saveBlogPost = async (req, res) => {
     await saveBlogFile(post._id.toString(), body.html);
     post = (await post.save()).toObject();
 
-    respond(http.CREATED, "post created!", {blog: post});
+    respond(http.CREATED, "post created!", {post});
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);

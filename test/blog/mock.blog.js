@@ -23,7 +23,7 @@ exports.blog3 = {
   title: "The friendly serpent",
   text: "The serpent seemed friendly \n as it lay, green, in grass",
   tags: ["cautionary", "saying goes..", "fang life"],
-  draft: false,
-  html: "<p>TThe serpent seemed friendly</p><p>as it lay, green, in grass</p>"
+  draft: true,
+  html: "<p>The serpent seemed friendly</p><p>as it lay, green, in grass</p>"
 };
 

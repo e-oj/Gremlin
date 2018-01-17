@@ -20,6 +20,7 @@ const DATA = "./app/api/blog/data";
 
 module.exports = describe("Blog tests", () => {
   let request = chai.request(SERVER_URL);
+  let token;
 
   context("Create/Edit Blog Post", () => {
     it("should fail without authentication", async () => {
@@ -35,10 +36,7 @@ module.exports = describe("Blog tests", () => {
     });
 
     context("After Authentication", () => {
-      let token;
-
       it("should create a new blog file and object", async () => {
-        let props = ["title", "text", "draft", "html"];
         let res = await request.post("/api/u/login").send(users.user1);
         token = res.body.result.token;
 
@@ -48,12 +46,8 @@ module.exports = describe("Blog tests", () => {
 
         res = res.body.result;
 
-        for(let prop of props){
-          expect(blogs.blog1[prop]).to.equal(res.blog[prop]);
-        }
-
-        expect(sameList(blogs.blog1.tags, res.blog.tags)).to.be.true;
-        expect(Date.parse(res.blog.createdAt)).to.not.equal(NaN);
+        expect(samePost(res.post, blogs.blog1)).to.be.true;
+        expect(Date.parse(res.post.createdAt)).to.not.equal(NaN);
       });
 
       it("should edit an existing post", async () => {
@@ -70,33 +64,22 @@ module.exports = describe("Blog tests", () => {
           .send(blogPost);
 
         res = res.body.result;
-        let blogPath = path.join(DATA, res.blog._id);
+        let blogPath = path.join(DATA, res.post._id);
 
-        for(let prop of sameProps){
-          expect(res.blog[prop]).to.equal(blogPost[prop]);
-        }
-
-        expect(sameList(res.blog.tags, blogPost.tags)).to.be.true;
-        expect(res.blog.title).to.equal(newTitle);
+        expect(samePost(res.post, blogPost, {props: sameProps})).to.be.true;
+        expect(res.post.title).to.equal(newTitle);
         expect(fs.existsSync(blogPath)).to.be.true;
       });
 
       it("should save a draft", async () => {
-        let props = ["title", "text", "draft", "html"];
-
-        let res = await request.put("/api/b")
-          .set(config.AUTH_TOKEN, token)
-          .send(blogs.blog2);
+        let req = request.put("/api/b").set(config.AUTH_TOKEN, token);
+        let res = await req.send(blogs.blog2);
 
         res = res.body.result;
-        let blogPath = path.join(DATA, res.blog._id);
+        let blogPath = path.join(DATA, res.post._id);
 
-        for(let prop of props){
-          expect(res.blog[prop]).to.equal(blogs.blog2[prop]);
-        }
-
-        expect(sameList(res.blog.tags, blogs.blog2.tags));
-        expect(Date.parse(res.blog.createdAt)).to.not.equal(NaN);
+        expect(samePost(res.post, blogs.blog2)).to.be.true;
+        expect(Date.parse(res.post.createdAt)).to.not.equal(NaN);
         expect(fs.existsSync(blogPath)).to.be.true;
       });
 
@@ -113,15 +96,11 @@ module.exports = describe("Blog tests", () => {
 
         res = res.body.result;
 
-        for(let prop of sameProps){
-          expect(res.blog[prop]).to.equal(draft[prop]);
-        }
-
-        expect(sameList(res.blog.tags, draft.tags)).to.be.true;
-        expect(res.blog.draft).to.be.false;
+        expect(samePost(res.post, draft, {props: sameProps})).to.be.true;
+        expect(res.post.draft).to.be.false;
 
         expect( (() => {
-          return firstCreatedAt < Date.parse(res.blog.createdAt);
+          return firstCreatedAt < Date.parse(res.post.createdAt);
         })() ).to.be.true;
       });
 
@@ -142,7 +121,70 @@ module.exports = describe("Blog tests", () => {
       });
     });
   });
+
+  context("Blog Post Retrieval", () => {
+    before(async () => {
+      try{
+        await request.put("/api/b")
+          .set(config.AUTH_TOKEN, token)
+          .send(blogs.blog3);
+      }
+      catch(err){
+        console.log(err);
+        throw err;
+      }
+    });
+
+    it("should return all drafts and published posts", async () => {
+      let res = await request.get("/api/b");
+      let posts = await Blog.find().sort("-date").lean().exec();
+
+      res = res.body.result;
+
+      for(let i = 0; i < res.posts.length; i++){
+        expect(samePost(res.posts[i], posts[i]));
+      }
+    });
+
+    it("should return only drafts", async () => {
+      let res = await request.get("/api/b/?draft=yes");
+      let post = await Blog.findOne({draft: true}).lean({virtuals: true}).exec();
+
+      res = res.body.result;
+
+      expect(res.posts.length).to.equal(1);
+      expect(samePost(res.posts[0], post)).to.be.true;
+    });
+
+
+    it("should return only published posts", async () => {
+      let res = await request.get("/api/b/?draft=no");
+      let posts = await Blog.find({draft: false}).sort("-date").lean().exec();
+
+      res = res.body.result;
+
+      for(let i = 0; i < res.posts.length; i++){
+        expect(res.posts[i].draft).to.be.false;
+        expect(samePost(res.posts[i], posts[i]));
+      }
+    });
+  });
 });
+
+function samePost(post1, post2, options={}){
+  let props = options.props || ["title", "text", "draft", "html"];
+  let tags = options.tags || true;
+
+  for(let prop of props){
+    if(post1[prop] !== post2[prop]){
+      return false;
+    }
+  }
+
+  if(tags) return sameList(post1.tags, post2.tags);
+
+  return true;
+}
 
 function sameList(lst1, lst2){
   if(lst1 === lst2) return true;
