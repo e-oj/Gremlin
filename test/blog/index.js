@@ -137,7 +137,7 @@ module.exports = describe("Blog tests", () => {
 
     it("should return all drafts and published posts", async () => {
       let res = await request.get("/api/b");
-      let posts = await Blog.find().sort("-date").lean().exec();
+      let posts = await Blog.find().sort("-date").lean({virtuals: true}).exec();
 
       res = res.body.result;
 
@@ -159,7 +159,7 @@ module.exports = describe("Blog tests", () => {
 
     it("should return only published posts", async () => {
       let res = await request.get("/api/b/?draft=no");
-      let posts = await Blog.find({draft: false}).sort("-date").lean().exec();
+      let posts = await Blog.find({draft: false}).sort("-date").lean({virtuals: true}).exec();
 
       res = res.body.result;
 
@@ -167,6 +167,15 @@ module.exports = describe("Blog tests", () => {
         expect(res.posts[i].draft).to.be.false;
         expect(samePost(res.posts[i], posts[i]));
       }
+    });
+
+    it("should return a post by _id", async () => {
+      let post = await Blog.findOne().lean({virtuals: true}).exec();
+      let res = await request.get(`/api/b/?_id=${post._id}`);
+
+      res = res.body.result;
+
+      expect(samePost(res.posts[0], post)).to.be.true;
     });
   });
 });
