@@ -137,7 +137,10 @@ module.exports = describe("Blog tests", () => {
 
     it("should return all drafts and published posts", async () => {
       let res = await request.get("/api/b");
-      let posts = await Blog.find().sort("-date").lean({virtuals: true}).exec();
+      let posts = await Blog.find({deleted: false})
+        .sort("-date")
+        .lean({virtuals: true})
+        .exec();
 
       res = res.body.result;
 
@@ -148,7 +151,9 @@ module.exports = describe("Blog tests", () => {
 
     it("should return only drafts", async () => {
       let res = await request.get("/api/b/?draft=yes");
-      let post = await Blog.findOne({draft: true}).lean({virtuals: true}).exec();
+      let post = await Blog.findOne({draft: true, deleted: false})
+        .lean({virtuals: true})
+        .exec();
 
       res = res.body.result;
 
@@ -176,6 +181,23 @@ module.exports = describe("Blog tests", () => {
       res = res.body.result;
 
       expect(samePost(res.posts[0], post)).to.be.true;
+    });
+  });
+
+  context("Delete post", async () => {
+    it("should delete a post by _id", async () => {
+      let post = await Blog.findOne().exec();
+
+      expect(post.deleted).to.equal(false);
+
+      let req = request.del("/api/b").set(config.AUTH_TOKEN, token);
+      let res = await req.send({_id: post._id});
+
+      res = res.body.result;
+      expect(samePost(res.post, post)).to.be.true;
+
+      post = await Blog.findById(post._id).exec();
+      expect(post.deleted).to.be.true;
     });
   });
 });

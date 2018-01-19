@@ -27,7 +27,7 @@ let http = require("../../../utils/HttpStats");
  *
  * @returns {Promise.<*>}
  */
-exports.saveBlogPost = async (req, res) => {
+exports.savePost = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
   let body = req.body;
@@ -62,7 +62,7 @@ exports.saveBlogPost = async (req, res) => {
     await saveBlogFile(post._id.toString(), body.html);
     post = (await post.save()).toObject();
 
-    respond(http.CREATED, "post created!", {post});
+    respond(http.CREATED, "post created.", {post});
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);
@@ -83,7 +83,7 @@ exports.getPosts = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
   let q = req.query;
-  let condition = {};
+  let condition = {deleted: false};
 
   if(q._id) condition._id = q._id;
   if(q.draft) condition.draft = q.draft === "yes";
@@ -94,7 +94,40 @@ exports.getPosts = async (req, res) => {
       .lean({virtuals: true})
       .exec();
 
-    respond(http.OK, `${posts.length} posts found`, {posts});
+    respond(http.OK, `${posts.length} posts found.`, {posts});
+  }
+  catch(err){
+    respondErr(http.SERVER_ERROR, err.message, err);
+  }
+};
+
+/**
+ * Route handler for deleting posts via _id. Posts
+ * are deleted by setting the deleted property on
+ * the post to true.
+ *
+ * @param req request
+ * @param res response
+ *
+ * @returns {Promise.<*>}
+ */
+exports.deletePost = async (req, res) => {
+  let respond = response.success(res);
+  let respondErr = response.failure(res, moduleId);
+  let _id = req.body._id;
+
+  if(!_id){
+    return respondErr(http.BAD_REQUEST, "Missing _id!");
+  }
+
+  try{
+    let post = await Blog.findOneAndUpdate({_id}, {deleted: true}).exec();
+
+    if(!post){
+      return respondErr(http.NOT_FOUND, "Post not found!");
+    }
+
+    respond(http.OK, "post deleted.", {post});
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);

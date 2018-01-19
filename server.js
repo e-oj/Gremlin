@@ -15,7 +15,7 @@ let cors = require("cors");
 let config = require("./config");
 let apiRouter = require("./app/api");
 
-mongoose.connect(config.DB_URL, {useMongoClient: true});
+mongoose.connect(config.DB_URL);
 
 const STATIC = path.join(__dirname, "public");
 let app = express();

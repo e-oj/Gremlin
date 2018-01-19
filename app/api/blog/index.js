@@ -11,7 +11,8 @@ let blog = require("./b");
 let blogRouter = express.Router();
 
 blogRouter.route("/")
-  .put(auth.checkToken, blog.saveBlogPost)
-  .get(blog.getPosts);
+  .get(blog.getPosts)
+  .put(auth.checkToken, blog.savePost)
+  .delete(auth.checkToken, blog.deletePost);
 
 module.exports = blogRouter;

@@ -8,7 +8,7 @@ mongoose.Promise = global.Promise = require("bluebird");
 
 let {DB_URL} = require("../config");
 
-mongoose.connect(DB_URL, {useMongoClient: true});
+mongoose.connect(DB_URL);
 let conn = mongoose.connection;
 
 chai.use(chaiHttp);
