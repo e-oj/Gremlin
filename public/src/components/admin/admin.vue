@@ -52,11 +52,11 @@
 
   .admin button{
     width: 6em;
-    height: 30px;
+    height: 2.4em;
     border: 1px solid #4078a5;
     background-color: white;
     color: #4078a5;
-    font-size: 0.7em;
+    font-size: 0.6em;
     cursor: pointer;
     transition: all linear 0.2s;
   }

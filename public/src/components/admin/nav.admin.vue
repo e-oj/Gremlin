@@ -2,13 +2,19 @@
   <div id="admin-nav">
     <ul>
       <li>
-        <router-link to="/admin" tag="button">Home</router-link>
+        <router-link to="/admin" tag="button">
+          <i class="fas fa-home"></i><span>Home</span>
+        </router-link>
       </li>
       <li>
-        <router-link to="/admin/blog" tag="button">Blog</router-link>
+        <router-link to="/admin/blog" tag="button">
+          <i class="far fa-newspaper"></i><span>Blog</span>
+        </router-link>
       </li>
       <li>
-        <button @click.prevent="logout">Logout</button>
+        <button @click.prevent="logout">
+          <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+        </button>
       </li>
     </ul>
   </div>
@@ -43,6 +49,14 @@
 
   #admin-nav li{
     display: inline-flex;
+  }
+
+  #admin-nav button{
+    width: 8em;
+  }
+
+  #admin-nav svg{
+    margin-right: 0.5em;
   }
 
   #admin-nav .router-link-exact-active{
