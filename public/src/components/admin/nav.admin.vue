@@ -28,11 +28,17 @@
 </script>
 
 <style>
+  #admin-nav{
+    background-color: #4078a5;
+    padding: 20px;
+  }
+
   #admin-nav ul{
     list-style-type: none;
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 0;
   }
 
   #admin-nav li{

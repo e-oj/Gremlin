@@ -1,14 +1,14 @@
 <template>
   <div class="admin-home">
     <div class="title">
-      Homepage Edits
+      Homepage
     </div>
 
     <form class="home-form">
       <textarea v-model="text" placeholder="Enter Home text"></textarea>
     </form>
 
-    <button @click.prevent="submit">Submit</button>
+    <button @click.prevent="submit">Change</button>
 
     <div v-if="err" class="err">{{err}}</div>
     <div v-if="msg" class="msg">{{msg}}</div>
@@ -76,7 +76,8 @@
   .admin-home .title{
     font-family: 'Amaranth', sans-serif;
     font-size: 1.2em;
-    color: #42b983;
+    /*color: #42b983;*/
+    color: #4078a5;
     text-align: center;
   }
 

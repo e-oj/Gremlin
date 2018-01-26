@@ -1,95 +1,43 @@
 <template>
   <div class="admin-blog">
-    <div id="editor"></div>
-    <button class="submit" @click="submit">Submit</button>
+    <div class="blog-actions">
+      <button v-show="!showEditor" @click="showEditor = true">
+        <i class="fas fa-plus"></i> New Post
+      </button>
+      <button v-show="showEditor" @click="showEditor = false">
+        <i class="fas fa-long-arrow-alt-left"></i> Back
+      </button>
+    </div>
+
+    <editor v-if="showEditor"></editor>
   </div>
 </template>
 
 <script>
-  import Quill from "quill"
+  import Editor from "./editor.vue"
 
   export default {
-    methods: {
-      loadQuill(){
-        let link = document.createElement("link");
-
-        link.setAttribute("href", "/node_modules/quill/dist/quill.snow.css");
-        link.setAttribute("rel", "stylesheet");
-
-        document.head.appendChild(link);
-      },
-
-      submit(){
-        let self = this;
-
-        console.log(self.quill.getContents());
-        console.log(self.quill.getText());
-        console.log($(".ql-editor").html());
+    data(){
+      return {
+        showEditor: false
       }
     },
 
-    created(){
-      let self = this;
-
-      self.loadQuill();
-    },
-
-    mounted(){
-      let self = this;
-      let Font = Quill.import("formats/font");
-
-      Font.whitelist = ["Text Me One"];
-      Quill.register(Font, true);
-
-      self.quill = new Quill("#editor", {
-        theme: "snow",
-        modules: {
-          toolbar: [
-            [{ header: [1, 2, false] }],
-            ["bold", "italic", "underline"],
-            [{"align": []}],
-            [{"list": "ordered"}, {"list": "bullet"}],
-            ["link", "image", "video"]
-          ]
-        }
-      });
+    components: {
+      "editor": Editor
     }
   }
 </script>
 
 <style>
-  .admin-blog{
+  .blog-actions{
     display: flex;
-    flex-direction: column;
     align-items: center;
-    color: #33334d;
+    justify-content: center;
+    margin: 50px;
   }
 
-  .admin-blog .submit{
-    margin-top: 20px;
+  .blog-actions button{
+    width: 8em;
   }
-  .ql-toolbar{
-    width: 900px;
-    margin: auto;
-  }
-  #editor{
-    width: 900px;
-    margin: auto;
-    color: white;
-    font-family: "Text Me One", sans-serif;
-  }
-
-  #editor p{
-    font-size: 1.7em;
-  }
-
-  #editor img{
-    width: 500px;
-    max-height: 500px;
-  }
-
-  .ql-formats{
-    background-color: white;
-  }
-
 </style>
