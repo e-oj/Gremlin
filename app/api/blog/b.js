@@ -61,6 +61,8 @@ exports.savePost = async (req, res) => {
 
     post.createdAt = Date.now();
 
+    await post.validate();
+
     await saveBlogFile(post._id.toString(), body.html);
     post = (await post.save()).toObject();
 
@@ -180,7 +182,7 @@ function cleanReq(body){
       tag = tag.trim();
 
       if(tag){
-        clean.tags.push(tag);
+        clean.tags.push(tag.toLowerCase());
       }
     }
 
@@ -189,7 +191,7 @@ function cleanReq(body){
     }
   }
 
-  for(let prop of ["draft", "html"]){
+  for(let prop of ["draft", "html", "_id"]){
     if(body.hasOwnProperty(prop)){
       clean[prop] = body[prop];
     }
