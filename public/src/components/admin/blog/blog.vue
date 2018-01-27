@@ -24,12 +24,12 @@
     },
 
     computed: {
-      showEditor(){
-        let self = this;
-        let store = self.$store;
-
-
-      }
+//      showEditor(){
+//        let self = this;
+//        let store = self.$store;
+//
+//
+//      }
     },
 
     components: {

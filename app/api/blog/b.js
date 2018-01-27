@@ -30,7 +30,7 @@ let http = require("../../../utils/HttpStats");
 exports.savePost = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
-  let body = req.body;
+  let body = cleanReq(req.body);
   let props = ["title", "text", "tags", "draft"];
   let post;
 
@@ -154,4 +154,38 @@ async function saveBlogFile(id, html){
   catch (err){
     throw err;
   }
+}
+
+function cleanReq(body){
+  let clean = {};
+
+  for(let prop of ["title", "text"]){
+    if(body[prop]){
+      clean[prop] = body[prop].trim();
+    }
+  }
+
+  if(body.tags){
+    clean.tags = [];
+
+    for(let tag of body.tags){
+      tag = tag.trim();
+
+      if(tag){
+        clean.tags.push(tag);
+      }
+    }
+
+    if(!clean.tags.length){
+      delete clean.tags;
+    }
+  }
+
+  for(let prop of ["draft", "html"]){
+    if(body.hasOwnProperty(prop)){
+      clean[prop] = body[prop];
+    }
+  }
+
+  return clean;
 }
