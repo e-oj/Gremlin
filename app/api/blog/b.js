@@ -156,6 +156,14 @@ async function saveBlogFile(id, html){
   }
 }
 
+/**
+ * Cleans up the request body before
+ * processing to ensure proper validations.
+ *
+ * @param body request body
+ *
+ * @returns clean body
+ */
 function cleanReq(body){
   let clean = {};
 
