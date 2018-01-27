@@ -28,6 +28,7 @@
     methods: {
       /**
        * Submits the form
+       *
        * @returns {Promise.<void>}
        */
       async submit(){

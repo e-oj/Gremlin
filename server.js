@@ -23,7 +23,7 @@ let app = express();
 app.use(express.static(STATIC));
 
 app.use(logger("dev"));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: config.MAX_PAYLOAD}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 

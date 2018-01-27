@@ -35,6 +35,8 @@ exports.savePost = async (req, res) => {
   let post;
 
   try{
+    console.log(body);
+
     if(body._id){
       post = await Blog.findById(body._id).exec();
 

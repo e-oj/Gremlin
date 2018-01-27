@@ -53,9 +53,10 @@
   .admin button{
     width: 6em;
     height: 2.4em;
-    border: 1px solid #4078a5;
+    border: none;
     background-color: white;
-    color: #4078a5;
+    /*color: #4078a5;*/
+    color: black;
     font-size: 0.6em;
     cursor: pointer;
     transition: all linear 0.2s;
@@ -63,7 +64,6 @@
 
   .admin button:hover{
     background-color: #42b983;
-    border-color: #42b983;
     color: white;
   }
 </style>

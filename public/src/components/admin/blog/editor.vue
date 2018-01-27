@@ -1,16 +1,18 @@
 <template>
   <div class="admin-editor">
-    <input class="editor-tags" v-model="tags" type="text" placeholder="comma-separated tags">
+    <input class="editor-tags" v-model="post.tags" type="text" placeholder="comma-separated tags">
     <input class="editor-title" v-model="post.title" type="text" placeholder="Title">
     <div id="editor"></div>
     <div class="editor-submit">
-      <button class="submit" @click="publish">
+      <button class="submit" @click.preventDefault="publish">
         <i class="fab fa-telegram-plane"></i> Publish
       </button>
-      <button class="submit" @click="draft">
+      <button class="submit" @click.preventDefault="save">
         <i class="fas fa-save"></i> Save
       </button>
     </div>
+    <div class="msg" v-show="!!success">{{success}}</div>
+    <div class="err" v-show="!!err">{{err}}</div>
   </div>
 </template>
 
@@ -26,7 +28,9 @@
           tags: "",
           draft: false,
           html: ""
-        }
+        },
+        success: "",
+        err: ""
       }
     },
 
@@ -40,16 +44,46 @@
         document.head.appendChild(link);
       },
 
-      publish(){
-
+      async publish(){
+        await this.send({asDraft: false});
       },
 
-      submit(){
-        let self = this;
+      async save(){
+        await this.send({asDraft: true});
+      },
 
-        console.log(self.quill.getContents());
-        console.log(self.quill.getText());
-        console.log($(".ql-editor").html());
+      async send(options) {
+        let self = this;
+        let $editor = $(".ql-editor");
+        let post = {
+          title: self.post.title,
+          text: self.quill.getText(),
+          tags: self.post.tags.split(","),
+          draft:  options.asDraft,
+          html: $editor.html()
+        };
+
+        if(self.post._id) {
+          post._id = self.post._id;
+        }
+
+        try{
+          let res = await self.$http.put("/api/b", post);
+
+          self.success = res.body.message;
+          self.post._id = res.body.result.post._id;
+
+          if(self.err){
+            self.err = ""
+          }
+        }
+        catch(err){
+          self.err = err.body.message;
+
+          if(self.success){
+            self.success = "";
+          }
+        }
       }
     },
 
@@ -93,10 +127,15 @@
   .admin-editor .submit{
     margin-top: 20px;
     width: 8em;
+    box-shadow: 0 0 3px lightgray;
   }
 
   .admin-editor .submit:last-child{
     margin-right: 0;
+  }
+
+  .admin-editor .err, .admin-editor .msg{
+    margin: 20px;
   }
 
   .admin-editor input{
@@ -126,6 +165,9 @@
   .ql-toolbar{
     width: 900px;
     margin: auto;
+    border: none !important;
+    box-shadow: 0 0 3px lightgray;
+    margin-bottom: 10px;
   }
 
   #editor{
@@ -133,6 +175,8 @@
     margin: auto;
     font-family: "Text Me One", sans-serif;
     font-weight: 700;
+    border: none;
+    box-shadow: 0 0 3px lightgray;
   }
 
   #editor p{
