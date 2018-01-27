@@ -6,6 +6,7 @@ import Vuex from "vuex";
 import App from "./App.vue";
 import router from "./router";
 import config from "./config";
+import status from "../../utils/HttpStats";
 
 Vue.use(VueResource);
 Vue.use(Vuex);
@@ -14,12 +15,18 @@ Vue.http.interceptors.push((request, next) => {
   let token = localStorage.getItem(config.AUTH);
 
   request.headers.set(config.AUTH_TOKEN, token);
-  next();
+
+  next(res => {
+    if(res.status === status.UNAUTHORIZED){
+      store.commit("clearToken");
+    }
+  });
 });
 
 let store = new Vuex.Store({
   state: {
-    token: null
+    token: null,
+    showEditor: false
   },
 
   getters: {
@@ -52,8 +59,18 @@ let store = new Vuex.Store({
      * @param state
      */
     clearToken(state){
-      localStorage.removeItem(config.AUTH);
-      state.token = "";
+      if(state.token){
+        localStorage.removeItem(config.AUTH);
+        state.token = "";
+      }
+    },
+
+    showEditor(state){
+      state.showEditor = true;
+    },
+
+    hideEditor(state){
+      state.showEditor = false;
     }
   }
 });

@@ -38,10 +38,12 @@
 
 <style>
   .admin{
-    background-color: #33334d;
+    /*background-color: #33334d;*/
+    background-color: white;
     position: absolute;
     width: 100%;
     height: 100%;
+    transition: none;
   }
 
   .admin .content{
@@ -49,17 +51,18 @@
   }
 
   .admin button{
-    width: 80px;
-    height: 30px;
-    border: 1px solid #336699;
+    width: 6em;
+    height: 2.4em;
+    border: none;
     background-color: white;
-    color: #204060;
-    font-size: 0.7em;
+    /*color: #4078a5;*/
+    color: black;
+    font-size: 0.6em;
     cursor: pointer;
     transition: all linear 0.2s;
   }
 
-  .admin button:hover, .admin .admin{
+  .admin button:hover{
     background-color: #42b983;
     color: white;
   }

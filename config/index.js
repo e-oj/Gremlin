@@ -11,3 +11,4 @@ exports.DUP_ERR = 11000;
 exports.AUTH_TOKEN = "x-auth-token";
 exports.DEFAULT_ERR_MSG = "OOPS! Sumfin goofed!!";
 exports.AUTH_ERR_MSG = "Authentication Failed!";
+exports.MAX_PAYLOAD = "50mb";

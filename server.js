@@ -15,7 +15,7 @@ let cors = require("cors");
 let config = require("./config");
 let apiRouter = require("./app/api");
 
-mongoose.connect(config.DB_URL, {useMongoClient: true});
+mongoose.connect(config.DB_URL);
 
 const STATIC = path.join(__dirname, "public");
 let app = express();
@@ -23,7 +23,7 @@ let app = express();
 app.use(express.static(STATIC));
 
 app.use(logger("dev"));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: config.MAX_PAYLOAD}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 

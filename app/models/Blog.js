@@ -15,7 +15,8 @@ let BlogSchema = new Schema({
   text: {type: String, required: true},
   tags: {type: [String], required: true},
   draft: {type: Boolean, default: null, required: true},
-  createdAt: {type: Date, required: true}
+  createdAt: {type: Date, required: true},
+  deleted: {type: Boolean, default: false}
 });
 
 /**
