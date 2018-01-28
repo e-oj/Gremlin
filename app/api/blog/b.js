@@ -55,10 +55,6 @@ exports.savePost = async (req, res) => {
       if(body.hasOwnProperty(prop)) post[prop] = body[prop];
     }
 
-    for(let i = 0; i < post.tags.length; i++){
-      post.tags[i] = post.tags[i].trim().toLowerCase();
-    }
-
     post.createdAt = Date.now();
 
     await post.validate();
@@ -187,7 +183,7 @@ function cleanReq(body){
     }
 
     if(!clean.tags.length){
-      delete clean.tags;
+      clean.tags = null;
     }
   }
 

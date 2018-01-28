@@ -63,6 +63,9 @@
           html: $editor.html()
         };
 
+        self.err = "";
+        self.success = "";
+
         if(self.post._id) {
           post._id = self.post._id;
         }
@@ -72,17 +75,9 @@
 
           self.success = res.body.message;
           self.post._id = res.body.result.post._id;
-
-          if(self.err){
-            self.err = ""
-          }
         }
         catch(err){
           self.err = err.body.message;
-
-          if(self.success){
-            self.success = "";
-          }
         }
       }
     },
