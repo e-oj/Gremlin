@@ -2,7 +2,9 @@
   <div class="admin-editor">
     <input class="editor-tags" v-model="post.tags" type="text" placeholder="comma-separated tags">
     <input class="editor-title" v-model="post.title" type="text" placeholder="Title">
+
     <div id="editor"></div>
+
     <div class="editor-submit">
       <button class="submit" @click.preventDefault="publish">
         <i class="fab fa-telegram-plane"></i> Publish
@@ -11,6 +13,7 @@
         <i class="fas fa-save"></i> Save
       </button>
     </div>
+
     <div class="msg" v-show="!!success">{{success}}</div>
     <div class="err" v-show="!!err">{{err}}</div>
   </div>
@@ -35,6 +38,9 @@
     },
 
     methods: {
+      /**
+       * loads the quill editor
+       */
       loadQuill(){
         let link = document.createElement("link");
 
@@ -44,14 +50,31 @@
         document.head.appendChild(link);
       },
 
+      /**
+       * publish a post
+       *
+       * @returns {Promise.<void>}
+       */
       async publish(){
         await this.send({asDraft: false});
       },
 
+      /**
+       * Save post as draft
+       *
+       * @returns {Promise.<void>}
+       */
       async save(){
         await this.send({asDraft: true});
       },
 
+      /**
+       * Builds and sends a post object to
+       * the api
+       *
+       * @param options draft or nah? {asDraft: Boolean}
+       * @returns {Promise.<void>}
+       */
       async send(options) {
         let self = this;
         let $editor = $(".ql-editor");
@@ -74,7 +97,9 @@
           let res = await self.$http.put("/api/b", post);
 
           self.success = res.body.message;
-          self.post._id = res.body.result.post._id;
+          self.post.title = "";
+          self.post.tags = "";
+          $editor.html("<p><br></p>");
         }
         catch(err){
           self.err = err.body.message;
@@ -90,10 +115,6 @@
 
     mounted(){
       let self = this;
-      let Font = Quill.import("formats/font");
-
-      Font.whitelist = ["Text Me One"];
-      Quill.register(Font, true);
 
       self.quill = new Quill("#editor", {
         theme: "snow",

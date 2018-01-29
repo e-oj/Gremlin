@@ -10,11 +10,13 @@
     </div>
 
     <editor v-if="showEditor"></editor>
+    <posts v-else></posts>
   </div>
 </template>
 
 <script>
   import Editor from "./editor.vue"
+  import Posts from "./posts.vue"
 
   export default {
     data(){
@@ -33,7 +35,8 @@
     },
 
     components: {
-      "editor": Editor
+      "editor": Editor,
+      "posts": Posts
     }
   }
 </script>

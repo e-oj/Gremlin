@@ -90,7 +90,7 @@ exports.getPosts = async (req, res) => {
 
   try{
     let posts = await Blog.find(condition)
-      .sort("-date")
+      .sort("-createdAt")
       .lean({virtuals: true})
       .exec();
 
