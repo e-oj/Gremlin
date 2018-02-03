@@ -2,9 +2,16 @@
   <div class="admin-posts">
     <div class="admin-post" v-for="post in posts" :key="post._id">
       <div class="admin-post-title">{{post.title}}</div>
+
       <div class="admin-post-text">{{textPreview(post.text)}}</div>
+
       <div class="admin-post-tags">
         <span v-for="tag in post.tags">{{tag}}</span>
+      </div>
+
+      <div class="admin-post-action">
+        <span class="admin-post-edit"><i class="far fa-edit"></i></span>
+        <span class="admin-post-delete"><i class="far fa-trash-alt"></i></span>
       </div>
     </div>
 
@@ -13,6 +20,8 @@
 </template>
 
 <script>
+  const PREVIEW_LENGTH = 300;
+
   export default{
     data(){
       return {
@@ -30,10 +39,8 @@
 
     methods: {
       textPreview(text){
-        text = text.substr(0, 200);
-
-        if(text.length === 200){
-          text += " .  .  .";
+        if(text.length > PREVIEW_LENGTH){
+          text = text.substr(0, PREVIEW_LENGTH) + "  .  .  .";
         }
 
         return text;
@@ -56,40 +63,61 @@
 </script>
 
 <style>
-  .admin-posts{
-    min-width: 900px;
-    width: 80%;
+  .admin-posts {
+    width: 900px;
     margin: auto;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    font-family: "Text Me One", "sans-serif";
+    font-family: "Quicksand", sans-serif;
   }
 
   .admin-post{
-    box-shadow: 0 0 3px lightgray;
-    margin-bottom: 20px;
-    padding: 20px;
+    padding: 10px;
+    border-top: 1px solid lightgrey;
+  }
+
+  .admin-post:last-child{
+    border-bottom: 1px solid lightgrey;
   }
 
   .admin-post-title{
-    margin-top: 5px;
-    margin-bottom: 30px;
+    margin-top: 3px;
+    margin-bottom: 15px;
+    font-size: 19px;
     font-weight: 900;
+  }
+
+  .admin-post-text{
+    font-size: 17px;
   }
 
   .admin-post-tags{
-    margin-top: 30px;
-    margin-bottom: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 
   .admin-post-tags span{
-    margin-right: 10px;
-    padding: 5px 15px;
-    background-color: dodgerblue;
-    color: white;
-    font-family: Amaranth, sans-serif;
-    font-size: 0.75em;
-    font-weight: 900;
-    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 15px;
+    font-style: italic;
+    text-decoration: underline;
+  }
+
+  .admin-post-action{
+    display: flex;
+    font-size: 15px;
+  }
+
+  .admin-post-action span{
+    margin-right: 20px;
+  }
+
+  .admin-post-edit{
+    color: #9900ff;
+  }
+
+  .admin-post-delete{
+    color: red;
   }
 </style>

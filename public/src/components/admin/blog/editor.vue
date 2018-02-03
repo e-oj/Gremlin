@@ -7,10 +7,10 @@
 
     <div class="editor-submit">
       <button class="submit" @click.preventDefault="publish">
-        <i class="fab fa-telegram-plane"></i> Publish
+        <i class="far fa-paper-plane"></i> Publish
       </button>
       <button class="submit" @click.preventDefault="save">
-        <i class="fas fa-save"></i> Save
+        <i class="far fa-hdd"></i> Save
       </button>
     </div>
 
@@ -133,6 +133,7 @@
 </script>
 
 <style>
+
   .admin-editor{
     display: flex;
     flex-direction: column;
@@ -148,6 +149,10 @@
 
   .admin-editor .submit:last-child{
     margin-right: 0;
+  }
+
+  .admin-editor .submit i{
+    color: #42b983;
   }
 
   .admin-editor .err, .admin-editor .msg{
@@ -178,7 +183,11 @@
     font-weight: 900;
   }
 
-  .ql-toolbar{
+  .ql-snow {
+    transition: none !important;
+  }
+
+  .ql-toolbar {
     width: 900px;
     margin: auto;
     border: none !important;

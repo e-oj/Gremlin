@@ -49,13 +49,12 @@ exports.savePost = async (req, res) => {
     }
     else{
       post = new Blog();
+      post.createdAt = Date.now();
     }
 
     for(let prop of props){
       if(body.hasOwnProperty(prop)) post[prop] = body[prop];
     }
-
-    post.createdAt = Date.now();
 
     await post.validate();
 
