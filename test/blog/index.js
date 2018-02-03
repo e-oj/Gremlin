@@ -138,7 +138,7 @@ module.exports = describe("Blog tests", () => {
     it("should return all drafts and published posts", async () => {
       let res = await request.get("/api/b");
       let posts = await Blog.find({deleted: false})
-        .sort("-date")
+        .sort("-createdAt")
         .lean({virtuals: true})
         .exec();
 

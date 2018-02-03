@@ -2,15 +2,18 @@
   <div class="admin-editor">
     <input class="editor-tags" v-model="post.tags" type="text" placeholder="comma-separated tags">
     <input class="editor-title" v-model="post.title" type="text" placeholder="Title">
+
     <div id="editor"></div>
+
     <div class="editor-submit">
       <button class="submit" @click.preventDefault="publish">
-        <i class="fab fa-telegram-plane"></i> Publish
+        <i class="far fa-paper-plane"></i> Publish
       </button>
       <button class="submit" @click.preventDefault="save">
-        <i class="fas fa-save"></i> Save
+        <i class="far fa-hdd"></i> Save
       </button>
     </div>
+
     <div class="msg" v-show="!!success">{{success}}</div>
     <div class="err" v-show="!!err">{{err}}</div>
   </div>
@@ -35,6 +38,9 @@
     },
 
     methods: {
+      /**
+       * loads the quill editor
+       */
       loadQuill(){
         let link = document.createElement("link");
 
@@ -44,14 +50,31 @@
         document.head.appendChild(link);
       },
 
+      /**
+       * publish a post
+       *
+       * @returns {Promise.<void>}
+       */
       async publish(){
         await this.send({asDraft: false});
       },
 
+      /**
+       * Save post as draft
+       *
+       * @returns {Promise.<void>}
+       */
       async save(){
         await this.send({asDraft: true});
       },
 
+      /**
+       * Builds and sends a post object to
+       * the api
+       *
+       * @param options draft or nah? {asDraft: Boolean}
+       * @returns {Promise.<void>}
+       */
       async send(options) {
         let self = this;
         let $editor = $(".ql-editor");
@@ -63,6 +86,9 @@
           html: $editor.html()
         };
 
+        self.err = "";
+        self.success = "";
+
         if(self.post._id) {
           post._id = self.post._id;
         }
@@ -71,18 +97,12 @@
           let res = await self.$http.put("/api/b", post);
 
           self.success = res.body.message;
-          self.post._id = res.body.result.post._id;
-
-          if(self.err){
-            self.err = ""
-          }
+          self.post.title = "";
+          self.post.tags = "";
+          $editor.html("<p><br></p>");
         }
         catch(err){
           self.err = err.body.message;
-
-          if(self.success){
-            self.success = "";
-          }
         }
       }
     },
@@ -95,10 +115,6 @@
 
     mounted(){
       let self = this;
-      let Font = Quill.import("formats/font");
-
-      Font.whitelist = ["Text Me One"];
-      Quill.register(Font, true);
 
       self.quill = new Quill("#editor", {
         theme: "snow",
@@ -117,6 +133,7 @@
 </script>
 
 <style>
+
   .admin-editor{
     display: flex;
     flex-direction: column;
@@ -132,6 +149,10 @@
 
   .admin-editor .submit:last-child{
     margin-right: 0;
+  }
+
+  .admin-editor .submit i{
+    color: #42b983;
   }
 
   .admin-editor .err, .admin-editor .msg{
@@ -162,7 +183,11 @@
     font-weight: 900;
   }
 
-  .ql-toolbar{
+  .ql-snow {
+    transition: none !important;
+  }
+
+  .ql-toolbar {
     width: 900px;
     margin: auto;
     border: none !important;

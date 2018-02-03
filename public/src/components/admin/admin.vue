@@ -38,7 +38,6 @@
 
 <style>
   .admin{
-    /*background-color: #33334d;*/
     background-color: white;
     position: absolute;
     width: 100%;
@@ -55,7 +54,6 @@
     height: 2.4em;
     border: none;
     background-color: white;
-    /*color: #4078a5;*/
     color: black;
     font-size: 0.6em;
     cursor: pointer;

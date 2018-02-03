@@ -40,7 +40,6 @@
 
 <style>
   #admin-nav{
-    /*background-color: #4078a5;*/
     padding: 20px;
   }
 

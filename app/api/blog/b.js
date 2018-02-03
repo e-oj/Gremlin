@@ -49,17 +49,12 @@ exports.savePost = async (req, res) => {
     }
     else{
       post = new Blog();
+      post.createdAt = Date.now();
     }
 
     for(let prop of props){
       if(body.hasOwnProperty(prop)) post[prop] = body[prop];
     }
-
-    for(let i = 0; i < post.tags.length; i++){
-      post.tags[i] = post.tags[i].trim().toLowerCase();
-    }
-
-    post.createdAt = Date.now();
 
     await post.validate();
 
@@ -94,7 +89,7 @@ exports.getPosts = async (req, res) => {
 
   try{
     let posts = await Blog.find(condition)
-      .sort("-date")
+      .sort("-createdAt")
       .lean({virtuals: true})
       .exec();
 
@@ -187,7 +182,7 @@ function cleanReq(body){
     }
 
     if(!clean.tags.length){
-      delete clean.tags;
+      clean.tags = null;
     }
   }
 
