@@ -7,7 +7,7 @@
 
     <div class="editor-submit">
       <button class="submit" @click.preventDefault="publish">
-        <i class="far fa-paper-plane"></i> Publish
+        <i class="far fa-caret-square-right"></i> Publish
       </button>
       <button class="submit" @click.preventDefault="save">
         <i class="far fa-hdd"></i> Save
@@ -143,7 +143,6 @@
 
   .admin-editor .submit{
     margin-top: 20px;
-    width: 8em;
     box-shadow: 0 0 3px lightgray;
   }
 

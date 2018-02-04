@@ -35,8 +35,6 @@ exports.savePost = async (req, res) => {
   let post;
 
   try{
-    console.log(body);
-
     if(body._id){
       post = await Blog.findById(body._id).exec();
 
@@ -96,6 +94,7 @@ exports.getPosts = async (req, res) => {
     respond(http.OK, `${posts.length} posts found.`, {posts});
   }
   catch(err){
+    console.log(err);
     respondErr(http.SERVER_ERROR, err.message, err);
   }
 };

@@ -50,7 +50,7 @@
   }
 
   .blog-actions button{
-    width: 8em;
+    width: 100px;
     box-shadow: 0 0 3px lightgray;
   }
 </style>
