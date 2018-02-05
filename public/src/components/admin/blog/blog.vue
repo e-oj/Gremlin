@@ -1,15 +1,15 @@
 <template>
   <div class="admin-blog">
     <div class="blog-actions">
-      <button v-show="!showEditor" @click.preventDefault="showEditor = true">
+      <button v-show="!showEditor" @click.preventDefault="newPost">
         <i class="fas fa-plus"></i> New Post
       </button>
-      <button v-show="showEditor" @click.preventDefault="showEditor = false">
+      <button v-show="showEditor" @click.preventDefault="back">
         <i class="fas fa-long-arrow-alt-left"></i> Back
       </button>
     </div>
 
-    <editor v-if="showEditor"></editor>
+    <editor v-if="showEditor" :to-edit="toEdit"></editor>
     <posts v-else></posts>
   </div>
 </template>
@@ -21,17 +21,30 @@
   export default {
     data(){
       return {
-        showEditor: false
+        showEditor: false,
+        toEdit: {}
       }
     },
 
-    computed: {
-//      showEditor(){
-//        let self = this;
-//        let store = self.$store;
-//
-//
-//      }
+    methods: {
+      /**
+       * Event handler for the back button
+       */
+      back(){
+        let self = this;
+
+        self.showEditor = false;
+
+        if(self.toEdit){
+          self.toEdit = {};
+        }
+      },
+
+      newPost(){
+        let self = this;
+
+        self.showEditor = true;
+      }
     },
 
     components: {

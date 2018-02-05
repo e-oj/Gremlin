@@ -37,6 +37,8 @@
       }
     },
 
+    props: ["toEdit"],
+
     methods: {
       /**
        * loads the quill editor
@@ -97,6 +99,7 @@
           let res = await self.$http.put("/api/b", post);
 
           self.success = res.body.message;
+          self.post._id = "";
           self.post.title = "";
           self.post.tags = "";
           $editor.html("<p><br></p>");
@@ -128,6 +131,16 @@
           ]
         }
       });
+
+      if(self.toEdit){
+        let $editor = $(".ql-editor");
+
+        self.post._id = self.toEdit._id;
+        self.post.title = self.toEdit.title;
+        self.post.tags = self.toEdit.tags.join(", ");
+
+        $editor.html(self.toEdit.html);
+      }
     }
   }
 </script>
@@ -143,6 +156,7 @@
 
   .admin-editor .submit{
     margin-top: 20px;
+    margin-bottom: 20px;
     box-shadow: 0 0 3px lightgray;
   }
 
@@ -179,7 +193,6 @@
 
   .editor-title, .editor-tags{
     text-align: center;
-    font-weight: 900;
   }
 
   .ql-snow {
@@ -198,7 +211,6 @@
     width: 900px;
     margin: auto;
     font-family: "Text Me One", sans-serif;
-    font-weight: 700;
     border: none;
     box-shadow: 0 0 3px lightgray;
   }

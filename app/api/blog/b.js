@@ -32,14 +32,18 @@ exports.savePost = async (req, res) => {
   let respondErr = response.failure(res, moduleId);
   let body = cleanReq(req.body);
   let props = ["title", "text", "tags", "draft"];
+  let successMsg = "created";
+
   let post;
 
   try{
     if(body._id){
       post = await Blog.findById(body._id).exec();
+      successMsg = "updated";
 
       if(!body.draft && post.draft) {
         post.createdAt = Date.now();
+        successMsg = "created";
       }
       else if(body.draft && post.draft === false){
         return respondErr(http.BAD_REQUEST, "Post already published");
@@ -59,7 +63,7 @@ exports.savePost = async (req, res) => {
     await saveBlogFile(post._id.toString(), body.html);
     post = (await post.save()).toObject();
 
-    respond(http.CREATED, "post created.", {post});
+    respond(http.CREATED, `post ${successMsg}`, {post});
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);
@@ -94,7 +98,6 @@ exports.getPosts = async (req, res) => {
     respond(http.OK, `${posts.length} posts found.`, {posts});
   }
   catch(err){
-    console.log(err);
     respondErr(http.SERVER_ERROR, err.message, err);
   }
 };

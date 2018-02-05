@@ -61,4 +61,8 @@
   button:focus {
     outline: none;
   }
+
+  svg{
+    max-height: 50px !important;
+  }
 </style>

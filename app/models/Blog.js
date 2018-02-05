@@ -24,7 +24,7 @@ let BlogSchema = new Schema({
  * the blog's file.
  */
 BlogSchema.virtual("html")
-  .get(async function(){
+  .get(function(){
     let self = this;
     let blogPath = path.join("./app/api/blog/data", self._id.toString());
     let text = "";
@@ -33,7 +33,7 @@ BlogSchema.virtual("html")
       text = fs.readFileSync(blogPath);
     }
     catch(err){
-      await Blog.deleteOne({_id: self._id});
+      (async () => await Blog.deleteOne({_id: self._id}))();
     }
 
     return text.toString();

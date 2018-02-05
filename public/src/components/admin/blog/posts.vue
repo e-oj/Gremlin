@@ -15,7 +15,9 @@
       </div>
 
       <div class="admin-post-action">
-        <span class="admin-post-edit"><i class="far fa-edit"></i></span>
+        <span class="admin-post-edit" @click="editPost(post)">
+          <i class="far fa-edit"></i>
+        </span>
         <span class="admin-post-delete"><i class="far fa-trash-alt"></i></span>
       </div>
     </div>
@@ -43,6 +45,14 @@
     },
 
     methods: {
+      /**
+       * Shortens text greater than a max length
+       * and adds ellipsis.
+       *
+       * @param text the full length text
+       *
+       * @returns shortened text + ellipsis
+       */
       textPreview(text){
         if(text.length > PREVIEW_LENGTH){
           text = text.substr(0, PREVIEW_LENGTH) + "  .  .  .";
@@ -51,6 +61,11 @@
         return text;
       },
 
+      /**
+       * Formats the date as "MM.DD.YY hh:mm"
+       * @param dateString
+       * @returns {string|*}
+       */
       formatDate(dateString){
         let date = new Date(dateString);
         let hours = date.getHours();
@@ -72,6 +87,13 @@
         dateString = dateString.split(" ").join(".") + ` ${hours}:${minutes}  ${period}`;
 
         return dateString;
+      },
+
+      editPost(post){
+        let parent = this.$parent;
+
+        parent.toEdit = post;
+        parent.showEditor = true;
       }
     },
 
@@ -145,6 +167,11 @@
 
   .admin-post-action span{
     margin-right: 20px;
+    cursor: pointer;
+  }
+
+  .admin-post-action span:hover{
+    color: green;
   }
 
   .admin-post-edit{
