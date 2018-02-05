@@ -50,12 +50,13 @@
   }
 
   .admin button{
-    width: 6em;
-    height: 2.4em;
+    width: 120px;
+    height: 35px;
     border: none;
     background-color: white;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
     color: black;
-    font-size: 0.6em;
     cursor: pointer;
     transition: all linear 0.2s;
   }

@@ -63,8 +63,8 @@
   }
 
   #admin-nav button{
-    width: 8em;
     box-shadow: 0 0 3px lightgray;
+    font-size: 14px;
   }
 
   #admin-nav svg{

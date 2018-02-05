@@ -26,9 +26,15 @@ let BlogSchema = new Schema({
 BlogSchema.virtual("html")
   .get(function(){
     let self = this;
-
     let blogPath = path.join("./app/api/blog/data", self._id.toString());
-    let text = fs.readFileSync(blogPath);
+    let text = "";
+
+    try {
+      text = fs.readFileSync(blogPath);
+    }
+    catch(err){
+      (async () => await Blog.deleteOne({_id: self._id}))();
+    }
 
     return text.toString();
   });
@@ -36,4 +42,4 @@ BlogSchema.virtual("html")
 BlogSchema.set("toObject", {virtuals: true});
 BlogSchema.plugin(leanVirtuals);
 
-exports.Blog = mongoose.model("Blog", BlogSchema);
+let Blog = exports.Blog = mongoose.model("Blog", BlogSchema);

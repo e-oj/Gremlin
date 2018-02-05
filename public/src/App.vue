@@ -57,4 +57,12 @@
   .msg{
     color: #42b983;
   }
+
+  button:focus {
+    outline: none;
+  }
+
+  svg{
+    max-height: 50px !important;
+  }
 </style>
