@@ -9,6 +9,11 @@
         <span v-for="tag in post.tags">{{tag}}</span>
       </div>
 
+      <div class="admin-post-date">
+        <span v-if="post.draft">In Progress . . .</span>
+        <span v-else>{{formatDate(post.createdAt)}}</span>
+      </div>
+
       <div class="admin-post-action">
         <span class="admin-post-edit"><i class="far fa-edit"></i></span>
         <span class="admin-post-delete"><i class="far fa-trash-alt"></i></span>
@@ -44,6 +49,29 @@
         }
 
         return text;
+      },
+
+      formatDate(dateString){
+        let date = new Date(dateString);
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let period = "am";
+
+        if(hours === 24){
+          hours = 12;
+        }
+        else if(hours >= 12){
+          period = "pm";
+
+          if(hours > 12){
+            hours = hours % 12;
+          }
+        }
+
+        dateString = date.toDateString().substring(4);
+        dateString = dateString.split(" ").join(".") + ` ${hours}:${minutes}  ${period}`;
+
+        return dateString;
       }
     },
 
@@ -102,6 +130,12 @@
     font-size: 15px;
     font-style: italic;
     text-decoration: underline;
+  }
+
+  .admin-post-date{
+    font-size: 13px;
+    color: blue;
+    margin: 15px 0 15px 0;
   }
 
   .admin-post-action{
