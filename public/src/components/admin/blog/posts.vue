@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  const PREVIEW_LENGTH = 300;
+  import * as utils from "../../../gen.utils"
 
   export default{
     data(){
@@ -45,49 +45,9 @@
     },
 
     methods: {
-      /**
-       * Shortens text greater than a max length
-       * and adds ellipsis.
-       *
-       * @param text the full length text
-       *
-       * @returns shortened text + ellipsis
-       */
-      textPreview(text){
-        if(text.length > PREVIEW_LENGTH){
-          text = text.substr(0, PREVIEW_LENGTH) + "  .  .  .";
-        }
+      textPreview: utils.textPreview,
 
-        return text;
-      },
-
-      /**
-       * Formats the date as "MM.DD.YY hh:mm"
-       * @param dateString
-       * @returns {string|*}
-       */
-      formatDate(dateString){
-        let date = new Date(dateString);
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let period = "am";
-
-        if(hours === 24){
-          hours = 12;
-        }
-        else if(hours >= 12){
-          period = "pm";
-
-          if(hours > 12){
-            hours = hours % 12;
-          }
-        }
-
-        dateString = date.toDateString().substring(4);
-        dateString = dateString.split(" ").join(".") + ` ${hours}:${minutes}  ${period}`;
-
-        return dateString;
-      },
+      formatDate: utils.formatDate,
 
       editPost(post){
         let parent = this.$parent;
