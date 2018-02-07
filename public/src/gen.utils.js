@@ -2,6 +2,7 @@
  * @author EmmanuelOlaojo
  * @since 2/6/18
  */
+
 const PREVIEW_LENGTH = 300;
 
 /**
