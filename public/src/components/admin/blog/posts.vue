@@ -1,5 +1,7 @@
 <template>
   <div class="admin-posts">
+    <delete v-if="toDelete" :_id="toDelete"></delete>
+
     <div class="admin-post" v-for="post in posts" :key="post._id">
       <div class="admin-post-title">{{post.title}}</div>
 
@@ -18,8 +20,12 @@
         <span class="admin-post-edit" @click="editPost(post)">
           <i class="far fa-edit"></i>
         </span>
-        <span class="admin-post-delete"><i class="far fa-trash-alt"></i></span>
+        <span class="admin-post-delete" @click="deletePost(post)">
+          <i class="far fa-trash-alt"></i>
+        </span>
       </div>
+
+      <span :class="post._id"></span>
     </div>
 
     <div v-if="!hasPosts" class="admin-no-posts">{{msg}}</div>
@@ -28,13 +34,15 @@
 
 <script>
   import * as utils from "../../../gen.utils"
+  import Delete from "./delete.vue"
 
   export default{
     data(){
       return {
         posts: [],
         err: "",
-        msg: "No posts to show"
+        msg: "No posts to show",
+        toDelete: ""
       }
     },
 
@@ -54,7 +62,19 @@
 
         parent.toEdit = post;
         parent.showEditor = true;
+      },
+
+      deletePost(post){
+        if(this.toDelete){
+          this.toDelete = "";
+        }
+
+        else this.toDelete = post._id;
       }
+    },
+
+    components: {
+      "delete": Delete
     },
 
     async created(){

@@ -22,7 +22,7 @@
     data(){
       return {
         showEditor: false,
-        toEdit: {}
+        toEdit: {},
       }
     },
 
@@ -40,6 +40,9 @@
         }
       },
 
+      /**
+       *
+       */
       newPost(){
         let self = this;
 
@@ -49,7 +52,7 @@
 
     components: {
       "editor": Editor,
-      "posts": Posts
+      "posts": Posts,
     }
   }
 </script>
