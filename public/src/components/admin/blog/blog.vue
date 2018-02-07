@@ -41,7 +41,7 @@
       },
 
       /**
-       *
+       * Opens up the editor for a new post
        */
       newPost(){
         let self = this;

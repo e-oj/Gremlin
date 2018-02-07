@@ -29,10 +29,19 @@
     props: ["_id"],
 
     methods: {
+
+      /**
+       * Closes this component
+       */
       exit(){
         this.$parent.toDelete = "";
       },
 
+      /**
+       * Sends a delete request to the api
+       * and removes the deleted post from the
+       * list of posts.
+       */
       async del(){
         let self = this;
 
@@ -94,7 +103,7 @@
   }
 
   .admin-delete-actions button{
-    width: 80px;
+    width: 100px;
     box-shadow: 0 0 2px lightgray;
   }
 </style>

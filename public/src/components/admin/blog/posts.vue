@@ -47,6 +47,11 @@
     },
 
     computed: {
+      /**
+       * Any posts to show?
+       *
+       * @returns {boolean}
+       */
       hasPosts(){
         return !!this.posts.length;
       }
@@ -57,6 +62,11 @@
 
       formatDate: utils.formatDate,
 
+      /**
+       * Opens up a post in the editor
+       *
+       * @param post the post to edit
+       */
       editPost(post){
         let parent = this.$parent;
 
@@ -64,6 +74,12 @@
         parent.showEditor = true;
       },
 
+      /**
+       * Opens up the delete dialog for
+       * a post.
+       *
+       * @param post the post to delete
+       */
       deletePost(post){
         if(this.toDelete){
           this.toDelete = "";
