@@ -1,5 +1,7 @@
 <template>
   <div class="admin-posts">
+    <delete v-if="toDelete" :_id="toDelete"></delete>
+
     <div class="admin-post" v-for="post in posts" :key="post._id">
       <div class="admin-post-title">{{post.title}}</div>
 
@@ -18,8 +20,12 @@
         <span class="admin-post-edit" @click="editPost(post)">
           <i class="far fa-edit"></i>
         </span>
-        <span class="admin-post-delete"><i class="far fa-trash-alt"></i></span>
+        <span class="admin-post-delete" @click="deletePost(post)">
+          <i class="far fa-trash-alt"></i>
+        </span>
       </div>
+
+      <span :class="post._id"></span>
     </div>
 
     <div v-if="!hasPosts" class="admin-no-posts">{{msg}}</div>
@@ -27,74 +33,64 @@
 </template>
 
 <script>
-  const PREVIEW_LENGTH = 300;
+  import * as utils from "../../../gen.utils"
+  import Delete from "./delete.vue"
 
   export default{
     data(){
       return {
         posts: [],
         err: "",
-        msg: "No posts to show"
+        msg: "No posts to show",
+        toDelete: ""
       }
     },
 
     computed: {
+      /**
+       * Any posts to show?
+       *
+       * @returns {boolean}
+       */
       hasPosts(){
         return !!this.posts.length;
       }
     },
 
     methods: {
-      /**
-       * Shortens text greater than a max length
-       * and adds ellipsis.
-       *
-       * @param text the full length text
-       *
-       * @returns shortened text + ellipsis
-       */
-      textPreview(text){
-        if(text.length > PREVIEW_LENGTH){
-          text = text.substr(0, PREVIEW_LENGTH) + "  .  .  .";
-        }
+      textPreview: utils.textPreview,
 
-        return text;
-      },
+      formatDate: utils.formatDate,
 
       /**
-       * Formats the date as "MM.DD.YY hh:mm"
-       * @param dateString
-       * @returns {string|*}
+       * Opens up a post in the editor
+       *
+       * @param post the post to edit
        */
-      formatDate(dateString){
-        let date = new Date(dateString);
-        let hours = date.getHours();
-        let minutes = date.getMinutes();
-        let period = "am";
-
-        if(hours === 24){
-          hours = 12;
-        }
-        else if(hours >= 12){
-          period = "pm";
-
-          if(hours > 12){
-            hours = hours % 12;
-          }
-        }
-
-        dateString = date.toDateString().substring(4);
-        dateString = dateString.split(" ").join(".") + ` ${hours}:${minutes}  ${period}`;
-
-        return dateString;
-      },
-
       editPost(post){
         let parent = this.$parent;
 
         parent.toEdit = post;
         parent.showEditor = true;
+      },
+
+      /**
+       * Opens up the delete dialog for
+       * a post.
+       *
+       * @param post the post to delete
+       */
+      deletePost(post){
+        if(this.toDelete){
+          this.toDelete = "";
+        }
+
+        else this.toDelete = post._id;
       }
+    },
+
+    components: {
+      "delete": Delete
     },
 
     async created(){
