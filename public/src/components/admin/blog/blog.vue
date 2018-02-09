@@ -66,7 +66,12 @@
   }
 
   .blog-actions button{
-    width: 100px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 18px;
+    color: white;
+    background-color: #4785b8;
     box-shadow: 0 0 3px lightgray;
   }
 </style>
