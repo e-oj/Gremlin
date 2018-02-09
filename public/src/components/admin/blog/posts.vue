@@ -42,11 +42,36 @@
         posts: [],
         err: "",
         msg: "No posts to show",
-        toDelete: ""
+        toDelete: "",
+        draftsOnly: false,
+        deletedOnly: false
       }
     },
 
     computed: {
+      /**
+       * Returns a list of posts after doing
+       * the required filtering
+       */
+      _posts(){
+        let result = [];
+        let self = this;
+
+        for(let post of self.posts){
+          if(self.draftsOnly && post.draft && !post.deleted){
+            result.push(post);
+          }
+          else if(self.deletedOnly && post.deleted){
+            result.push(post);
+          }
+          else if(!post.deleted){
+            result.push(post);
+          }
+        }
+
+        return result;
+      },
+
       /**
        * Any posts to show?
        *
