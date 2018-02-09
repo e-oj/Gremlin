@@ -84,7 +84,7 @@ exports.getPosts = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
   let q = req.query;
-  let condition = {deleted: false};
+  let condition = {};
 
   if(q._id) condition._id = q._id;
   if(q.draft) condition.draft = q.draft === "yes";

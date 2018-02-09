@@ -43,10 +43,10 @@
         err: "",
         msg: "No posts to show",
         toDelete: "",
-        draftsOnly: false,
-        deletedOnly: false
       }
     },
+
+    props: ["show"],
 
     computed: {
       /**
@@ -58,13 +58,13 @@
         let self = this;
 
         for(let post of self.posts){
-          if(self.draftsOnly && post.draft && !post.deleted){
+          if(self.show === "drafts" && post.draft && !post.deleted){
             result.push(post);
           }
-          else if(self.deletedOnly && post.deleted){
+          else if(self.show === "deleted" && post.deleted){
             result.push(post);
           }
-          else if(!post.deleted){
+          else if(self.show === "published" && !(post.deleted || post.draft)){
             result.push(post);
           }
         }
@@ -78,7 +78,7 @@
        * @returns {boolean}
        */
       hasPosts(){
-        return !!this.posts.length;
+        return !!this._posts.length;
       }
     },
 

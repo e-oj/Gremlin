@@ -1,16 +1,30 @@
 <template>
   <div class="admin-blog">
-    <div class="blog-actions">
-      <button v-show="!showEditor" @click.preventDefault="newPost">
-        <i class="fas fa-plus"></i>
-      </button>
-      <button v-show="showEditor" @click.preventDefault="back">
-        <i class="fas fa-long-arrow-alt-left"></i>
-      </button>
+    <div class="admin-blog-controls">
+
+      <div class="admin-blog-actions" v-show="!showEditor" >
+        <button v-for="action in actions"
+                :class="{'admin-blog-active': show === action.show}"
+                @click="showOnly(action.show)">
+          <i :class="action.icon"></i>
+        </button>
+      </div>
+
+      <div class="admin-editor-actions">
+        <button v-show="!showEditor" @click.preventDefault="newPost">
+          <i class="fas fa-plus"></i>
+        </button>
+
+        <button v-show="showEditor" @click.preventDefault="back">
+          <i class="fas fa-long-arrow-alt-left"></i>
+        </button>
+      </div>
+
+      <div class="admin-blog-fill" v-show="!showEditor"></div>
     </div>
 
     <editor v-if="showEditor" :to-edit="toEdit"></editor>
-    <posts v-else></posts>
+    <posts v-else :show="show"></posts>
   </div>
 </template>
 
@@ -22,7 +36,13 @@
     data(){
       return {
         showEditor: false,
-        toEdit: {},
+        toEdit: null,
+        show: "published",
+        actions: [
+          {show: "published", icon: "fas fa-align-justify"},
+          {show: "drafts", icon: "fas fa-pencil-alt"},
+          {show: "deleted", icon: "fas fa-trash-alt"},
+        ]
       }
     },
 
@@ -36,7 +56,7 @@
         self.showEditor = false;
 
         if(self.toEdit){
-          self.toEdit = {};
+          self.toEdit = null;
         }
       },
 
@@ -44,9 +64,14 @@
        * Opens up the editor for a new post
        */
       newPost(){
-        let self = this;
+        this.showEditor = true;
+      },
 
-        self.showEditor = true;
+      /**
+       * Show only drafts
+       */
+      showOnly(type){
+        this.show = type;
       }
     },
 
@@ -58,20 +83,37 @@
 </script>
 
 <style>
-  .blog-actions{
+  .admin-blog-controls{
+    width: 900px;
+    margin: 50px auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 50px;
   }
 
-  .blog-actions button{
+  .admin-blog-controls div{
+    flex: 1;
+  }
+
+  .admin-blog-controls button{
     width: 50px;
     height: 50px;
     border-radius: 50%;
     font-size: 18px;
     color: white;
-    background-color: #4785b8;
+    background-color: #3498db;
     box-shadow: 0 0 3px lightgray;
+  }
+
+  .admin-blog-actions button{
+    margin-right: 40px;
+    background-color: #9b59b6;
+  }
+
+  .admin-editor-actions{
+    display: flex;
+    justify-content: center;
+  }
+
+  .admin-blog-active{
+    background-color: #42b983 !important;
   }
 </style>
