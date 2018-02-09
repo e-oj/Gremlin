@@ -1,7 +1,7 @@
 <template>
   <div class="admin-delete">
     <div class="admin-delete-msg">
-      Delete Post?
+      {{msg}}
     </div>
 
     <div class="admin-delete-actions">
@@ -26,7 +26,13 @@
       }
     },
 
-    props: ["_id"],
+    computed: {
+      msg(){
+        return this.post.deleted ? "Delete Permanently?" : "Delete Post";
+      }
+    },
+
+    props: ["post"],
 
     methods: {
 
@@ -46,19 +52,25 @@
         let self = this;
 
         try{
-          await self.$http.delete("/api/b", {body: {_id: self._id}});
+          await self.$http.delete("/api/b", {body: {_id: self.post._id}});
 
-          let posts = self.$parent.posts;
-          let index;
+          if(self.post.deleted){
+            let posts = self.$parent.posts;
+            let index;
 
-          for(let i = 0; i < posts.length; i++){
-            if(posts[i]._id === self._id){
-              index = i;
-              break;
+            for(let i = 0; i < posts.length; i++){
+              if(posts[i]._id === self._id){
+                index = i;
+                break;
+              }
             }
+
+            posts.splice(index, 1);
           }
 
-          posts.splice(index, 1);
+          else {
+            self.post.deleted = true;
+          }
 
           self.exit();
         }
@@ -74,8 +86,8 @@
      */
     mounted(){
       let $self = $(".admin-delete");
-      let margin = 10;
-      let top = $(`.${this._id}`).offset().top - $self.height() - margin;
+      let margin = 40;
+      let top = $(`.${this.post._id}`).offset().top - $self.height() - margin;
 
       $self.css({top});
     }
@@ -86,11 +98,12 @@
   .admin-delete{
     background-color: white;
     position: absolute;
-    width: 250px;
-    height: 150px;
+    width: 200px;
+    height: 100px;
     margin: auto;
     padding: 5px;
     text-align: center;
+    font-size: 14px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -100,10 +113,11 @@
   .admin-delete-actions{
     display: flex;
     justify-content: space-evenly;
+    font-size: 12px;
   }
 
   .admin-delete-actions button{
-    width: 100px;
+    width: 80px;
     box-shadow: 0 0 2px lightgray;
   }
 </style>

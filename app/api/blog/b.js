@@ -84,7 +84,7 @@ exports.getPosts = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
   let q = req.query;
-  let condition = {deleted: false};
+  let condition = {};
 
   if(q._id) condition._id = q._id;
   if(q.draft) condition.draft = q.draft === "yes";
@@ -122,10 +122,18 @@ exports.deletePost = async (req, res) => {
   }
 
   try{
-    let post = await Blog.findOneAndUpdate({_id}, {deleted: true}).exec();
+    let post = await Blog.findById(_id).exec();
 
     if(!post){
       return respondErr(http.NOT_FOUND, "Post not found!");
+    }
+
+    if(post.deleted){
+      await post.remove();
+    }
+    else{
+      post.deleted = true;
+      await post.save();
     }
 
     respond(http.OK, "post deleted.", {post});

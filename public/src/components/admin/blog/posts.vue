@@ -1,8 +1,8 @@
 <template>
   <div class="admin-posts">
-    <delete v-if="toDelete" :_id="toDelete"></delete>
+    <delete v-if="toDelete" :post="toDelete"></delete>
 
-    <div class="admin-post" v-for="post in posts" :key="post._id">
+    <div class="admin-post" v-for="post in _posts" :key="post._id">
       <div class="admin-post-title">{{post.title}}</div>
 
       <div class="admin-post-text">{{textPreview(post.text)}}</div>
@@ -42,18 +42,43 @@
         posts: [],
         err: "",
         msg: "No posts to show",
-        toDelete: ""
+        toDelete: "",
       }
     },
 
+    props: ["show"],
+
     computed: {
+      /**
+       * Returns a list of posts after doing
+       * the required filtering
+       */
+      _posts(){
+        let result = [];
+        let self = this;
+
+        for(let post of self.posts){
+          if(self.show === "drafts" && post.draft && !post.deleted){
+            result.push(post);
+          }
+          else if(self.show === "deleted" && post.deleted){
+            result.push(post);
+          }
+          else if(self.show === "published" && !(post.deleted || post.draft)){
+            result.push(post);
+          }
+        }
+
+        return result;
+      },
+
       /**
        * Any posts to show?
        *
        * @returns {boolean}
        */
       hasPosts(){
-        return !!this.posts.length;
+        return !!this._posts.length;
       }
     },
 
@@ -82,10 +107,10 @@
        */
       deletePost(post){
         if(this.toDelete){
-          this.toDelete = "";
+          this.toDelete = null;
         }
 
-        else this.toDelete = post._id;
+        else this.toDelete = post;
       }
     },
 
@@ -100,6 +125,7 @@
         let res = await self.$http.get("/api/b");
 
         self.posts = res.body.result.posts;
+        self.changed = true;
       }
       catch(err){
         self.err = err.message;

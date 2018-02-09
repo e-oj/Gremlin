@@ -4,12 +4,12 @@
       <ul>
         <li>
           <router-link to="/admin" tag="button">
-            <i class="fas fa-home"></i><span>Home</span>
+            <i class="fas fa-home"></i>
           </router-link>
         </li>
         <li>
           <router-link to="/admin/blog" tag="button">
-            <i class="far fa-newspaper"></i><span>Blog</span>
+            <i class="far fa-newspaper"></i>
           </router-link>
         </li>
       </ul>
@@ -17,7 +17,7 @@
       <ul>
         <li>
           <button @click.prevent="logout">
-            <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+            <i class="fas fa-sign-out-alt"></i>
           </button>
         </li>
       </ul>
@@ -64,11 +64,8 @@
 
   #admin-nav button{
     box-shadow: 0 0 3px lightgray;
-    font-size: 14px;
-  }
-
-  #admin-nav svg{
-    margin-right: 0.5em;
+    font-size: 18px;
+    width: 80px;
   }
 
   #admin-nav .router-link-exact-active{
