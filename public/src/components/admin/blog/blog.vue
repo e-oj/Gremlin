@@ -2,10 +2,10 @@
   <div class="admin-blog">
     <div class="blog-actions">
       <button v-show="!showEditor" @click.preventDefault="newPost">
-        <i class="fas fa-plus"></i> New Post
+        <i class="fas fa-plus"></i>
       </button>
       <button v-show="showEditor" @click.preventDefault="back">
-        <i class="fas fa-long-arrow-alt-left"></i> Back
+        <i class="fas fa-long-arrow-alt-left"></i>
       </button>
     </div>
 

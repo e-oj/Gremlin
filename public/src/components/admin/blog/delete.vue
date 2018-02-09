@@ -86,11 +86,12 @@
   .admin-delete{
     background-color: white;
     position: absolute;
-    width: 250px;
-    height: 150px;
+    width: 200px;
+    height: 100px;
     margin: auto;
     padding: 5px;
     text-align: center;
+    font-size: 14px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -100,10 +101,11 @@
   .admin-delete-actions{
     display: flex;
     justify-content: space-evenly;
+    font-size: 12px;
   }
 
   .admin-delete-actions button{
-    width: 100px;
+    width: 80px;
     box-shadow: 0 0 2px lightgray;
   }
 </style>

@@ -2,7 +2,7 @@
   <div class="admin-posts">
     <delete v-if="toDelete" :_id="toDelete"></delete>
 
-    <div class="admin-post" v-for="post in posts" :key="post._id">
+    <div class="admin-post" v-for="post in _posts" :key="post._id">
       <div class="admin-post-title">{{post.title}}</div>
 
       <div class="admin-post-text">{{textPreview(post.text)}}</div>
