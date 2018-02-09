@@ -1,6 +1,6 @@
 <template>
   <div class="admin-posts">
-    <delete v-if="toDelete" :_id="toDelete"></delete>
+    <delete v-if="toDelete" :post="toDelete"></delete>
 
     <div class="admin-post" v-for="post in _posts" :key="post._id">
       <div class="admin-post-title">{{post.title}}</div>
@@ -107,10 +107,10 @@
        */
       deletePost(post){
         if(this.toDelete){
-          this.toDelete = "";
+          this.toDelete = null;
         }
 
-        else this.toDelete = post._id;
+        else this.toDelete = post;
       }
     },
 
@@ -125,6 +125,7 @@
         let res = await self.$http.get("/api/b");
 
         self.posts = res.body.result.posts;
+        self.changed = true;
       }
       catch(err){
         self.err = err.message;

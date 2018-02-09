@@ -64,7 +64,7 @@
 
   #admin-nav button{
     box-shadow: 0 0 3px lightgray;
-    font-size: 14px;
+    font-size: 18px;
     width: 80px;
   }
 

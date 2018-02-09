@@ -122,10 +122,18 @@ exports.deletePost = async (req, res) => {
   }
 
   try{
-    let post = await Blog.findOneAndUpdate({_id}, {deleted: true}).exec();
+    let post = await Blog.findById(_id).exec();
 
     if(!post){
       return respondErr(http.NOT_FOUND, "Post not found!");
+    }
+
+    if(post.deleted){
+      await post.remove();
+    }
+    else{
+      post.deleted = true;
+      await post.save();
     }
 
     respond(http.OK, "post deleted.", {post});
