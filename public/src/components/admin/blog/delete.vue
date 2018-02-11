@@ -59,7 +59,7 @@
             let index;
 
             for(let i = 0; i < posts.length; i++){
-              if(posts[i]._id === self._id){
+              if(posts[i]._id === self.post._id){
                 index = i;
                 break;
               }
