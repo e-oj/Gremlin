@@ -18,16 +18,16 @@
       </div>
 
       <div class="admin-post-action">
+        <span v-if="show == 'deleted'" class="admin-post-restore" @click="restorePost(post)">
+          <i class="fas fa-undo-alt"></i>
+        </span>
+
         <span class="admin-post-edit" @click="editPost(post)">
           <i class="far fa-edit"></i>
         </span>
 
         <span class="admin-post-delete" @click="deletePost(post)">
           <i class="far fa-trash-alt"></i>
-        </span>
-
-        <span v-if="show == 'deleted'" class="admin-post-restore" @click="restorePost(post)">
-          <i class="fas fa-undo-alt"></i>
         </span>
       </div>
 
@@ -238,8 +238,12 @@
     color: green;
   }
 
-  .admin-post-edit, .admin-post-restore{
+  .admin-post-edit{
     color: #9900ff;
+  }
+
+  .admin-post-restore{
+    color: #1a8cff;
   }
 
   .admin-post-delete{
