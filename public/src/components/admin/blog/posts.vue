@@ -167,7 +167,6 @@
         let res = await self.$http.get("/api/b");
 
         self.posts = res.body.result.posts;
-        self.changed = true;
       }
       catch(err){
         self.err = err.message;
