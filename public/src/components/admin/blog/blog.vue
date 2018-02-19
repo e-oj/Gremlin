@@ -94,18 +94,18 @@
   }
 
   .admin-blog-controls button{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    font-size: 18px;
+    font-size: 12px;
     color: white;
-    background-color: #3498db;
+    background-color: #1a8cff;
     box-shadow: 0 0 3px lightgray;
   }
 
   .admin-blog-actions button{
     margin-right: 40px;
-    background-color: #9b59b6;
+    background-color: #cc33ff;
   }
 
   .admin-editor-actions{

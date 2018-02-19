@@ -184,9 +184,11 @@ module.exports = describe("Blog tests", () => {
     });
   });
 
-  context("Delete post", async () => {
+  context("Post state of existence", async () => {
+    let post;
+
     it("should delete a post by _id", async () => {
-      let post = await Blog.findOne().exec();
+      post = await Blog.findOne().exec();
 
       expect(post.deleted).to.equal(false);
 
@@ -196,8 +198,19 @@ module.exports = describe("Blog tests", () => {
       res = res.body.result;
       expect(samePost(res.post, post)).to.be.true;
 
-      post = await Blog.findById(post._id).exec();
+      expect(res.post.deleted).to.be.true;
+    });
+
+    it("should restore a deleted post", async () => {
       expect(post.deleted).to.be.true;
+
+      let req = request.put("/api/b/restore").set(config.AUTH_TOKEN, token);
+      let res = await req.send({_id: post._id});
+
+      res = res.body.result;
+
+      expect(samePost(res.post, post)).to.be.true;
+      expect(res.post.deleted).to.be.false;
     });
   });
 });

@@ -1,11 +1,11 @@
 <template>
-  <div class="admin-delete">
-    <div class="admin-delete-msg">
+  <div class="admin-restore">
+    <div class="admin-restore-msg">
       {{msg}}
     </div>
 
-    <div class="admin-delete-actions">
-      <button @click="del">
+    <div class="admin-restore-actions">
+      <button @click="restore">
         <i class="fas fa-check-circle"></i> Yes
       </button>
 
@@ -22,13 +22,8 @@
   export default {
     data(){
       return {
-        err: ""
-      }
-    },
-
-    computed: {
-      msg(){
-        return this.post.deleted ? "Delete Permanently?" : "Delete Post";
+        err: "",
+        msg: "Restore Post?"
       }
     },
 
@@ -40,7 +35,7 @@
        * Closes this component
        */
       exit(){
-        this.$parent.toDelete = "";
+        this.$parent.toRestore = "";
       },
 
       /**
@@ -48,30 +43,13 @@
        * and removes the deleted post from the
        * list of posts.
        */
-      async del(){
+      async restore(){
         let self = this;
 
         try{
-          await self.$http.delete("/api/b", {body: {_id: self.post._id}});
+          await self.$http.put("/api/b/restore", {_id: self.post._id});
 
-          if(self.post.deleted){
-            let posts = self.$parent.posts;
-            let index;
-
-            for(let i = 0; i < posts.length; i++){
-              if(posts[i]._id === self.post._id){
-                index = i;
-                break;
-              }
-            }
-
-            posts.splice(index, 1);
-          }
-
-          else {
-            self.post.deleted = true;
-          }
-
+          self.post.deleted = false;
           self.exit();
         }
         catch(err){
@@ -85,7 +63,7 @@
      * summoned it.
      */
     mounted(){
-      let $self = $(".admin-delete");
+      let $self = $(".admin-restore");
       let margin = 40;
       let top = $(`.${this.post._id}`).offset().top - $self.height() - margin;
 
@@ -95,7 +73,7 @@
 </script>
 
 <style>
-  .admin-delete{
+  .admin-restore{
     background-color: white;
     position: absolute;
     width: 200px;
@@ -110,13 +88,13 @@
     box-shadow: 0 0 2px lightgray;
   }
 
-  .admin-delete-actions{
+  .admin-restore-actions{
     display: flex;
     justify-content: space-evenly;
     font-size: 12px;
   }
 
-  .admin-delete-actions button{
+  .admin-restore-actions button{
     width: 80px;
     box-shadow: 0 0 2px lightgray;
   }

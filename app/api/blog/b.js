@@ -144,6 +144,39 @@ exports.deletePost = async (req, res) => {
 };
 
 /**
+ * Restores a deleted post
+ *
+ * @param req request
+ * @param res response
+ *
+ * @returns {Promise.<void>}
+ */
+exports.restorePost = async (req, res) => {
+  let respond = response.success(res);
+  let respondErr = response.failure(res, moduleId);
+  let _id = req.body._id;
+
+  try{
+    let post = await Blog.findById(_id).exec();
+
+    if(!post){
+      return respondErr(http.NOT_FOUND, "post not found!");
+    }
+    else if(!post.deleted){
+      return respondErr(http.BAD_REQUEST, "the post has not been deleted");
+    }
+
+    post.deleted = false;
+    post = await post.save();
+
+    respond(http.OK, "post restored", {post});
+  }
+  catch(err){
+    respondErr(http.SERVER_ERROR, err.message, err);
+  }
+};
+
+/**
  * Helper function to save blog markup
  * in a file
  *
