@@ -15,4 +15,6 @@ blogRouter.route("/")
   .put(auth.checkToken, blog.savePost)
   .delete(auth.checkToken, blog.deletePost);
 
+blogRouter.put("/restore", blog.restorePost);
+
 module.exports = blogRouter;

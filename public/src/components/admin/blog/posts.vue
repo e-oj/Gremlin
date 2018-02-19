@@ -1,6 +1,7 @@
 <template>
   <div class="admin-posts">
     <delete v-if="toDelete" :post="toDelete"></delete>
+    <restore v-if="toRestore" :post="toRestore"></restore>
 
     <div class="admin-post" v-for="post in _posts" :key="post._id">
       <div class="admin-post-title">{{post.title}}</div>
@@ -20,8 +21,13 @@
         <span class="admin-post-edit" @click="editPost(post)">
           <i class="far fa-edit"></i>
         </span>
+
         <span class="admin-post-delete" @click="deletePost(post)">
           <i class="far fa-trash-alt"></i>
+        </span>
+
+        <span v-if="show == 'deleted'" class="admin-post-restore" @click="restorePost(post)">
+          <i class="fas fa-undo-alt"></i>
         </span>
       </div>
 
@@ -33,8 +39,9 @@
 </template>
 
 <script>
-  import * as utils from "../../../gen.utils"
-  import Delete from "./delete.vue"
+  import * as utils from "../../../gen.utils";
+  import Delete from "./delete.vue";
+  import Restore from "./restore.vue";
 
   export default{
     data(){
@@ -43,10 +50,20 @@
         err: "",
         msg: "No posts to show",
         toDelete: "",
+        toRestore: "",
       }
     },
 
     props: ["show"],
+
+    watch: {
+      show(){
+        let self = this;
+
+        if(self.toDelete) self.toDelete = null;
+        if(self.toRestore) self.toRestore = null;
+      }
+    },
 
     computed: {
       /**
@@ -106,16 +123,41 @@
        * @param post the post to delete
        */
       deletePost(post){
-        if(this.toDelete){
-          this.toDelete = null;
+        let self = this;
+
+        if(self.toRestore){
+          self.toRestore = null;
         }
 
-        else this.toDelete = post;
+        if(self.toDelete){
+          self.toDelete = null;
+        }
+        else self.toDelete = post;
+      },
+
+      /**
+       * Opens up the restore dialog for
+       * a post.
+       *
+       * @param post the post to delete
+       */
+      restorePost(post){
+        let self = this;
+
+        if(self.toDelete){
+          self.toDelete = null;
+        }
+
+        if(self.toRestore){
+          self.toRestore = null;
+        }
+        else self.toRestore = post;
       }
     },
 
     components: {
-      "delete": Delete
+      "delete": Delete,
+      "restore": Restore
     },
 
     async created(){
@@ -196,7 +238,7 @@
     color: green;
   }
 
-  .admin-post-edit{
+  .admin-post-edit, .admin-post-restore{
     color: #9900ff;
   }
 
