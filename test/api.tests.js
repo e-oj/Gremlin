@@ -6,6 +6,9 @@ let chai = require("chai");
 let chaiHttp = require("chai-http");
 mongoose.Promise = global.Promise = require("bluebird");
 
+// configure env variables
+require("dotenv").config();
+
 let {DB_URL} = require("../config");
 
 mongoose.connect(DB_URL);

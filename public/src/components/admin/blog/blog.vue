@@ -84,7 +84,7 @@
 
 <style>
   .admin-blog-controls{
-    width: 900px;
+    width: 1000px;
     margin: 50px auto;
     display: flex;
   }
