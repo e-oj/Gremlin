@@ -177,7 +177,7 @@
 
 <style>
   .admin-posts {
-    width: 900px;
+    width: 1000px;
     margin: auto;
     margin-bottom: 20px;
     display: flex;

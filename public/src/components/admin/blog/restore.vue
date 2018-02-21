@@ -53,7 +53,7 @@
           self.exit();
         }
         catch(err){
-          self.err = err.body.message;
+          self.err = err.message;
         }
       },
     },

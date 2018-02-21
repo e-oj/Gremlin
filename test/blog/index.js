@@ -196,9 +196,11 @@ module.exports = describe("Blog tests", () => {
       let res = await req.send({_id: post._id});
 
       res = res.body.result;
-      expect(samePost(res.post, post)).to.be.true;
 
+      expect(samePost(res.post, post)).to.be.true;
       expect(res.post.deleted).to.be.true;
+
+      post = res.post;
     });
 
     it("should restore a deleted post", async () => {
