@@ -19,7 +19,7 @@
 
       <div class="admin-post-action">
         <span v-if="show == 'deleted'" class="admin-post-restore" @click="restorePost(post)">
-          <i class="fas fa-undo-alt"></i>
+          <i class="far fa-undo-alt"></i>
         </span>
 
         <span class="admin-post-edit" @click="editPost(post)">
@@ -197,30 +197,30 @@
   .admin-post-title{
     margin-top: 3px;
     margin-bottom: 15px;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 900;
   }
 
   .admin-post-text{
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .admin-post-tags{
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    font-size: 13px;
   }
 
   .admin-post-tags span{
     margin-right: 5px;
-    font-size: 15px;
     font-style: italic;
     text-decoration: underline;
   }
 
   .admin-post-date{
-    font-size: 13px;
+    font-size: 12px;
     color: blue;
-    margin: 15px 0 15px 0;
+    margin-bottom: 10px;
   }
 
   .admin-post-action{

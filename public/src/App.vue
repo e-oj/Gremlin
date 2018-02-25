@@ -52,6 +52,7 @@
 
   .err {
     color: red;
+    max-width: 900px;
   }
 
   .msg{
