@@ -7,10 +7,11 @@
 
     <div class="editor-submit">
       <button class="submit" @click.preventDefault="publish">
-        <i class="far fa-caret-square-right"></i> Publish
+        <i class="fas fa-share-alt"></i>
       </button>
+
       <button class="submit" @click.preventDefault="save">
-        <i class="far fa-hdd"></i> Save
+        <i class="fas fa-folder"></i>
       </button>
     </div>
 
@@ -152,12 +153,25 @@
     flex-direction: column;
     align-items: center;
     color: #33334d;
+    margin-bottom: 30px;
   }
 
-  .admin-editor .submit{
+  .editor-submit{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .editor-submit .submit{
     margin-top: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 0 3px lightgray;
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background-color: #cc66ff;
+    color: white;
+    font-size: 14px;
   }
 
   .admin-editor .submit:last-child{
@@ -181,14 +195,14 @@
   }
 
   .editor-title{
-    font-size: 1.2em;
+    font-size: 20px;
     width: 600px;
     margin: 40px;
   }
 
   .editor-tags{
     width: 600px;
-    font-size: 1em;
+    font-size: 18px;
   }
 
   .editor-title, .editor-tags{
@@ -216,7 +230,7 @@
   }
 
   #editor p{
-    font-size: 1.7em;
+    font-size: 18px;
   }
 
   #editor img{

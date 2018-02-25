@@ -105,7 +105,7 @@
 
   .admin-blog-actions button{
     margin-right: 40px;
-    background-color: #cc33ff;
+    background-color: #cc66ff;
   }
 
   .admin-editor-actions{

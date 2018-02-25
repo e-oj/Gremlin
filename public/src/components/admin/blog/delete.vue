@@ -86,7 +86,7 @@
      */
     mounted(){
       let $self = $(".admin-delete");
-      let margin = 40;
+      let margin = 30;
       let top = $(`.${this.post._id}`).offset().top - $self.height() - margin;
 
       $self.css({top});
