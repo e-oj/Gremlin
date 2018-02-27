@@ -84,8 +84,8 @@
 
 <style>
   .admin-blog-controls{
-    width: 1000px;
-    margin: 50px auto;
+    width: 50em;
+    margin: 2.5em auto;
     display: flex;
   }
 
@@ -94,17 +94,17 @@
   }
 
   .admin-blog-controls button{
-    width: 40px;
-    height: 40px;
+    font-size: 0.6em;
+    width: 3.33em;
+    height: 3.33em;
     border-radius: 50%;
-    font-size: 12px;
     color: white;
     background-color: #1a8cff;
-    box-shadow: 0 0 3px lightgray;
+    box-shadow: 0 0 0.25em lightgray;
   }
 
   .admin-blog-actions button{
-    margin-right: 40px;
+    margin-right: 3.33em;
     background-color: #cc66ff;
   }
 

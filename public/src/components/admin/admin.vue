@@ -14,6 +14,8 @@
   import Auth from "./auth.vue";
   import AdminNav from "./nav.admin.vue"
 
+  const FONT_RATIO = 0.0104;
+
   export default {
     data(){
       return {}
@@ -32,8 +34,22 @@
     components: {
       "auth": Auth,
       "admin-nav": AdminNav
+    },
+
+    methods: {
+      setFontSize(){
+        let $admin = $(".admin");
+        let fontSize = (screen.availWidth * FONT_RATIO) + "px";
+
+        $admin.css({fontSize});
+      }
+    },
+
+    mounted(){
+      this.setFontSize();
     }
   }
+
 </script>
 
 <style>
@@ -43,6 +59,7 @@
     width: 100%;
     height: 100%;
     transition: none;
+    font-size: 20px;
   }
 
   .admin .content{
@@ -50,12 +67,12 @@
   }
 
   .admin button{
-    width: 120px;
-    height: 35px;
+    width: 6em;
+    height: 1.75em;
     border: none;
     background-color: white;
     font-family: "Open Sans", sans-serif;
-    font-size: 14px;
+    font-size: 0.7em;
     color: black;
     cursor: pointer;
     transition: all linear 0.2s;

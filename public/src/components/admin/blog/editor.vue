@@ -153,25 +153,32 @@
     flex-direction: column;
     align-items: center;
     color: #33334d;
-    margin-bottom: 30px;
+    margin-bottom: 1.5em;
+    font-size: 1em !important;
   }
 
   .editor-submit{
-    width: 200px;
+    width: 12em;
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 1em;
   }
 
   .editor-submit .submit{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 43px;
-    height: 43px;
-    border-radius: 50%;
-    background-color: #cc66ff;
+    font-size: 0.9em;
+    margin-top: 1.43em;
+    margin-bottom: 1.43em;
+    width: 4em;
+    height: 2em;
+    border-radius: 0.22em;
+    background-color: white;
+    box-shadow: 0 0 2px lightgray;
+    color: #4da6ff;
+  }
+
+  .admin-editor .submit:hover{
+    background-color: #4da6ff;
     color: white;
-    font-size: 14px;
   }
 
   .admin-editor .submit:last-child{
@@ -183,30 +190,42 @@
   }
 
   .admin-editor .err, .admin-editor .msg{
-    margin: 20px;
+    margin: 1em;
   }
 
   .admin-editor input{
     font-family: "Text Me One", sans-serif;
+    border: none;
+    border-bottom: 1px solid lightgrey;
   }
 
   .admin-editor input::placeholder{
     opacity: 0.6;
   }
 
-  .editor-title{
-    font-size: 20px;
-    width: 600px;
-    margin: 40px;
+  .admin-editor input:focus{
+    outline: none;
+    border-bottom-color: dodgerblue;
   }
 
   .editor-tags{
-    width: 600px;
-    font-size: 18px;
+    font-size: 0.9em;
+    width: 33.34em;
+    margin-bottom: 2em;
+  }
+
+  .editor-title{
+    font-size: 1.2em;
+    width: 25em;
+    margin-bottom: 3em;
   }
 
   .editor-title, .editor-tags{
     text-align: center;
+  }
+
+  .ql-container{
+    font-size: 1em !important;
   }
 
   .ql-snow {
@@ -214,28 +233,41 @@
   }
 
   .ql-toolbar {
-    width: 900px;
+    width: 45em;
     margin: auto;
     border: none !important;
-    box-shadow: 0 0 3px lightgray;
-    margin-bottom: 10px;
+    box-shadow: 0 0 0.15em lightgray;
+    margin-bottom: 0.5em;
+  }
+
+  .ql-toolbar svg{
+    width: 1.5em;
+    height: 1.5em;
   }
 
   #editor{
-    width: 900px;
+    width: 45em;
     margin: auto;
     font-family: "Text Me One", sans-serif;
     border: none;
-    box-shadow: 0 0 3px lightgray;
+    box-shadow: 0 0 0.15em lightgray;
   }
 
   #editor p{
-    font-size: 18px;
+    font-size: 1em;
   }
 
-  #editor img{
-    width: 500px;
-    max-height: 500px;
+  #editor p img{
+    display: block;
+    width: 42.5em;
+    max-height: 42.5em;
+    margin: auto;
+  }
+
+  #editor .ql-video {
+    width: 42.5em;
+    height: 23.9em;
+    margin: auto;
   }
 
   .ql-formats{

@@ -95,8 +95,6 @@ new Vue({
       let fontSize = fSize + "px";
 
       $body.css({fontSize});
-
-      console.log(fontSize, MIN_FONT_SIZE);
     }
   }
   , created(){

@@ -1,16 +1,16 @@
 <template>
-  <div class="admin-delete">
-    <div class="admin-delete-msg">
+  <div class="admin-dialog admin-delete">
+    <div class="admin-dialog-msg">
       {{msg}}
     </div>
 
-    <div class="admin-delete-actions">
+    <div class="admin-dialog-actions">
       <button @click="del">
-        <i class="fas fa-check-circle"></i> Yes
+        <i class="far fa-check"></i>
       </button>
 
       <button @click="exit">
-        <i class="fas fa-times-circle"></i> No
+        <i class="far fa-times"></i>
       </button>
     </div>
 
@@ -28,7 +28,7 @@
 
     computed: {
       msg(){
-        return this.post.deleted ? "Delete Permanently?" : "Delete Post";
+        return this.post.deleted ? "Delete Permanently?" : "Delete Post?";
       }
     },
 
@@ -86,7 +86,7 @@
      */
     mounted(){
       let $self = $(".admin-delete");
-      let margin = 30;
+      let margin = 40;
       let top = $(`.${this.post._id}`).offset().top - $self.height() - margin;
 
       $self.css({top});
@@ -95,29 +95,34 @@
 </script>
 
 <style>
-  .admin-delete{
+  .admin-dialog{
+    font-size: 0.7em;
     background-color: white;
     position: absolute;
-    width: 200px;
-    height: 100px;
+    width: 14em;
+    height: 6em;
     margin: auto;
-    padding: 5px;
+    padding: 0.36em;
     text-align: center;
-    font-size: 14px;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    box-shadow: 0 0 2px lightgray;
+    justify-content: center;
+    box-shadow: 0 0 0.14em lightgray;
   }
 
-  .admin-delete-actions{
+  .admin-dialog-msg{
+    margin-bottom: 1.2em;
+  }
+
+  .admin-dialog-actions{
     display: flex;
     justify-content: space-evenly;
-    font-size: 12px;
   }
 
-  .admin-delete-actions button{
-    width: 80px;
-    box-shadow: 0 0 2px lightgray;
+  .admin-dialog-actions button{
+    width: 5em;
+    height: 2.1em;
+    font-size: 1em;
+    box-shadow: 0 0 0.1em lightgray;
   }
 </style>

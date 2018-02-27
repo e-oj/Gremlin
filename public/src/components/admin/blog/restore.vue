@@ -1,16 +1,16 @@
 <template>
-  <div class="admin-restore">
-    <div class="admin-restore-msg">
+  <div class="admin-dialog admin-restore">
+    <div class="admin-dialog-msg">
       {{msg}}
     </div>
 
-    <div class="admin-restore-actions">
+    <div class="admin-dialog-actions">
       <button @click="restore">
-        <i class="fas fa-check-circle"></i> Yes
+        <i class="far fa-check"></i>
       </button>
 
       <button @click="exit">
-        <i class="fas fa-times-circle"></i> No
+        <i class="far fa-times"></i>
       </button>
     </div>
 
@@ -64,38 +64,10 @@
      */
     mounted(){
       let $self = $(".admin-restore");
-      let margin = 30;
+      let margin = 40;
       let top = $(`.${this.post._id}`).offset().top - $self.height() - margin;
 
       $self.css({top});
     }
   }
 </script>
-
-<style>
-  .admin-restore{
-    background-color: white;
-    position: absolute;
-    width: 200px;
-    height: 100px;
-    margin: auto;
-    padding: 5px;
-    text-align: center;
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    box-shadow: 0 0 2px lightgray;
-  }
-
-  .admin-restore-actions{
-    display: flex;
-    justify-content: space-evenly;
-    font-size: 12px;
-  }
-
-  .admin-restore-actions button{
-    width: 80px;
-    box-shadow: 0 0 2px lightgray;
-  }
-</style>
