@@ -76,7 +76,7 @@
 
   .admin-home .title{
     font-family: 'Amaranth', sans-serif;
-    font-size: 1.2em;
+    font-size: 1em;
     /*color: #42b983;*/
     color: #4078a5;
     text-align: center;
@@ -93,16 +93,16 @@
   .admin-home textarea{
     font-size: 1.2em;
     font-family: 'Text Me One', sans-serif;
-    padding: 10px;
+    padding: 0.5em;
     width: 70%;
-    max-width: 700px;
+    max-width: 35em;
     height: 100%;
   }
 
   .admin-home button{
-    width: 120px;
-    height: 50px;
-    padding: 10px 15px;
+    width: 6em;
+    height: 2.5em;
+    padding: 0.5em 0.75em;
     font-family: 'Acme', sans-serif;
     font-size: 0.8em;
   }

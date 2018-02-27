@@ -177,16 +177,16 @@
 
 <style>
   .admin-posts {
-    width: 1000px;
+    width: 50em;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 1em;
     display: flex;
     flex-direction: column;
     font-family: "Quicksand", sans-serif;
   }
 
   .admin-post{
-    padding: 10px;
+    padding: 0.5em;
     border-top: 1px solid lightgrey;
   }
 
@@ -195,41 +195,41 @@
   }
 
   .admin-post-title{
-    margin-top: 3px;
-    margin-bottom: 15px;
-    font-size: 17px;
+    font-size: 0.85em;
     font-weight: 900;
+    margin-top: 0.18em;
+    margin-bottom: 0.88em;
   }
 
   .admin-post-text{
-    font-size: 15px;
+    font-size: 0.75em;
   }
 
   .admin-post-tags{
-    margin-top: 15px;
-    margin-bottom: 10px;
-    font-size: 13px;
+    font-size: 0.65em;
+    margin-top: 1.15em;
+    margin-bottom: 0.77em;
   }
 
   .admin-post-tags span{
-    margin-right: 5px;
+    margin-right: 0.38em;
     font-style: italic;
     text-decoration: underline;
   }
 
   .admin-post-date{
-    font-size: 12px;
+    font-size: 0.6em;
     color: blue;
-    margin-bottom: 10px;
+    margin-bottom: 0.84em;
   }
 
   .admin-post-action{
     display: flex;
-    font-size: 15px;
+    font-size: 0.75em;
   }
 
   .admin-post-action span{
-    margin-right: 20px;
+    margin-right: 1em;
     cursor: pointer;
   }
 

@@ -40,7 +40,7 @@
 
 <style>
   #admin-nav{
-    padding: 20px;
+    padding: 1em;
   }
 
   .admin-nav{
@@ -63,9 +63,9 @@
   }
 
   #admin-nav button{
-    box-shadow: 0 0 3px lightgray;
-    font-size: 18px;
-    width: 80px;
+    box-shadow: 0 0 0.15em lightgray;
+    font-size: 0.9em;
+    width: 4em;
   }
 
   #admin-nav .router-link-exact-active{
