@@ -1,8 +1,18 @@
 <template>
   <div class="admin-ext-posts">
+    <div v-if="noPosts">
+      {{msg}}
+    </div>
+
+    <div v-if="err" style="color: red;">{{err}}</div>
+
     <div class="new-ext-post">
-      <div class="new-ext-action" @click="showForm = !showForm">
+      <div class="new-ext-action" v-show="!showForm" @click="showForm = !showForm">
         <i class="fa fa-plus"></i>
+      </div>
+
+      <div class="new-ext-action" v-show="showForm" @click="showForm = !showForm">
+        <i class="fa fa-times"></i>
       </div>
 
       <div class="new-ext-form" v-show="showForm">
@@ -17,16 +27,10 @@
         <div class="new-ext-right">
           <input v-for="prop of props" v-model="newPost[prop]" :placeholder="prop" type="text"/>
 
-          <div class="new-ext-submit">Submit</div>
+          <div class="new-ext-submit" @click="createPost">Submit</div>
         </div>
       </div>
     </div>
-
-    <div v-if="noPosts">
-      {{msg}}
-    </div>
-
-    <div v-if="err" style="color: red;">{{err}}</div>
 
     <div class="ext-post" v-for="post in posts">
       <div class="ext-delete" @click="deletePost(post)">
@@ -73,6 +77,33 @@
     },
 
     methods: {
+      async createPost(){
+        let self = this;
+        let form  = new FormData();
+
+        for(let prop of self.props){
+          form.append(prop, self.newPost[prop])
+        }
+
+        form.append("image", self.newPost.image.file);
+
+        try{
+          let res = await self.$http.post("/api/b/ext", form);
+          let post = res.body.result.post;
+
+          for(let prop of self.props){
+            self.newPost[prop] = ""
+          }
+          self.newPost.image = null;
+
+          post.index = self.posts.length;
+          self.posts.push(post);
+        }
+        catch(err){
+          self.err = err.message || err.body.message;
+        }
+      },
+
       async deletePost(post){
         let self = this;
 
@@ -83,7 +114,7 @@
           self.posts.splice(post.index, 1);
         }
         catch(err){
-          self.err = err.message;
+          self.err = err.message || err.body.message;
         }
       },
 
@@ -114,7 +145,7 @@
 
     computed: {
       noPosts(){
-        return self.posts && !self.posts.length;
+        return !this.posts.length
       }
     },
 
@@ -130,7 +161,7 @@
           post.index = index++;
         }
 
-        self.posts = res.body.result.posts;
+        self.posts = res.body.result.posts || [];
       }
       catch(err){
         self.err = err.message;
