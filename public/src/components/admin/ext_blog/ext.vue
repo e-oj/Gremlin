@@ -80,12 +80,13 @@
       async createPost(){
         let self = this;
         let form  = new FormData();
+        let image = self.newPost.image;
+
+        if(image) form.append("image", image.file);
 
         for(let prop of self.props){
           form.append(prop, self.newPost[prop])
         }
-
-        form.append("image", self.newPost.image.file);
 
         try{
           let res = await self.$http.post("/api/b/ext", form);
@@ -264,8 +265,12 @@
   .ext-post{
     position: relative;
     width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+
+  .ext-post:hover{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
 
   .ext-post .ext-delete{
