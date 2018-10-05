@@ -12,6 +12,11 @@
             <i class="far fa-newspaper"></i>
           </router-link>
         </li>
+        <li>
+          <router-link to="/admin/ext" tag="button">
+            <i class="fas fa-align-justify"></i>
+          </router-link>
+        </li>
       </ul>
 
       <ul>

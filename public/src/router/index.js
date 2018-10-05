@@ -11,6 +11,7 @@ import Home from "../components/site/home.vue";
 import Admin from "../components/Admin/admin.vue";
 import AdminHome from "../components/admin/home/home.admin.vue";
 import AdminBlog from "../components/admin/blog/blog.vue";
+import AdminExtBlog from "../components/admin/ext_blog/ext";
 
 Vue.use(Router);
 
@@ -23,12 +24,16 @@ export default new Router({
       component: Admin,
       children: [
         {
-          path: "/",
+          path: "",
           component: AdminHome
         },
         {
           path: "blog",
           component: AdminBlog
+        },
+        {
+          path: "ext",
+          component: AdminExtBlog
         }
       ]
     },

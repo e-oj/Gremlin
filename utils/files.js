@@ -5,40 +5,120 @@
 
 let moduleId = "utils/files";
 
+// Max duration of uploaded video in seconds
 const MAX_DURATION = 20;
 
 let fs = Promise.promisifyAll(require("fs"));
 let mongoose = require("mongoose");
+let Fawn = require("fawn");
 let ffmpegStatic = require("ffmpeg-static");
 let ffprobeStatic = require("ffprobe-static");
 let ffmpeg = require("fluent-ffmpeg");
 let Grid = require("gridfs-stream");
+let readChunk = require("read-chunk");
+let fileType = require("file-type");
 
 let response = require("./response");
 let http = require("./HttpStats");
+let User = require("../app/models/User").User;
 
 Grid.mongo = mongoose.mongo;
 
 ffmpeg.setFfmpegPath(ffmpegStatic.path);
 ffmpeg.setFfprobePath(ffprobeStatic.path);
 
+Fawn.init(mongoose);
+
 /**
- * Attach an image to a mongoose document
- * at the specified key.
+ * Checks if a file is an image.
  *
- * @param file the image to attach
- * @param doc the mongoose document
- * @param key image key in the document
+ * @param file - to be checked
+ * @returns {Promise.<boolean>}
+ */
+async function isImage(file){
+  let buffer = await readChunk(file.path, 0, 4100);
+  let safeTypes = new Set(["jpg", "png", "gif", "webp"]);
+  let imgType = fileType(buffer);
+
+  return safeTypes.has(imgType.ext);
+}
+
+/**
+ * Route handler to get an
+ * image with the specified _id
+ *
+ * @param req the request
+ * @param res the response
  *
  * @returns {Promise.<void>}
  */
-exports.attachImage = async (file, doc, key) => {
-  doc[key] = {
-    data: await fs.readFileAsync(file.path, "base64")
-    , mimetype: file.mimetype
-  };
+exports.getImg = async (req, res) => {
+  let gfs = Grid(mongoose.connection.db);
+  let respondErr = response.failure(res, moduleId);
+  let readStream;
 
-  await fs.unlinkAsync(file.path);
+  if(!req.query["imgId"]){
+    return respondErr(http.BAD_REQUEST, "Missing required id");
+  }
+
+  readStream = gfs.createReadStream({
+    _id: req.query["imgId"]
+  });
+
+  readStream.pipe(res);
+};
+
+/**
+ * Uploads an image to the db. Returns
+ * null if the provided file is not an email
+ *
+ * @param file - to be uploaded
+ * @returns {Promise.<*>}
+ */
+let uploadImage = exports.uploadImage = async (file) => {
+  let result = null;
+
+  try{
+    let isImg = await isImage(file);
+
+    if(isImg){
+      let task = Fawn.Task();
+      let _id = mongoose.Types.ObjectId();
+
+      result = await task
+        .saveFile(file.path, {_id, metadata: file})
+        .run();
+
+      result = result[0];
+    }
+
+    await fs.unlinkAsync(file.path);
+  }
+  catch(err){
+    throw err;
+  }
+
+  return result;
+};
+
+/**
+ * Uploads images to the db. Returns
+ * null if the provided file is not an email
+ *
+ * @param files - to be uploaded
+ * @returns {Promise.<*>}
+ */
+exports.uploadImages = async files => {
+  let result = [];
+  let res;
+
+  for(let file of files){
+    res = await uploadImage(file);
+
+    if (res) result.push(res);
+  }
+
+  return result;
 };
 
 /**
