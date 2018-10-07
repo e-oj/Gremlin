@@ -97,6 +97,8 @@
           }
           self.newPost.image = null;
 
+          if(self.err) self.err = "";
+
           post.index = self.posts.length;
           self.posts.push(post);
         }
@@ -109,8 +111,8 @@
         let self = this;
 
         try{
-          let res = await self.$http.delete("/api/b/ext", {body: {_id: post._id}});
-          console.log(res.body.message);
+          await self.$http.delete("/api/b/ext", {body: {_id: post._id}});
+          if(self.err) self.err = "";
 
           self.posts.splice(post.index, 1);
         }
@@ -162,7 +164,7 @@
           post.index = index++;
         }
 
-        self.posts = res.body.result.posts || [];
+        self.posts = res.body.result.posts;
       }
       catch(err){
         self.err = err.message;

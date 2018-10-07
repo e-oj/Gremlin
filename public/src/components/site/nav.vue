@@ -1,12 +1,12 @@
 <template>
   <ul class="nav">
     <li><a href="/">Home</a></li>
-    <li><a href="/">Blog</a></li>
+    <li><a href="/blog">Blog</a></li>
     <li><a href="/">Resume</a></li>
   </ul>
 </template>
 
-<style>
+<style scoped>
   .nav{
     list-style-type: none;
     display: flex;

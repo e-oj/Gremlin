@@ -7,6 +7,7 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import Home from "../components/site/home.vue";
+import ClientExtBlog from "../components/site/ext.vue";
 
 import Admin from "../components/Admin/admin.vue";
 import AdminHome from "../components/admin/home/home.admin.vue";
@@ -19,6 +20,7 @@ export default new Router({
   mode: "history",
   routes: [
     {path: "/", component: Home},
+    {path: "/blog", component: ClientExtBlog},
     {
       path: "/admin",
       component: Admin,
