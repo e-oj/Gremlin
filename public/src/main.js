@@ -76,8 +76,7 @@ let store = new Vuex.Store({
 });
 
 const FONT_RATIO = 0.013;
-const MIN_FONT_RATIO = 0.0096;
-const MIN_FONT_SIZE = window.screen.availWidth * MIN_FONT_RATIO;
+const MIN_FONT_SIZE = 25;
 
 $("body").css({
   transition: "font-size 0.2s ease-in-out"
