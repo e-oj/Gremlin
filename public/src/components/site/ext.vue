@@ -1,6 +1,6 @@
 <template>
   <div class="client-ext-posts">
-    <nav-bar class="client-ext-nav"></nav-bar>
+    <nav-bar class="client-ext-nav" is-fixed="true"></nav-bar>
 
     <div class="client-ext-content">
       <div class="ext-post" v-for="post in posts">
@@ -62,22 +62,6 @@
 <style scoped>
   .client-ext-posts{
     transition: all 0.3s ease;
-  }
-
-  .client-ext-posts .client-ext-nav{
-    position: fixed;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    margin-bottom: 50px;
-    width: 100%;
-    height: 100px;
-    background-color: #33334d;
-    font-size: 25px;
-  }
-
-  .client-ext-posts .client-ext-nav >>> li:last-child{
-    margin-right: 60px;
   }
 
   .client-ext-content{
