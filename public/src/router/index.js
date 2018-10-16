@@ -8,7 +8,7 @@ import Router from "vue-router";
 
 import Home from "../components/site/home";
 import ClientExtBlog from "../components/site/ext";
-import Story from "../components/site/story";
+import Story from "../components/site/story/story";
 
 import Admin from "../components/Admin/admin";
 import AdminHome from "../components/admin/home/home.admin";
