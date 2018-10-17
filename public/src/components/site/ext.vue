@@ -71,7 +71,7 @@
 
   .ext-post{
     position: relative;
-    width: 900px;
+    width: 800px;
     margin: 0 auto 40px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }

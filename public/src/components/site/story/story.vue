@@ -41,7 +41,7 @@
   }
 
   .s-card{
-    width: 900px;
+    width: 800px;
     margin: 0 auto 40px;
     display: flex;
     flex-direction: column;
@@ -67,6 +67,7 @@
     width: fit-content;
     margin-bottom: 10px;
     font-size: 20px;
+    font-weight: bolder;
     border-bottom: 3px solid #42b983;
   }
 
@@ -74,10 +75,11 @@
     width: fit-content;
     margin-bottom: 15px;
     font-size: 18px;
+    font-weight: bold;
     border-bottom: 3px solid #42b983;
   }
 
   .s-card .s-body .description{
-    font-size: 16px;
+    font-size: 17px;
   }
 </style>
