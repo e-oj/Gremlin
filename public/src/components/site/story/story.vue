@@ -9,8 +9,8 @@
         </div>
 
         <div class="s-body">
-          <div class="location">{{story.location}}</div>
-          <div class="role">{{story.role}}</div>
+          <div class="location">{{story.title}}</div>
+          <div class="role">{{story.subtitle}}</div>
           <div class="description">{{story.description}}</div>
         </div>
       </div>
@@ -42,7 +42,7 @@ export default {
 
   .s-card{
     width: 800px;
-    margin: 0 auto 40px;
+    margin: 0 auto 20px;
     padding: 20px;
     display: flex;
     flex-direction: column;
