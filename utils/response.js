@@ -3,7 +3,6 @@
  * @since 12/29/16
  */
 
-//todo: add check for error status code
 function failure(res, moduleId){
   if(!moduleId) throw new Error("Missing moduleId!!!!!");
 

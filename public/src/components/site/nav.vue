@@ -15,9 +15,9 @@
 </template>
 
 <script>
-  export default {
-    props: ["isFixed"]
-  }
+export default {
+  props: ["isFixed"]
+};
 </script>
 
 <style scoped>
@@ -31,7 +31,7 @@
   .nav-logo{
     display: flex;
     align-items: center;
-    font-size: 40px;
+    font-size: 32px;
     margin-left: 100px;
     min-width: 120px;
   }
@@ -55,9 +55,9 @@
     position: fixed;
     z-index: 1;
     width: 100%;
-    height: 100px;
+    height: 80px;
     background-color: black;
-    font-size: 25px;
+    font-size: 22px;
   }
 
   .fixed-nav .nav{

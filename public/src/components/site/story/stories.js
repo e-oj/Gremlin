@@ -16,5 +16,5 @@ export default [
     "to the start of a journey I feel well equipped for.",
     image: "0.jpg"
   }
-]
+];
 

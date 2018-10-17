@@ -3,7 +3,7 @@
     <nav-bar is-fixed="true"></nav-bar>
 
     <div class="story-content">
-      <div class="s-card" v-for="story in stories">
+      <div class="s-card" v-for="story in stories" :key="story._id">
         <div class="s-image">
           <img :src="`/src/assets/img/stories/${story.image}`">
         </div>
@@ -19,25 +19,25 @@
 </template>
 
 <script>
-  import Nav from "../nav"
-  import stories from "./stories";
+import Nav from "../nav";
+import stories from "./stories";
 
-  export default {
-    data(){
-      return {
-        stories: stories
-      }
-    },
-    components: {
-      "nav-bar": Nav
-    }
+export default {
+  data(){
+    return {
+      stories: stories
+    };
+  },
+  components: {
+    "nav-bar": Nav
   }
+};
 </script>
 
 <style scoped>
   .story-content{
     position: relative;
-    top: 130px;
+    top: 100px;
   }
 
   .s-card{
@@ -67,7 +67,7 @@
   .s-card .s-body .location{
     width: fit-content;
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bolder;
     border-bottom: 3px solid #42b983;
   }
@@ -75,12 +75,12 @@
   .s-card .s-body .role{
     width: fit-content;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     border-bottom: 3px solid #42b983;
   }
 
   .s-card .s-body .description{
-    font-size: 17px;
+    font-size: 15px;
   }
 </style>

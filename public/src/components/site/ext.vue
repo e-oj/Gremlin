@@ -3,7 +3,7 @@
     <nav-bar class="client-ext-nav" is-fixed="true"></nav-bar>
 
     <div class="client-ext-content">
-      <div class="ext-post" v-for="post in posts">
+      <div class="ext-post" v-for="post in posts" :key="post._id">
         <a :href="post.url" target="_blank">
           <div class="ext-image">
             <img :src="`/api/img/?imgId=${post.imgId}`" alt="Image">
@@ -25,38 +25,38 @@
 </template>
 
 <script>
-  import Nav from "./nav"
+import Nav from "./nav";
 
-  export default {
-    data(){
-      return {
-        posts: []
+export default {
+  data(){
+    return {
+      posts: []
+    };
+  },
+
+  components: {
+    "nav-bar": Nav
+  },
+
+  async created(){
+    let self = this;
+
+    try{
+      let res = await self.$http.get("/api/b/ext");
+      let posts = res.body.result.posts;
+      let index = 0;
+
+      for(let post of posts){
+        post.index = index++;
       }
-    },
 
-    components: {
-      "nav-bar": Nav
-    },
-
-    async created(){
-      let self = this;
-
-      try{
-        let res = await self.$http.get("/api/b/ext");
-        let posts = res.body.result.posts;
-        let index = 0;
-
-        for(let post of posts){
-          post.index = index++;
-        }
-
-        self.posts = res.body.result.posts;
-      }
-      catch(err){
-        self.err = err.message;
-      }
+      self.posts = res.body.result.posts;
+    }
+    catch(err){
+      self.err = err.message;
     }
   }
+};
 </script>
 
 <style scoped>
@@ -66,7 +66,7 @@
 
   .client-ext-content{
     position: relative;
-    top: 130px;
+    top: 100px;
   }
 
   .ext-post{
