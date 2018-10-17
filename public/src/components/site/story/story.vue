@@ -43,6 +43,7 @@
   .s-card{
     width: 800px;
     margin: 0 auto 40px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -60,7 +61,7 @@
 
   .s-card .s-body{
     color: #454547;
-    padding: 20px;
+    padding: 20px 0 0;
   }
 
   .s-card .s-body .location{
