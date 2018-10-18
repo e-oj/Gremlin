@@ -37,8 +37,9 @@ export default [
     _id: 2,
     title: "Grabity",
     subtitle: "Author (September 2017)",
-    description: "<a href='https://www.github.com/e-oj/grabity'>Grabity</a> is " +
-    "a Node.js library that gets preview data from a url. " +
+    description: "<a href='https://www.github.com/e-oj/grabity' target='_blank'>" +
+    "Grabity</a> " +
+    "is a Node.js library that gets preview data from a url. " +
     "It sends a request to the url and looks through the html response for " +
     "<a href='https://developers.facebook.com/docs/sharing/webmasters#markup' " +
     "target='_blank'>Open Graph</a> " +
@@ -50,7 +51,7 @@ export default [
     "a necessity. A major feature of the app was link sharing and we needed a way to " +
     "get data about a link in order to display a preview of the website. This project " +
     "is open source an can be found on my " +
-    "<a href='https://www.github.com/e-oj'>GitHub</a> account.",
+    "<a href='https://www.github.com/e-oj' target='_blank'>GitHub</a> account.",
     image: "2.png"
   },
   {
@@ -58,7 +59,9 @@ export default [
     title: "Enel X",
     subtitle: "Software Engineering Intern (May 2016 - August 2016)",
     description: "In the summer of 2016, I was a software engineering " +
-    "intern at EnerNOC where I worked on the backend and frontend of " +
+    "intern at " +
+    "<a href='https://www.enelxnorthamerica.com/' target='_blank'>Enel X</a> " +
+    "where I worked on the backend and frontend of " +
     "components in their energy intelligence software platform. Through " +
     "this internship, I gained valuable experience in unit testing and " +
     "software design. I also got to work alongside many talented engineers " +
@@ -85,7 +88,7 @@ export default [
     "native transactions. The project has been a success with over 30,000 downloads on " +
     "<a href='https://www.npmjs.com/package/fawn' target='_blank'>npm</a>. " +
     "The code is open source and can be found on my " +
-    "<a href='https://www.github.com/e-oj'>GitHub</a> " +
+    "<a href='https://www.github.com/e-oj' target='_blank'>GitHub</a> " +
     "account",
     image: "4.png"
   },
@@ -93,7 +96,7 @@ export default [
     _id: 5,
     title: "Information Sciences and Technologies",
     subtitle: "Teaching Assistant (September 2015 - May 2016)",
-    description: "I worked as a TA for both of the Java courses in the IST Java " +
+    description: "I worked as a TA for both of the courses in the IST java " +
     "sequence (ISTE 120, ISTE 121). In the 120 course, I helped the students " +
     "understand object oriented programming concepts and basic, general, " +
     "programming concepts like loops, if statements, basic data structures " +
