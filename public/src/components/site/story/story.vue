@@ -9,8 +9,8 @@
         </div>
 
         <div class="s-body">
-          <div class="location">{{story.title}}</div>
-          <div class="role">{{story.subtitle}}</div>
+          <div class="title">{{story.title}}</div>
+          <div class="subtitle">{{story.subtitle}}</div>
           <div class="description" v-html="story.description"></div>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default {
     padding: 20px 0 0;
   }
 
-  .s-card .s-body .location{
+  .s-card .s-body .title{
     width: fit-content;
     margin-bottom: 10px;
     font-size: 18px;
@@ -72,7 +72,7 @@ export default {
     border-bottom: 3px solid #42b983;
   }
 
-  .s-card .s-body .role{
+  .s-card .s-body .subtitle{
     width: fit-content;
     margin-bottom: 15px;
     font-size: 16px;
