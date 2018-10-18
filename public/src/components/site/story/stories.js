@@ -96,9 +96,9 @@ export default [
     description: "I worked as a TA for both of the Java courses in the IST Java " +
     "sequence (ISTE 120, ISTE 121). In the 120 course, I helped the students " +
     "understand object oriented programming concepts and basic, general, " +
-    "programming concepts like loops, If statements, basic data structures " +
-    "and Exceptions. In the 121 course I helped them deal with more complex " +
-    "topics like Networking, Multithreading, Generics and Graphics. Through " +
+    "programming concepts like loops, if statements, basic data structures " +
+    "and exceptions. In the 121 course I helped them deal with more complex " +
+    "topics like networking, multithreading, generics, and graphics. Through " +
     "this position, I was able to have a positive impact on the lives of many " +
     "new programmers while solidifying my understanding of the topics I taught. " +
     "To teach is to learn twice.",
