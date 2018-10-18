@@ -11,7 +11,7 @@
         <div class="s-body">
           <div class="location">{{story.title}}</div>
           <div class="role">{{story.subtitle}}</div>
-          <div class="description">{{story.description}}</div>
+          <div class="description" v-html="story.description"></div>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@ export default {
 
   .s-card{
     width: 800px;
-    margin: 0 auto 20px;
+    margin: 0 auto 30px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -82,5 +82,18 @@ export default {
 
   .s-card .s-body .description{
     font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .s-card .s-body .description >>> a{
+    text-decoration: none !important;
+    background-color: whitesmoke;
+    color: cornflowerblue;
+    transition: all 0.2s linear;
+  }
+
+  .s-card .s-body .description >>> a:hover{
+    background-color: cornflowerblue;
+    color: white;
   }
 </style>
