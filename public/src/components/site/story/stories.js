@@ -13,7 +13,7 @@ export default [
     "adjust my views and interests. I learned about open source software " +
     "at RIT and, since then, I've created two open source projects which I " +
     "still actively maintain. I'll be graduating next May and I look forward " +
-    "to the start of a new journey",
+    "to the start of a new journey.",
     image: "0.jpg"
   },
   {
