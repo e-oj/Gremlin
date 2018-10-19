@@ -49,8 +49,9 @@ export default [
     "markup. This information is then returned to the user and can be used to generate " +
     "Facebook type link previews. I was working on a forum  app when this tool became " +
     "a necessity. A major feature of the app was link sharing and we needed a way to " +
-    "get data about a link in order to display a preview of the website. This project " +
-    "is open source an can be found on my " +
+    "get data about a link in order to display a preview of the website. I published " +
+    "grabity on npm because I felt that a good number of people would find it useful. " +
+    "The code is open source and can be found on my " +
     "<a href='https://www.github.com/e-oj' target='_blank'>GitHub</a> account.",
     image: "2.png"
   },
@@ -65,7 +66,7 @@ export default [
     "components in their energy intelligence software platform. Through " +
     "this internship, I gained valuable experience in unit testing and " +
     "software design. I also got to work alongside many talented engineers " +
-    "which is it's own reward. The company is based in Boston, so it was a fun " +
+    "which is its own reward. The company is based in Boston, so it was a fun " +
     "summer for me because I'd never been there. It's a great city " +
     "with many leisure activities and tourist attractions, I recommend " +
     "a visit to anyone who can make the trip.",
@@ -83,8 +84,8 @@ export default [
     "<a href='https://codeburst.io/fawn-transactions-in-mongodb-988d8646e564' " +
     "target='_blank'>Medium article</a> " +
     "that describes the functionality of this library in greater detail. I published " +
-    "this library in August 2016 and since that time, MongoDB has added multi-document " +
-    "transactions to the Database. I'm working on updates to the library that incorporate " +
+    "Fawn in August 2016 and since that time, MongoDB has added multi-document " +
+    "transactions to the database. I'm working on updates to the library that incorporate " +
     "native transactions. The project has been a success with over 30,000 downloads on " +
     "<a href='https://www.npmjs.com/package/fawn' target='_blank'>npm</a>. " +
     "The code is open source and can be found on my " +

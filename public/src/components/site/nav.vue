@@ -1,9 +1,9 @@
 <template>
   <div :class="['nav-container', {'fixed-nav': isFixed}]">
     <div v-if="isFixed" class="nav-logo">
-      <span class="bracket"><</span>
-        <a target="_blank" href="https://www.github.com/e-oj">@e-oj</a>
-      <span class="bracket">></span>
+      <a target="_blank" href="https://www.github.com/e-oj">
+        <span class="bracket">&lt;</span>@e-oj<span class="bracket">&gt;</span>
+      </a>
     </div>
 
     <ul class="nav">
@@ -31,24 +31,26 @@ export default {
   .nav-logo{
     display: flex;
     align-items: center;
+    justify-content: center;
     font-size: 32px;
     margin-left: 100px;
     min-width: 120px;
+    background-color: #42b983;
   }
 
   .nav-logo .bracket{
-    color: #42b983;
+    color: #24292e;
+    opacity: 0;
   }
 
   .nav-logo a{
     text-decoration: none;
-    color: #ffff00;
-    border-bottom: 5px solid transparent;
-    transition: all 0.2s linear;
+    color: #24292e;
   }
 
-  .nav-logo a:hover{
-    border-color: #ffff00;
+  .nav-logo a:hover .bracket{
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
   }
 
   .fixed-nav{
@@ -56,8 +58,9 @@ export default {
     z-index: 1;
     width: 100%;
     height: 80px;
-    background-color: black;
+    background-color: #24292e;
     font-size: 22px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
 
   .fixed-nav .nav{
@@ -67,6 +70,15 @@ export default {
 
   .fixed-nav .nav li:last-child{
     margin-right: 100px;
+  }
+
+  .fixed-nav .nav a{
+    color: #e6e6e6;
+    border-bottom: none
+  }
+
+  .fixed-nav .nav a:hover{
+    color: #42b983;
   }
 
   .nav{
@@ -80,19 +92,20 @@ export default {
   .nav a{
     text-decoration: none;
     transition: all 0.2s linear;
+    color: #42b983;
+    border-bottom: 4px solid #ffff00;
+  }
+
+  .nav a:hover{
+    color: #ffff00;
   }
 
   .nav li{
     margin: 0 60px 0 0;
-    border-bottom: 3px solid #ffff00;
     transition: all 0.2s linear;
   }
 
   .nav li:last-child{
     margin-right: 150px;
-  }
-
-  .nav li:hover a{
-    color: #ffff00;
   }
 </style>
