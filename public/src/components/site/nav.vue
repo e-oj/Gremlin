@@ -62,7 +62,6 @@ export default {
     height: 80px;
     background-color: #24292e;
     font-size: 22px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
 
   .fixed-nav .nav{
@@ -117,5 +116,15 @@ export default {
 
   .nav li:last-child{
     margin-right: 150px;
+  }
+
+  @media screen and (max-width: 1150px){
+    .fixed-nav{
+      font-size: 25px;
+    }
+
+    .nav-logo{
+      font-size: 36px;
+    }
   }
 </style>

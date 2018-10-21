@@ -8,9 +8,9 @@
       <div class="story-content">
         <div class="s-nav">
           <div v-for="(story, i) in stories"
-               :class="['s-nav-item', {'s-nav-active': i === index}]"
+               :class="['s-nav-item', {'s-nav-active': isActive(i)}]"
                :key="story._id"
-               @click="setIndex(i)">
+               @click="setActive(i)">
 
             <div class="s-nav-title">{{story.title}}</div>
             <div class="s-nav-subtitle">{{story.subtitle}}</div>
@@ -29,8 +29,28 @@
           </div>
         </div>
       </div>
+
+
+      <div class="mobile-stories">
+        <div v-for="(story, i) in stories"
+             :class="['s-card', {'mobile-active': isActive(i)}]"
+             @click="setActive(i)">
+
+          <div class="s-image" v-show="isActive(i)">
+            <img :src="`/src/assets/img/stories/${story.image}`">
+          </div>
+
+          <div class="s-body">
+            <div class="title">{{story.title}}</div>
+            <div class="subtitle">{{story.subtitle}}</div>
+            <div class="description"
+                 v-html="story.description"
+                 v-show="isActive(i)"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -50,8 +70,12 @@ export default {
   },
 
   methods: {
-    setIndex(index){
+    setActive(index){
       this.index = index;
+    },
+
+    isActive(index){
+      return index === this.index;
     }
   },
 
@@ -107,7 +131,7 @@ export default {
     line-height: 1.6;
   }
 
-  .s-nav .s-nav-item:hover:not(.s-nav-active){
+  .s-nav .s-nav-item:not(.s-nav-active):hover{
     background-color: #f2f2f2;
   }
 
@@ -130,6 +154,7 @@ export default {
     margin: 0 auto 30px;
     padding: 20px;
     display: flex;
+    flex-shrink: 0;
     flex-direction: column;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
@@ -181,4 +206,46 @@ export default {
     background-color: cornflowerblue;
     color: white;
   }
+
+  .mobile-stories {
+    display: none;
+  }
+
+  @media screen and (max-width: 1150px){
+    .story-wrapper{
+      height: 100vh;
+    }
+
+    .story-content{
+      display: none;
+    }
+
+    .mobile-stories{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-stories .s-card:not(.mobile-active){
+      cursor: pointer;
+    }
+
+    .mobile-stories .s-card:not(.mobile-active):hover{
+      background-color: #f2f2f2
+    }
+
+    .mobile-stories .s-card .s-body .title{
+      font-size: 22px;
+    }
+
+    .mobile-stories .s-card .s-body .subtitle{
+      font-size: 20px;
+    }
+
+    .mobile-stories .s-card .s-body .description{
+      font-size: 19px;
+    }
+
+  }
+
 </style>
