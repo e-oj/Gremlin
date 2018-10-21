@@ -64,6 +64,7 @@ export default {
     max-width: 1920px;
     height: 100vh;
     margin: auto;
+    overflow: auto;
     background-color: white;
     transition: all 0.3s ease;
   }

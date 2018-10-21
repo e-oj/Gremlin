@@ -2,32 +2,35 @@
   <div class="story">
     <nav-bar is-fixed="true"></nav-bar>
 
-    <div class="story-content">
-      <div class="s-nav-container">
+    <div class="nav-ghost"></div>
+
+    <div class="story-wrapper">
+      <div class="story-content">
         <div class="s-nav">
-          <div class="s-nav-item" v-for="(story, index) in stories"
+          <div v-for="(story, i) in stories"
+               :class="['s-nav-item', {'s-nav-active': i === index}]"
                :key="story._id"
-               @click="setIndex(index)">
+               @click="setIndex(i)">
 
             <div class="s-nav-title">{{story.title}}</div>
             <div class="s-nav-subtitle">{{story.subtitle}}</div>
           </div>
         </div>
-      </div>
 
-      <div class="s-card">
-        <div class="s-image">
-          <img :src="`/src/assets/img/stories/${currentStory.image}`">
-        </div>
+        <div class="s-card">
+          <div class="s-image">
+            <img :src="`/src/assets/img/stories/${currentStory.image}`">
+          </div>
 
-        <div class="s-body">
-          <div class="title">{{currentStory.title}}</div>
-          <div class="subtitle">{{currentStory.subtitle}}</div>
-          <div class="description" v-html="currentStory.description"></div>
+          <div class="s-body">
+            <div class="title">{{currentStory.title}}</div>
+            <div class="subtitle">{{currentStory.subtitle}}</div>
+            <div class="description" v-html="currentStory.description"></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -65,13 +68,26 @@ export default {
     max-width: 1920px;
     height: 100vh;
     margin: auto;
+    overflow: auto;
     display: flex;
+    flex-direction: column;
     background-color: white;
+  }
+
+  .story-wrapper{
+    height: 80vh;
+    display: flex;
+  }
+
+  .nav-ghost{
+    height: 100px;
+    flex-shrink: 0;
+    opacity: 0;
   }
 
   .story-content{
     position: relative;
-    min-width: 1200px;
+    min-width: 1150px;
     min-height: 750px;
     margin: auto;
     display: flex;
@@ -82,12 +98,26 @@ export default {
     width: 250px;
     height: fit-content;
     font-size: 12px;
+    cursor: pointer;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
 
   .s-nav .s-nav-item{
     padding: 10px;
-    line-height: 1.4;
+    line-height: 1.6;
+  }
+
+  .s-nav .s-nav-item:hover:not(.s-nav-active){
+    background-color: #f2f2f2;
+  }
+
+  .s-nav .s-nav-active{
+    background-color: #42b983;
+    color: white;
+  }
+
+  .s-nav .s-nav-image img{
+    width: 30px;
   }
 
   .s-nav .s-nav-title{
