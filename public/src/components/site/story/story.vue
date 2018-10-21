@@ -233,7 +233,9 @@ export default {
     .mobile-stories .s-card:not(.mobile-active):hover{
       background-color: #f2f2f2
     }
+  }
 
+  @media screen and (max-width: 640px){
     .mobile-stories .s-card .s-body .title{
       font-size: 22px;
     }
@@ -245,7 +247,6 @@ export default {
     .mobile-stories .s-card .s-body .description{
       font-size: 19px;
     }
-
   }
 
 </style>

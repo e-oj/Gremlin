@@ -118,7 +118,7 @@ export default {
     margin-right: 150px;
   }
 
-  @media screen and (max-width: 1150px){
+  @media screen and (max-width: 640px){
     .fixed-nav{
       font-size: 25px;
     }
