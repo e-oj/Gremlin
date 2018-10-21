@@ -250,6 +250,7 @@ export default {
 
     .story-content{
       display: none;
+      width: 100%;
     }
 
     .mobile-stories{
@@ -259,6 +260,7 @@ export default {
     }
 
     .mobile-stories .s-card{
+      width: 75%;
       margin: 0 auto 30px;
     }
 
@@ -284,20 +286,6 @@ export default {
 
     .mobile-stories .s-card:not(.mobile-active):hover{
       background-color: #f2f2f2
-    }
-  }
-
-  @media screen and (max-width: 640px){
-    .mobile-stories .s-card .s-body .title{
-      font-size: 22px;
-    }
-
-    .mobile-stories .s-card .s-body .subtitle{
-      font-size: 20px;
-    }
-
-    .mobile-stories .s-card .s-body .description{
-      font-size: 19px;
     }
   }
 
