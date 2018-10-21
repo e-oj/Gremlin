@@ -58,6 +58,7 @@ export default {
     top: 0;
     z-index: 1;
     width: 100%;
+    max-width: 1920px;
     height: 80px;
     background-color: #24292e;
     font-size: 22px;

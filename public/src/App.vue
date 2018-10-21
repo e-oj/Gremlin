@@ -30,6 +30,7 @@
     font-size: 20pt;
     margin: 0;
     padding: 0;
+    background-color: whitesmoke;
   }
 
   h1, h2 {
