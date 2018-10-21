@@ -61,6 +61,10 @@ export default {
 
 <style scoped>
   .client-ext-posts{
+    max-width: 1920px;
+    height: 100vh;
+    margin: auto;
+    background-color: white;
     transition: all 0.3s ease;
   }
 
