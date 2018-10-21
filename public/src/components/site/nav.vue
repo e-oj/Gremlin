@@ -118,13 +118,20 @@ export default {
     margin-right: 150px;
   }
 
+  @media screen and (max-width: 1500px){
+    .fixed-nav{
+      font-size: 20px;
+      height: 70px;
+    }
+  }
+
   @media screen and (max-width: 640px){
     .fixed-nav{
       font-size: 25px;
     }
 
     .nav-logo{
-      font-size: 36px;
+      font-size: 30px;
     }
   }
 </style>

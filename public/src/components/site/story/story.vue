@@ -32,7 +32,7 @@
 
 
       <div class="mobile-stories">
-        <div v-for="(story, i) in stories"
+        <div v-for="(story, i) in stories" :key="story._id"
              :class="['s-card', {'mobile-active': isActive(i)}]"
              @click="setActive(i)">
 
@@ -111,7 +111,7 @@ export default {
 
   .story-content{
     position: relative;
-    min-width: 1150px;
+    width: 1150px;
     min-height: 750px;
     margin: auto;
     display: flex;
@@ -151,7 +151,7 @@ export default {
   .s-card{
     width: 800px;
     height: fit-content;
-    margin: 0 auto 30px;
+    margin: 0 auto;
     padding: 20px;
     display: flex;
     flex-shrink: 0;
@@ -211,7 +211,39 @@ export default {
     display: none;
   }
 
-  @media screen and (max-width: 1150px){
+  @media screen and (max-width: 1500px){
+    .story-content{
+      width: 980px;
+      min-height: 620px;
+    }
+
+    .s-nav{
+      width: 230px;
+      font-size: 11px;
+    }
+
+    .s-card{
+      width: 640px;
+    }
+
+    .s-card .s-image{
+      height: 320px;
+    }
+
+    .s-card .s-body .title{
+      font-size: 16px;
+    }
+
+    .s-card .s-body .subtitle{
+      font-size: 14px;
+    }
+
+    .s-card .s-body .description{
+      font-size: 13px;
+    }
+  }
+
+  @media screen and (max-width: 1000px){
     .story-wrapper{
       height: 100vh;
     }
@@ -224,6 +256,26 @@ export default {
       width: 100%;
       display: flex;
       flex-direction: column;
+    }
+
+    .mobile-stories .s-card{
+      margin: 0 auto 30px;
+    }
+
+    .mobile-stories .s-body{
+      padding-top: 0;
+    }
+
+    .mobile-stories .mobile-active .s-body{
+      padding-top: 20px;
+    }
+
+    .mobile-stories .s-body .subtitle{
+      margin-bottom: 0;
+    }
+
+    .mobile-stories .mobile-active .subtitle{
+      margin-bottom: 15px;
     }
 
     .mobile-stories .s-card:not(.mobile-active){
