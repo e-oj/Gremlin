@@ -7,9 +7,9 @@
     </div>
 
     <ul class="nav">
-      <li><a href="/">Home</a></li>
-      <li><a href="/story">Story</a></li>
-      <li><a href="/blog">Blog</a></li>
+      <li><router-link tag="a" to="/">Home</router-link></li>
+      <li><router-link tag="a" to="/story">Story</router-link></li>
+      <li><router-link tag="a" to="/blog">Blog</router-link></li>
     </ul>
   </div>
 </template>
@@ -55,6 +55,7 @@ export default {
 
   .fixed-nav{
     position: fixed;
+    top: 0;
     z-index: 1;
     width: 100%;
     height: 80px;
@@ -68,6 +69,10 @@ export default {
     align-items: center;
   }
 
+  .fixed-nav .nav li{
+    margin: 0 60px 0 0;
+  }
+
   .fixed-nav .nav li:last-child{
     margin-right: 100px;
   }
@@ -78,6 +83,10 @@ export default {
   }
 
   .fixed-nav .nav a:hover{
+    color: #42b983;
+  }
+
+  .fixed-nav .nav .router-link-exact-active{
     color: #42b983;
   }
 
@@ -101,7 +110,7 @@ export default {
   }
 
   .nav li{
-    margin: 0 60px 0 0;
+    margin: 0 2.5em 0 0;
     transition: all 0.2s linear;
   }
 

@@ -4,7 +4,8 @@
 
     <div class="content">
       <div class="intro">
-        Emmanuel Olaojo (<a href="https://github.com/e-oj">@e-oj</a>)
+        Emmanuel Olaojo (<a href="https://github.com/e-oj"
+                            target="_blank">@e-oj</a>)
       </div>
 
       <div class="splash-text">
@@ -66,8 +67,8 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    color: white;
-    background-color: #33334d;
+    color: #e6f1ff;
+    background-color: #0a192f;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -77,7 +78,6 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    font-size: 1.3em;
     width: 80%;
     height: 70%;
     justify-content: space-evenly;
@@ -86,22 +86,32 @@
 
   .home .splash-text{
     width: 46%;
+    padding: 20px;
     max-width: 700px;
-    font-family: 'Text Me One', sans-serif;
+    font-family: 'Source Code Pro', sans-serif;
+    line-height: 1.4;
+    background-color: white;
+    color: #24292e;
+    font-size: 1em;
   }
 
   .home .intro{
     font-weight: bold;
+    font-size: 1.4em;
   }
 
   .home .intro a{
     text-decoration: none;
-    border-bottom: 3px solid #ffff00;
+    border-bottom: 5px solid #ffff00;
     transition: all 0.2s linear;
   }
 
   .home .intro a:hover{
     color: #ffff00
+  }
+
+  .home .links{
+    font-size: 1.3em;
   }
 
   .home .links a{
