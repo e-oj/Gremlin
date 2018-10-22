@@ -260,7 +260,7 @@ export default {
     }
 
     .mobile-stories .s-card{
-      width: 75%;
+      width: 72%;
       margin: 0 auto 30px;
     }
 
