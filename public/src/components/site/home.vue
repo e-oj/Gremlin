@@ -140,12 +140,12 @@ export default{
     flex-direction: column;
     flex-shrink: 0;
     justify-content: space-evenly;
-    height: 200px;
+    height: 300px;
   }
 
   .content .splash-text{
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 350px;
+    max-width: 350px;
     padding: 15px;
     font-family: Quicksand, sans-serif;
     font-size: 18px;
@@ -205,12 +205,12 @@ export default{
     }
 
     .content, .oj-image{
-      height: 400px;
+      height: 450px;
       min-height: 350px;
     }
 
     .content .intro{
-      font-size: 25px;
+      font-size: 28px;
       padding: 10px;
     }
 
