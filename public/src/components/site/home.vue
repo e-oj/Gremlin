@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import Vue from "vue"
 import Nav from "./nav.vue";
 
 const DEFAULT_TEXT = "I'm a full-stack developer and Computer " +
@@ -52,11 +53,7 @@ export default{
   data(){
     return {
       text: "",
-      traits: [
-        "Full-stack Developer",
-        "Entrepreneur",
-        "World Peace"
-      ]
+      traits: []
     };
   },
 
@@ -64,8 +61,38 @@ export default{
     "nav-bar": Nav
   },
 
+  methods: {
+    *genTraits(){
+      let index = 0;
+      let partition = 3; // three traits per section
+      let traits = [
+        "Full-stack Developer", "Entrepreneur", "Lifelong Learner",
+        "Growth Mindset", "Creative Problem Solver", "Team Player",
+        "Open-source Enthusiast", "Manchester United Fan", "Nigerian Citizen"
+      ];
+
+      while (index < traits.length){
+        yield {text: traits[index], index: index % partition};
+
+        if (++index === traits.length) index = 0;
+      }
+    },
+
+    setTraits(trait){
+      this.traits.splice(trait.index, 1, trait.text)
+    }
+  },
+
   async created(){
     let self = this;
+    let traits = self.genTraits();
+    let partition = 3;
+
+    for(let i = 0;  i < partition; i++){
+      self.traits.push(traits.next().value.text)
+    }
+
+    setInterval(() => {self.setTraits(traits.next().value)}, 2000);
 
     try{
       let res = await self.$http.get("/api/h");
@@ -135,6 +162,10 @@ export default{
     font-family: Acme, cursive;
   }
 
+  .content .intro a:hover{
+    background-color: #f2f2f2;;
+  }
+
   .content .splash{
     display: flex;
     flex-direction: column;
@@ -144,8 +175,8 @@ export default{
   }
 
   .content .splash-text{
-    min-width: 350px;
-    max-width: 350px;
+    width: 350px;
+    flex-shrink: 0;
     padding: 15px;
     font-family: Quicksand, sans-serif;
     font-size: 18px;
@@ -173,6 +204,11 @@ export default{
   .content .links a svg{
     width: 35px;
     height: 35px;
+    transition: all 0.2s linear;
+  }
+
+  .content .links a:hover svg{
+    color: #42b983;
   }
 
   .oj-image{
@@ -215,7 +251,7 @@ export default{
     }
 
     .content .splash{
-      height: 200px;
+      height: 240px;
     }
 
     .content .splash-text{
@@ -231,6 +267,20 @@ export default{
     .content .links a svg{
       width: 30px;
       height: 30px;
+    }
+  }
+
+  @media screen and (max-width: 1000px){
+    .oj-image{
+      display: none;
+    }
+
+    .content{
+      margin-right: 0;
+    }
+
+    .content .splash-text{
+      width: 300px;
     }
   }
 

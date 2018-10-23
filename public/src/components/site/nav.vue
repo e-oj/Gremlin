@@ -128,9 +128,21 @@ export default {
   @media screen and (max-width: 640px){
     .fixed-nav{
       font-size: 25px;
+      justify-content: center;
+    }
+
+    .fixed-nav .nav{
+      margin-left: 0;
+      width: 300px;
+      justify-content: space-between;
+    }
+
+    .fixed-nav .nav li, .fixed-nav .nav li:last-child{
+      margin: 0 10px;
     }
 
     .nav-logo{
+      display: none;
       font-size: 30px;
     }
   }
