@@ -14,7 +14,7 @@
 
         <div class="splash">
           <div class="splash-text" v-for="trait in traits" :key="trait">
-            {{trait}}
+            <span class="highlight-text">{{trait}}</span>
           </div>
         </div>
 
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import Vue from "vue"
 import Nav from "./nav.vue";
 
 const DEFAULT_TEXT = "I'm a full-stack developer and Computer " +
@@ -68,7 +67,8 @@ export default{
       let traits = [
         "Full-stack Developer", "Entrepreneur", "Lifelong Learner",
         "Growth Mindset", "Creative Problem Solver", "Team Player",
-        "Open-source Enthusiast", "Manchester United Fan", "Nigerian Citizen"
+        "Open-source Enthusiast", "Manchester United Fan", "Humanitarian",
+        "Humorist", "Environmental Advocate", "Nigerian Citizen"
       ];
 
       while (index < traits.length){
@@ -152,7 +152,7 @@ export default{
   .content .intro{
     width: fit-content;
     padding: 15px;
-    font-family: "Signika", cursive;
+    font-family: "Assistant", cursive;
     font-size: 30px;
     font-weight: bold;
     color: #24292e;
@@ -184,7 +184,12 @@ export default{
     line-height: 2;
     color: #24292e;
     background-color: #f2f2f2;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  }
+
+  .content .highlight-text{
+    background-color: #b5e3cf;
+    color: black;
+    padding: 8px;
   }
 
   .content .links{
@@ -259,6 +264,10 @@ export default{
       padding: 10px;
     }
 
+    .content .highlight-text{
+      padding: 5px;
+    }
+
     .content .links a{
       height: 30px;
       padding: 10px;
@@ -281,6 +290,25 @@ export default{
 
     .content .splash-text{
       width: 300px;
+    }
+  }
+
+  @media screen and (max-width: 640px){
+    .content{
+      height: 250px;
+    }
+
+    .content .intro{
+      font-size: 25px;
+    }
+
+    .content .splash{
+      height: 160px;
+    }
+
+    .content .splash-text{
+      font-size: 12px;
+      width: 260px;
     }
   }
 

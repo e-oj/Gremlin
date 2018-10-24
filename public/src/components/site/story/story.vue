@@ -260,8 +260,13 @@ export default {
     }
 
     .mobile-stories .s-card{
-      width: 72%;
+      width: 80%;
       margin: 0 auto 30px;
+      padding: 15px;
+    }
+
+    .mobile-stories .s-image{
+      height: 280px;
     }
 
     .mobile-stories .s-body{
@@ -269,7 +274,7 @@ export default {
     }
 
     .mobile-stories .mobile-active .s-body{
-      padding-top: 20px;
+      padding-top: 15px;
     }
 
     .mobile-stories .s-body .subtitle{
@@ -277,7 +282,7 @@ export default {
     }
 
     .mobile-stories .mobile-active .subtitle{
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .mobile-stories .s-card:not(.mobile-active){
@@ -286,6 +291,52 @@ export default {
 
     .mobile-stories .s-card:not(.mobile-active):hover{
       background-color: #f2f2f2
+    }
+
+    @media screen and (max-width: 640px){
+      .mobile-stories .s-image{
+        height: 150px;
+      }
+
+      .mobile-stories .mobile-active .s-body{
+        padding-top: 10px;
+      }
+
+      .mobile-stories .s-body .title,
+      .mobile-stories .s-body .subtitle{
+        border-bottom: 2px solid #42b983;
+      }
+
+      .mobile-stories .s-body .title{
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+
+      .mobile-stories .s-body .subtitle{
+        font-size: 10px;
+      }
+
+      .mobile-stories .s-body .description{
+        font-size: 9px;
+      }
+    }
+
+    @media screen and (max-width: 320px){
+      .mobile-stories .s-image{
+        height: 115px;
+      }
+
+      .mobile-stories .s-body .title{
+        font-size: 10px;
+      }
+
+      .mobile-stories .s-body .subtitle{
+        font-size: 8px;
+      }
+
+      .mobile-stories .s-body .description{
+        font-size: 8px;
+      }
     }
   }
 

@@ -127,13 +127,13 @@ export default {
 
   @media screen and (max-width: 640px){
     .fixed-nav{
-      font-size: 25px;
+      font-size: 16px;
       justify-content: center;
     }
 
     .fixed-nav .nav{
       margin-left: 0;
-      width: 300px;
+      width: 72%;
       justify-content: space-between;
     }
 
@@ -143,7 +143,6 @@ export default {
 
     .nav-logo{
       display: none;
-      font-size: 30px;
     }
   }
 </style>
