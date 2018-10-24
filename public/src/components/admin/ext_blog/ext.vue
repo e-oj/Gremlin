@@ -25,14 +25,14 @@
         </div>
 
         <div class="new-ext-right">
-          <input v-for="prop of props" v-model="newPost[prop]" :placeholder="prop" type="text"/>
+          <input v-for="prop of props" :key="prop" v-model="newPost[prop]" :placeholder="prop" type="text"/>
 
           <div class="new-ext-submit" @click="createPost">Submit</div>
         </div>
       </div>
     </div>
 
-    <div class="ext-post" v-for="post in posts">
+    <div class="ext-post" v-for="post in posts" :key="post._id">
       <div class="ext-delete" @click="deletePost(post)">
         <i class="fal fa-times"></i>
       </div>
@@ -57,120 +57,121 @@
 </template>
 
 <script>
-  import {readFiles} from "../../../../public.utils";
+import {readFiles} from "../../../../public.utils";
 
-  export default {
-    data(){
-      return {
-        posts: [],
-        err: "",
-        msg: "No posts to show",
-        props: ["title", "description", "url"],
-        showForm: false,
-        newPost: {
-          image: null,
-          title: "",
-          description: "",
-          url: "",
+export default {
+  data(){
+    return {
+      posts: [],
+      err: "",
+      msg: "No posts to show",
+      props: ["title", "description", "url", "date"],
+      showForm: false,
+      newPost: {
+        image: null,
+        title: "",
+        description: "",
+        url: "",
+        date: ""
+      }
+    };
+  },
+
+  methods: {
+    async createPost(){
+      let self = this;
+      let form  = new FormData();
+      let image = self.newPost.image;
+
+      if(image) form.append("image", image.file);
+
+      for(let prop of self.props){
+        form.append(prop, self.newPost[prop]);
+      }
+
+      try{
+        let res = await self.$http.post("/api/b/ext", form);
+        let post = res.body.result.post;
+
+        for(let prop of self.props){
+          self.newPost[prop] = "";
         }
+        self.newPost.image = null;
+
+        if(self.err) self.err = "";
+
+        post.index = self.posts.length;
+        self.posts.push(post);
+      }
+      catch(err){
+        self.err = err.message || err.body.message;
       }
     },
 
-    methods: {
-      async createPost(){
-        let self = this;
-        let form  = new FormData();
-        let image = self.newPost.image;
+    async deletePost(post){
+      let self = this;
 
-        if(image) form.append("image", image.file);
+      try{
+        await self.$http.delete("/api/b/ext", {body: {_id: post._id}});
+        if(self.err) self.err = "";
 
-        for(let prop of self.props){
-          form.append(prop, self.newPost[prop])
-        }
+        self.posts.splice(post.index, 1);
+      }
+      catch(err){
+        self.err = err.message || err.body.message;
+      }
+    },
 
-        try{
-          let res = await self.$http.post("/api/b/ext", form);
-          let post = res.body.result.post;
-
-          for(let prop of self.props){
-            self.newPost[prop] = ""
-          }
-          self.newPost.image = null;
-
-          if(self.err) self.err = "";
-
-          post.index = self.posts.length;
-          self.posts.push(post);
-        }
-        catch(err){
-          self.err = err.message || err.body.message;
-        }
-      },
-
-      async deletePost(post){
-        let self = this;
-
-        try{
-          await self.$http.delete("/api/b/ext", {body: {_id: post._id}});
-          if(self.err) self.err = "";
-
-          self.posts.splice(post.index, 1);
-        }
-        catch(err){
-          self.err = err.message || err.body.message;
-        }
-      },
-
-      /**
+    /**
        * Adds a file from the input.
        *
        * @param event - input change event
        * @returns {Promise<void>}
        */
-      async addFile(event){
-        let self = this;
-
-        try{
-          let files = await readFiles(event.target);
-
-          if (files.length){
-            self.newPost.image = files[0];
-          }
-          else{
-            self.newPost.image = null;
-          }
-        }
-        catch(err){
-          console.log("File Upload Error:", err);
-        }
-      }
-    },
-
-    computed: {
-      noPosts(){
-        return !this.posts.length
-      }
-    },
-
-    async created(){
+    async addFile(event){
       let self = this;
 
       try{
-        let res = await self.$http.get("/api/b/ext");
-        let posts = res.body.result.posts;
-        let index = 0;
+        let files = await readFiles(event.target);
 
-        for(let post of posts){
-          post.index = index++;
+        if (files.length){
+          self.newPost.image = files[0];
         }
-
-        self.posts = res.body.result.posts;
+        else{
+          self.newPost.image = null;
+        }
       }
       catch(err){
-        self.err = err.message;
+        console.log("File Upload Error:", err);
       }
     }
+  },
+
+  computed: {
+    noPosts(){
+      return !this.posts.length;
+    }
+  },
+
+  async created(){
+    let self = this;
+
+    try{
+      let res = await self.$http.get("/api/b/ext");
+      let posts = res.body.result.posts;
+      let index = 0;
+
+      for(let post of posts){
+        post.index = index++;
+      }
+
+      self.posts = res.body.result.posts;
+    }
+    catch(err){
+      self.err = err.message;
+    }
   }
+};
 </script>
 
 <style scoped>
@@ -215,15 +216,15 @@
   }
 
   .new-ext-form .preview{
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     background: #EDEFF0;
     margin-bottom: 16px;
   }
 
   .new-ext-form .preview img{
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 100%
   }
 
   .new-ext-form #new-ext-image{

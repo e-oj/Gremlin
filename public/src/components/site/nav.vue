@@ -56,7 +56,7 @@ export default {
   .fixed-nav{
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 10;
     width: 100%;
     max-width: 1920px;
     height: 80px;

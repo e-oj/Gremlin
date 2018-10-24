@@ -5,6 +5,9 @@
     <div class="client-ext-content">
       <div class="ext-post" v-for="post in posts" :key="post._id">
         <a :href="post.url" target="_blank">
+          <div class="ext-date">
+            {{post.date}}
+          </div>
           <div class="ext-image">
             <img :src="`/api/img/?imgId=${post.imgId}`" alt="Image">
           </div>
@@ -78,6 +81,7 @@ export default {
     position: relative;
     width: 700px;
     margin: 0 auto 40px;
+    background-color: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
 
@@ -89,6 +93,20 @@ export default {
     display: block;
     text-decoration: none;
     padding: 20px;
+  }
+
+  .ext-post .ext-date{
+    position: absolute;
+    z-index: 1;
+    width: fit-content;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px;
+    top: 10px;
+    left: 10px;
+    background-color: white;
+    color: #454547;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
 
   .ext-post .ext-image{
@@ -149,6 +167,10 @@ export default {
     .ext-post{
       width: 80%;
       min-width: 350px;
+    }
+
+    .ext-post .ext-date{
+      font-size: 10px;
     }
 
     .ext-post .ext-image{

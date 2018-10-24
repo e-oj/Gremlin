@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
   let data = req.body;
-  let props = ["title", "url", "description"];
+  let props = ["title", "url", "description", "date"];
   let post = new ExtPost();
   let img = req.file;
 
@@ -50,7 +50,7 @@ exports.get = async (req, res) => {
   try{
     let posts = await ExtPost.find();
 
-    respond(http.OK, "All Posts", {posts})
+    respond(http.OK, "All Posts", {posts});
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);
