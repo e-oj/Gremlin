@@ -11,7 +11,7 @@
 
           <div class="ext-content">
             <div class="ext-title">
-              {{post.title}}
+              <span class="highlight-text">{{post.title}}</span>
             </div>
 
             <div class="ext-description">
@@ -71,46 +71,97 @@ export default {
 
   .client-ext-content{
     position: relative;
-    top: 100px;
+    top: 130px;
   }
 
   .ext-post{
     position: relative;
-    width: 800px;
+    width: 700px;
     margin: 0 auto 40px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
 
   .ext-post:hover{
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background-color: whitesmoke;
   }
 
   .ext-post a{
+    display: block;
     text-decoration: none;
+    padding: 20px;
   }
 
   .ext-post .ext-image{
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 350px;
   }
 
   .ext-post .ext-image img{
     width: 100%;
-    height: 400px;
+    height: 100%;
+    border-radius: 2px;
   }
 
   .ext-post .ext-content{
     color: #454547;
-    padding: 20px;
+  }
+
+  .ext-post .highlight-text{
+    background-color: #b5e3cf;
+    color: black;
+    padding: 3px;
+  }
+
+  .ext-post .ext-title, .ext-post .ext-description{
+    width: fit-content;
+    font-weight: bold;
+    color: #24292e;
   }
 
   .ext-post .ext-title{
-    padding-bottom: 10px;
-    font-size: 20px;
+    margin: 15px 0 8px;
+    font-size: 16px;
+    border-bottom: 2px solid #42b983;
   }
 
   .ext-post .ext-description{
-    font-size: 16px;
+    font-size: 14px;
+    padding: 3px;
+  }
+
+  @media screen and (max-width: 1000px){
+    .ext-post{
+      width: 70%;
+      min-width: 350px;
+    }
+
+    .ext-post a{
+      padding: 15px;
+    }
+
+    .ext-post .ext-image{
+      height: 270px;
+    }
+  }
+
+  @media screen and (max-width: 640px){
+    .ext-post{
+      width: 80%;
+      min-width: 350px;
+    }
+
+    .ext-post .ext-image{
+      height: 180px;
+    }
+
+    .ext-post .ext-title{
+      /*margin: 15px 0 8px;*/
+      font-size: 12px;
+    }
+
+    .ext-post .ext-description{
+      font-size: 10px;
+    }
   }
 </style>
