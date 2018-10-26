@@ -70,16 +70,35 @@ export default {
   },
 
   methods: {
+    /**
+     * Sets the active index to
+     * the given value.
+     *
+     * @param index
+     */
     setActive(index){
       this.index = index;
     },
 
+    /**
+     * Checks if an index is the
+     * active index.
+     *
+     * @param index - to be checked
+     *
+     * @return {boolean}
+     */
     isActive(index){
       return index === this.index;
     }
   },
 
   computed: {
+    /**
+     * Gets the story at the active index.
+     *
+     * @return {{_id, title, subtitle, description, image}|*}
+     */
     currentStory(){
       return this.stories[this.index]
     }
@@ -295,7 +314,7 @@ export default {
 
     @media screen and (max-width: 640px){
       .mobile-stories .s-image{
-        height: 150px;
+        height: 165px;
       }
 
       .mobile-stories .mobile-active .s-body{

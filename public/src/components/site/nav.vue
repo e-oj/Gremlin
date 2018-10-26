@@ -121,19 +121,19 @@ export default {
   @media screen and (max-width: 1500px){
     .fixed-nav{
       font-size: 20px;
-      height: 70px;
+      /*height: 70px;*/
     }
   }
 
   @media screen and (max-width: 640px){
     .fixed-nav{
-      font-size: 16px;
+      font-size: 18px;
       justify-content: center;
     }
 
     .fixed-nav .nav{
       margin-left: 0;
-      width: 72%;
+      width: 80%;
       justify-content: space-between;
     }
 

@@ -61,6 +61,13 @@ export default{
   },
 
   methods: {
+    /**
+     * Generates a single item from a list along
+     * with an index representing it's position
+     * in a list of length 3.
+     *
+     * @return {IterableIterator<{text: string, index: number}>}
+     */
     *genTraits(){
       let index = 0;
       let partition = 3; // three traits per section
@@ -78,8 +85,16 @@ export default{
       }
     },
 
-    setTraits(trait){
-      this.traits.splice(trait.index, 1, trait.text)
+    /**
+     * Adds a generated trait to the list
+     * of traits at the specified index.
+     *
+     * @param traits - Trait generator
+     */
+    newTrait(traits){
+      let trait = traits.next().value;
+
+      this.traits.splice(trait.index, 1, trait.text);
     }
   },
 
@@ -87,12 +102,15 @@ export default{
     let self = this;
     let traits = self.genTraits();
     let partition = 3;
+    let i = 0;
 
-    for(let i = 0;  i < partition; i++){
-      self.traits.push(traits.next().value.text)
+    // Generate first set of traits
+    while(i++ < partition){
+      self.newTrait(traits);
     }
 
-    setInterval(() => {self.setTraits(traits.next().value)}, 2000);
+    // Get a new trait every 2 seconds
+    setInterval(() => {self.newTrait(traits)}, 2000);
 
     try{
       let res = await self.$http.get("/api/h");

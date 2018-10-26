@@ -145,13 +145,14 @@ export default {
 
   .ext-post .ext-description{
     font-size: 14px;
-    padding: 3px;
+    margin-left: 3px;
   }
 
   @media screen and (max-width: 1000px){
     .ext-post{
       width: 70%;
-      min-width: 350px;
+      max-width: 570px;
+      min-width: 545px;
     }
 
     .ext-post a{
@@ -164,8 +165,13 @@ export default {
   }
 
   @media screen and (max-width: 640px){
+    .client-ext-content{
+      top: 100px;
+    }
+
     .ext-post{
       width: 80%;
+      max-width: 380px;
       min-width: 350px;
     }
 
@@ -174,7 +180,7 @@ export default {
     }
 
     .ext-post .ext-image{
-      height: 180px;
+      height: 160px;
     }
 
     .ext-post .ext-title{
