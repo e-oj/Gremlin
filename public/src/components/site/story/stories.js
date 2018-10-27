@@ -22,12 +22,12 @@ export default [
     subtitle: "Web Developer (October 2018)",
     description: "Sometime ago, I decided to create a website that would serve " +
     "as an online portfolio and contain some information about me. " +
-    "Parts of the site are still under development but this the initial version " +
+    "Parts of the site are still under development but this is the initial version " +
     "(sort of an MVP). Updates to the site will be made periodically. The " +
     "source code is available on my " +
     "<a href='https://www.github.com/e-oj/gremlin' target='_blank'>GitHub</a> " +
     "page for anyone who's interested. The site has a backend with a " +
-    "<a href='https://www.mongodb.com/' target='_blank'>MongoDb</a> " +
+    "<a href='https://www.mongodb.com/' target='_blank'>MongoDB</a> " +
     "database and an " +
     "<a href='https://expressjs.com/' target='_blank'>Express</a> " +
     "api. The frontend is built with " +
@@ -40,9 +40,7 @@ export default [
     "<a href='https://babeljs.io/' target='_blank'>Babel</a> " +
     "as the transpiler. " +
     "Currently, my notable projects can be found on this site. More will be added " +
-    "as they are completed. I might add a social media aggregator to the site to " +
-    "collect my social media posts. I have a few other ideas as well, depends on " +
-    "what I have the time for.",
+    "as they are completed.",
     image: "e-oj.png"
   },
   {
