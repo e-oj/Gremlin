@@ -38,8 +38,8 @@ export default [
     "<a href='https://www.w3schools.com/js/js_es6.asp'>ES6</a> " +
     "with " +
     "<a href='https://babeljs.io/' target='_blank'>Babel</a> " +
-    "as the transpiler. " +
-    "Currently, my notable projects can be found on this site. More will be added " +
+    "as the transpiler. Google analytics is used to collect usage data abaout the site. " +
+    "Currently, my notable projects can be found here. More will be added " +
     "as they are completed.",
     image: "e-oj.png"
   },
