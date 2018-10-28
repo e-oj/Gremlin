@@ -16,7 +16,23 @@
 
 <script>
 export default {
-  props: ["isFixed"]
+  props: ["isFixed"],
+  methods: {
+    analytics(){
+      let self = this;
+
+      $(".nav-logo a").click(function(){
+        self.$ga.event("Nav logo", "open", $(this).attr("href"));
+      });
+    }
+  },
+
+  created(){
+    let self = this;
+
+    // analytics
+    self.$nextTick(() => self.analytics());
+  }
 };
 </script>
 

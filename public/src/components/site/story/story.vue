@@ -77,7 +77,9 @@ export default {
      * @param index
      */
     setActive(index){
-      this.index = index;
+      let self = this;
+      self.index = index;
+      self.$ga.event("Stories", "select", self.stories[index].title);
     },
 
     /**

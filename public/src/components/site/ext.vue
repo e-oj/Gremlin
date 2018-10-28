@@ -3,8 +3,11 @@
     <nav-bar class="client-ext-nav" is-fixed="true"></nav-bar>
 
     <div class="client-ext-content">
-      <div class="ext-post" v-for="post in posts" :key="post._id">
-        <a :href="post.url" target="_blank">
+      <div class="ext-post"
+           v-for="post in posts"
+           :key="post._id">
+
+        <a :href="post.url" target="_blank" @click="trackPost(post.title)">
           <div class="ext-date">
             {{post.date}}
           </div>
@@ -22,6 +25,7 @@
             </div>
           </div>
         </a>
+
       </div>
     </div>
   </div>
@@ -39,6 +43,18 @@ export default {
 
   components: {
     "nav-bar": Nav
+  },
+
+  methods: {
+    /**
+     * Report to google analytics when
+     * a post is opened
+     *
+     * @param title - post title
+     */
+    trackPost(title){
+      this.$ga.event("External Posts", "open", title);
+    }
   },
 
   async created(){

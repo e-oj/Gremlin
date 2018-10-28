@@ -19,15 +19,15 @@
         </div>
 
         <div class="links">
-          <a href="https://github.com/e-oj">
+          <a href="https://github.com/e-oj" target="_blank">
             <i class="fab fa-github github-logo"></i>
           </a>
 
-          <a href="https://www.linkedin.com/in/emmanuel-olaojo/">
+          <a href="https://www.linkedin.com/in/emmanuel-olaojo/" target="_blank">
             <i class="fab fa-linkedin linkedin-logo"></i>
           </a>
 
-          <a href="https://medium.com/@emmanuelolaojo">
+          <a href="https://medium.com/@emmanuelolaojo" target="_blank">
             <i class="fab fa-medium medium-logo"></i>
           </a>
         </div>
@@ -95,6 +95,25 @@ export default{
       let trait = traits.next().value;
 
       this.traits.splice(trait.index, 1, trait.text);
+    },
+
+    /**
+     * Track all the links on the
+     * homepage with google analytics
+     */
+    analytics(){
+      let self = this;
+      let anchors = [
+        {selector: ".intro a", type: "Title Link"},
+        {selector: ".links a", type: "Icon Link"}
+      ];
+
+      for (let a of anchors){
+        $(a.selector).click(function(){
+          let url = $(this).attr("href");
+          self.$ga.event(`Home - ${a.type}`, "open", url);
+        });
+      }
     }
   },
 
@@ -120,7 +139,10 @@ export default{
     catch(err){
       self.text = DEFAULT_TEXT;
     }
-  }
+
+    // analytics
+    self.$nextTick(() => self.analytics());
+  },
 };
 </script>
 
