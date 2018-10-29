@@ -9,7 +9,7 @@ const DB_ADDRESS = "mongodb://localhost:27017";
 const COLLECTION = process.env.COLLECTION || "Gremlin";
 
 exports.PORT = process.env.PORT || 8234;
-exports.SECRET = "gremlin-secret";
+exports.SECRET = process.env.SECRET || "gremlin-secret";
 exports.DB_URL = `${DB_ADDRESS}/${COLLECTION}`;
 exports.MONGO_ERR = "MongoError";
 exports.DUP_ERR = 11000;
