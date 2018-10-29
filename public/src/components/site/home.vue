@@ -129,7 +129,7 @@ export default{
     }
 
     // Get a new trait every 2 seconds
-    setInterval(() => {self.newTrait(traits)}, 2000);
+    setInterval(() => {self.newTrait(traits);}, 2000);
 
     try{
       let res = await self.$http.get("/api/h");

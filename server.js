@@ -33,16 +33,57 @@ app.use("*", (req, res) => {
   res.sendFile(`${STATIC}/index.html`);
 });
 
-let server = app.listen(config.PORT);
+// start https or http server
+startServer();
 
-server.on("close", async err => {
-  if(err) throw err;
+function startServer(){
+  let {port} = config;
+  let server;
 
-  console.log("\nClosing db connections...\n");
-  await mongoose.disconnect();
-  console.log("Server Out!! *drops mic*");
-});
+  if(process.env.NODE_ENV === "production"){
+    server = prodServer(port);
+  }
+  else {
+    server = devServer(port);
+  }
 
-process.on("SIGINT", () => server.close());
+  server.on("close", async err => {
+    if(err) throw err;
 
-console.log(`Running on port: ${config.PORT}`);
+    console.log("\nClosing db connections...\n");
+    try{
+      await mongoose.disconnect();
+    }
+    catch (e) {
+      console.error(e.message)
+    }
+    console.log("Server Out!! *drops mic*");
+  });
+
+  process.on("SIGINT", () => server.close());
+
+  console.log(`Running on port: ${config.PORT}`);
+}
+
+function prodServer(port){
+  let https = require("https");
+  let fs = require("fs");
+
+  let certPath = process.env.CERT;
+  let keyPath = process.env.KEY;
+
+  if (!(certPath && keyPath)){
+    throw new Error("set env vars for https CERT and KEY paths");
+  }
+
+  let options = {
+    key: fs.readFileSync(keyPath),
+    cert: fs.readFileSync(certPath)
+  };
+
+  return https.createServer(options, app).listen(port)
+}
+
+function devServer(port){
+  return app.listen(port);
+}
