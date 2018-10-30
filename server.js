@@ -9,17 +9,21 @@ let express = require("express");
 let logger = require("morgan");
 let bodyParser = require("body-parser");
 let mongoose = require("mongoose");
-mongoose.Promise = global.Promise = require("bluebird");
+let bluebird = require("bluebird");
 let cors = require("cors");
+let helmet = require("helmet");
+
+mongoose.Promise = global.Promise = bluebird;
 
 let config = require("./config");
 let apiRouter = require("./app/api");
 
-mongoose.connect(config.DB_URL);
+mongoose.connect(config.DB_URL, config.DB_OPTIONS);
 
 const STATIC = path.join(__dirname, "public");
 let app = express();
 
+app.use(helmet());
 app.use(express.static(STATIC));
 
 app.use(logger("dev"));
@@ -36,15 +40,19 @@ app.use("*", (req, res) => {
 // start https or http server
 startServer();
 
+/**
+ * Starts a development or production
+ * server with http or https.
+ */
 function startServer(){
-  let {port} = config;
+  const {PORT} = config;
   let server;
 
   if(process.env.NODE_ENV === "production"){
-    server = prodServer(port);
+    server = prodServer(PORT);
   }
   else {
-    server = devServer(port);
+    server = devServer(PORT);
   }
 
   server.on("close", async err => {
@@ -62,28 +70,42 @@ function startServer(){
 
   process.on("SIGINT", () => server.close());
 
-  console.log(`Running on port: ${config.PORT}`);
+  console.log(`Running on port: ${PORT}`);
 }
 
+/**
+ * Starts an https server at
+ * the given port
+ *
+ * @param port - port number
+ * @return {Server}
+ */
 function prodServer(port){
   let https = require("https");
-  let fs = require("fs");
-
-  let certPath = process.env.CERT;
-  let keyPath = process.env.KEY;
-
-  if (!(certPath && keyPath)){
-    throw new Error("set env vars for https CERT and KEY paths");
-  }
 
   let options = {
-    key: fs.readFileSync(keyPath),
-    cert: fs.readFileSync(certPath)
+    key: config.KEY,
+    cert: config.CERT
   };
 
   return https.createServer(options, app).listen(port)
 }
 
+/**
+ * Starts an http or, if the env vars
+ * are present, https server at the
+ * given port.
+ *
+ * @param port - port number
+ * @return {*}
+ */
 function devServer(port){
+  let cert = config.CERT;
+  let key = config.KEY;
+
+  if(cert && key){
+    return prodServer(port);
+  }
+
   return app.listen(port);
 }

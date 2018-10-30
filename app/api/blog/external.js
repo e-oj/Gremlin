@@ -10,6 +10,14 @@ let files = require("../../../utils/files");
 let response = require("../../../utils/response");
 let http = require("../../../utils/HttpStats");
 
+/**
+ * Create a link to an external post
+ *
+ * @param req request
+ * @param res response
+ *
+ * @return {Promise<*>}
+ */
 exports.create = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
@@ -43,6 +51,14 @@ exports.create = async (req, res) => {
   respond(http.CREATED, "External Post Created", {post});
 };
 
+/**
+ * Get an external post from the database
+ *
+ * @param req request
+ * @param res response
+ *
+ * @return {Promise<void>}
+ */
 exports.get = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
@@ -57,6 +73,14 @@ exports.get = async (req, res) => {
   }
 };
 
+/**
+ * Delete an external post.
+ *
+ * @param req request
+ * @param res response
+ *
+ * @return {Promise<*>}
+ */
 exports.delete = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
