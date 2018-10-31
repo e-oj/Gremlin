@@ -2,6 +2,7 @@
 import Vue from "vue";
 import VueResource from "vue-resource";
 import Vuex from "vuex";
+import VueAnalytics from "vue-analytics"
 
 import App from "./App.vue";
 import router from "./router";
@@ -10,6 +11,10 @@ import status from "../../utils/HttpStats";
 
 Vue.use(VueResource);
 Vue.use(Vuex);
+Vue.use(VueAnalytics, {
+  id: "UA-128254003-1",
+  router
+});
 
 Vue.http.interceptors.push((request, next) => {
   let token = localStorage.getItem(config.AUTH);

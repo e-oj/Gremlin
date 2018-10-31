@@ -10,11 +10,19 @@ let files = require("../../../utils/files");
 let response = require("../../../utils/response");
 let http = require("../../../utils/HttpStats");
 
+/**
+ * Create a link to an external post
+ *
+ * @param req request
+ * @param res response
+ *
+ * @return {Promise<*>}
+ */
 exports.create = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
   let data = req.body;
-  let props = ["title", "url", "description"];
+  let props = ["title", "url", "description", "date"];
   let post = new ExtPost();
   let img = req.file;
 
@@ -43,6 +51,14 @@ exports.create = async (req, res) => {
   respond(http.CREATED, "External Post Created", {post});
 };
 
+/**
+ * Get an external post from the database
+ *
+ * @param req request
+ * @param res response
+ *
+ * @return {Promise<void>}
+ */
 exports.get = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);
@@ -50,13 +66,21 @@ exports.get = async (req, res) => {
   try{
     let posts = await ExtPost.find();
 
-    respond(http.OK, "All Posts", {posts})
+    respond(http.OK, "All Posts", {posts});
   }
   catch(err){
     respondErr(http.SERVER_ERROR, err.message, err);
   }
 };
 
+/**
+ * Delete an external post.
+ *
+ * @param req request
+ * @param res response
+ *
+ * @return {Promise<*>}
+ */
 exports.delete = async (req, res) => {
   let respond = response.success(res);
   let respondErr = response.failure(res, moduleId);

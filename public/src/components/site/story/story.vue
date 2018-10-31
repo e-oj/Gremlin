@@ -70,16 +70,37 @@ export default {
   },
 
   methods: {
+    /**
+     * Sets the active index to
+     * the given value.
+     *
+     * @param index
+     */
     setActive(index){
-      this.index = index;
+      let self = this;
+      self.index = index;
+      self.$ga.event("Stories", "select", self.stories[index].title);
     },
 
+    /**
+     * Checks if an index is the
+     * active index.
+     *
+     * @param index - to be checked
+     *
+     * @return {boolean}
+     */
     isActive(index){
       return index === this.index;
     }
   },
 
   computed: {
+    /**
+     * Gets the story at the active index.
+     *
+     * @return {{_id, title, subtitle, description, image}|*}
+     */
     currentStory(){
       return this.stories[this.index]
     }
@@ -260,8 +281,13 @@ export default {
     }
 
     .mobile-stories .s-card{
-      width: 72%;
+      width: 80%;
       margin: 0 auto 30px;
+      padding: 15px;
+    }
+
+    .mobile-stories .s-image{
+      height: 280px;
     }
 
     .mobile-stories .s-body{
@@ -269,7 +295,7 @@ export default {
     }
 
     .mobile-stories .mobile-active .s-body{
-      padding-top: 20px;
+      padding-top: 15px;
     }
 
     .mobile-stories .s-body .subtitle{
@@ -277,7 +303,7 @@ export default {
     }
 
     .mobile-stories .mobile-active .subtitle{
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
     .mobile-stories .s-card:not(.mobile-active){
@@ -286,6 +312,52 @@ export default {
 
     .mobile-stories .s-card:not(.mobile-active):hover{
       background-color: #f2f2f2
+    }
+
+    @media screen and (max-width: 640px){
+      .mobile-stories .s-image{
+        height: 165px;
+      }
+
+      .mobile-stories .mobile-active .s-body{
+        padding-top: 10px;
+      }
+
+      .mobile-stories .s-body .title,
+      .mobile-stories .s-body .subtitle{
+        border-bottom: 2px solid #42b983;
+      }
+
+      .mobile-stories .s-body .title{
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+
+      .mobile-stories .s-body .subtitle{
+        font-size: 10px;
+      }
+
+      .mobile-stories .s-body .description{
+        font-size: 9px;
+      }
+    }
+
+    @media screen and (max-width: 320px){
+      .mobile-stories .s-image{
+        height: 115px;
+      }
+
+      .mobile-stories .s-body .title{
+        font-size: 10px;
+      }
+
+      .mobile-stories .s-body .subtitle{
+        font-size: 8px;
+      }
+
+      .mobile-stories .s-body .description{
+        font-size: 8px;
+      }
     }
   }
 

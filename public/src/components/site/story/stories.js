@@ -14,10 +14,37 @@ export default [
     "at RIT and, since then, I've created two open source projects which I " +
     "still actively maintain. I'll be graduating next May and I look forward " +
     "to the start of a new journey.",
-    image: "0.jpg"
+    image: "rit.jpg"
   },
   {
     _id: 1,
+    title: "Personal Website",
+    subtitle: "Web Developer (October 2018)",
+    description: "Sometime ago, I decided to create a website that would serve " +
+    "as an online portfolio and contain some information about me. " +
+    "Parts of the site are still under development but this is the initial version " +
+    "(sort of an MVP). Updates to the site will be made periodically. The " +
+    "source code is available on my " +
+    "<a href='https://www.github.com/e-oj/gremlin' target='_blank'>GitHub</a> " +
+    "page for anyone who's interested. The site has a backend with a " +
+    "<a href='https://www.mongodb.com/' target='_blank'>MongoDB</a> " +
+    "database and an " +
+    "<a href='https://expressjs.com/' target='_blank'>Express</a> " +
+    "api. The frontend is built with " +
+    "<a href='https://vuejs.org/' target='_blank'>Vue</a>, " +
+    "using " +
+    "<a href='https://webpack.js.org/'>Webpack</a> " +
+    "as the module bundler and " +
+    "<a href='https://www.w3schools.com/js/js_es6.asp'>ES6</a> " +
+    "with " +
+    "<a href='https://babeljs.io/' target='_blank'>Babel</a> " +
+    "as the transpiler. Google analytics is used to collect usage data abaout the site. " +
+    "Currently, my notable projects can be found here. More will be added " +
+    "as they are completed.",
+    image: "e-oj.png"
+  },
+  {
+    _id: 2,
     title: "Stör",
     subtitle: "Co-Founder/Tech Lead (September 2017)",
     description: "Stör is a platform that connects people who have extra space " +
@@ -31,10 +58,10 @@ export default [
     "and Airbnb are just a few examples of companies taking advantage of this trend. " +
     "The storage industry seems ripe for disruption, we might as well be the ones to " +
     "do it.",
-    image: "1.png"
+    image: "stor.png"
   },
   {
-    _id: 2,
+    _id: 3,
     title: "Grabity",
     subtitle: "Author (September 2017)",
     description: "<a href='https://www.github.com/e-oj/grabity' target='_blank'>" +
@@ -53,10 +80,10 @@ export default [
     "grabity on npm because I felt that a good number of people would find it useful. " +
     "The code is open source and can be found on my " +
     "<a href='https://www.github.com/e-oj' target='_blank'>GitHub</a> account.",
-    image: "2.png"
+    image: "grabity.png"
   },
   {
-    _id: 3,
+    _id: 4,
     title: "Enel X",
     subtitle: "Software Engineering Intern (May 2016 - August 2016)",
     description: "In the summer of 2016, I was a software engineering " +
@@ -70,10 +97,10 @@ export default [
     "summer for me because I'd never been there. It's a great city " +
     "with many leisure activities and tourist attractions, I recommend " +
     "a visit to anyone who can make the trip.",
-    image: "3.jpg"
+    image: "enel-x.jpg"
   },
   {
-    _id: 4,
+    _id: 5,
     title: "Fawn",
     subtitle: "Author (May 2016)",
     description: "<a href='https://www.github.com/e-oj/Fawn' target='_blank'>Fawn</a> " +
@@ -91,10 +118,10 @@ export default [
     "The code is open source and can be found on my " +
     "<a href='https://www.github.com/e-oj' target='_blank'>GitHub</a> " +
     "account",
-    image: "4.png"
+    image: "fawn.png"
   },
   {
-    _id: 5,
+    _id: 6,
     title: "Information Sciences and Technologies",
     subtitle: "Teaching Assistant (September 2015 - May 2016)",
     description: "I worked as a TA for both of the courses in the IST java " +
@@ -106,7 +133,7 @@ export default [
     "this position, I was able to have a positive impact on the lives of many " +
     "new programmers while solidifying my understanding of the topics I taught. " +
     "To teach is to learn twice.",
-    image: "5.jpg"
+    image: "ta.jpg"
   }
 ];
 
