@@ -141,7 +141,7 @@ export default {
 
   .s-nav{
     width: 250px;
-    height: fit-content;
+    height: 100%;
     font-size: 12px;
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -171,7 +171,7 @@ export default {
 
   .s-card{
     width: 800px;
-    height: fit-content;
+    height: 100%;
     margin: 0 auto;
     padding: 20px;
     display: flex;
@@ -197,6 +197,7 @@ export default {
 
   .s-card .s-body .title{
     width: fit-content;
+    width: -moz-fit-content;
     margin-bottom: 10px;
     font-size: 18px;
     font-weight: bolder;
@@ -205,6 +206,7 @@ export default {
 
   .s-card .s-body .subtitle{
     width: fit-content;
+    width: -moz-fit-content;
     margin-bottom: 15px;
     font-size: 16px;
     font-weight: bold;

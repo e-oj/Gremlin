@@ -91,6 +91,7 @@ export default {
   .client-ext-content{
     position: relative;
     top: 130px;
+    padding-bottom: 20px;
   }
 
   .ext-post{
@@ -115,6 +116,7 @@ export default {
     position: absolute;
     z-index: 1;
     width: fit-content;
+    width: -moz-fit-content;
     font-size: 12px;
     font-weight: bold;
     padding: 5px;
@@ -149,6 +151,7 @@ export default {
 
   .ext-post .ext-title, .ext-post .ext-description{
     width: fit-content;
+    width: -moz-fit-content;
     font-weight: bold;
     color: #24292e;
   }

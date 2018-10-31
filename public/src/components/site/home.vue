@@ -168,6 +168,7 @@ export default{
     width: 100%;
     height: 70vh;
     min-height: fit-content;
+    min-height: -moz-fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -191,6 +192,7 @@ export default{
 
   .content .intro{
     width: fit-content;
+    width: -moz-fit-content;
     padding: 15px;
     font-family: "Assistant", cursive;
     font-size: 30px;
@@ -242,6 +244,7 @@ export default{
   .content .links a{
     flex-shrink: 0;
     width: fit-content;
+    width: -moz-fit-content;
     height: 35px;
     padding: 15px;
   }
@@ -258,6 +261,7 @@ export default{
 
   .oj-image{
     width: fit-content;
+    width: -moz-fit-content;
     min-height: 450px;
     display: flex;
     align-items: center;
