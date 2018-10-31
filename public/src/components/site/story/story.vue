@@ -171,7 +171,8 @@ export default {
 
   .s-card{
     width: 800px;
-    height: 100%;
+    height: fit-content;
+    height: -moz-fit-content;
     margin: 0 auto;
     padding: 20px;
     display: flex;
