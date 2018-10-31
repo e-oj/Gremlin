@@ -10,7 +10,7 @@ import Home from "../components/site/home";
 import ClientExtBlog from "../components/site/ext";
 import Story from "../components/site/story/story";
 
-import Admin from "../components/Admin/admin";
+import Admin from "../components/admin/admin";
 import AdminHome from "../components/admin/home/home.admin";
 import AdminBlog from "../components/admin/blog/blog";
 import AdminExtBlog from "../components/admin/ext_blog/ext";
