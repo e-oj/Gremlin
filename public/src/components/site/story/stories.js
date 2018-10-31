@@ -78,7 +78,7 @@ export default [
     "<a href='https://developer.twitter.com/en/docs/tweets/optimize-with-cards/" +
     "guides/getting-started.html' target='_blank'>Twitter Cards</a> " +
     "markup. This information is then returned to the user and can be used to generate " +
-    "Facebook type link previews. I was working on a forum  app when this tool became " +
+    "Facebook-esque link previews. I was working on a forum  app when this tool became " +
     "a necessity. A major feature of the app was link sharing and we needed a way to " +
     "get data about a link in order to display a preview of the website. I published " +
     "grabity on npm because I felt that a good number of people would find it useful. " +
