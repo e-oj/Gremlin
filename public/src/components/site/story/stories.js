@@ -35,11 +35,14 @@ export default [
     "using " +
     "<a href='https://webpack.js.org/'>Webpack</a> " +
     "as the module bundler and " +
-    "<a href='https://www.w3schools.com/js/js_es6.asp'>ES6</a> " +
+    "<a href='https://www.w3schools.com/js/js_es6.asp'>ES6</a>, " +
     "with " +
     "<a href='https://babeljs.io/' target='_blank'>Babel</a> " +
-    "as the transpiler. Google analytics is used to collect usage data abaout the site. " +
-    "Currently, my notable projects can be found here. More will be added " +
+    "as the transpiler. Google analytics is used to collect usage data about the site. " +
+    "The whole thing is hosted on an " +
+    "<a href='https://aws.amazon.com/ec2/' target='_blank'>aws EC2</a> " +
+    "instance. " +
+    "Currently, my notable projects can be found on this site. More will be added " +
     "as they are completed.",
     image: "e-oj.png"
   },
