@@ -3,6 +3,9 @@ let path = require("path");
 let webpack = require("webpack");
 
 module.exports = {
+  node: {
+    fs: "empty"
+  },
   entry: ["babel-polyfill", "./src/main.js"],
   output: {
     path: path.resolve(__dirname, "./dist"),
