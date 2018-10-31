@@ -340,7 +340,7 @@ export default{
 
   @media screen and (max-width: 640px){
     .content{
-      height: 300px;
+      height: 250px;
     }
 
     .content .intro{
@@ -348,7 +348,7 @@ export default{
     }
 
     .content .splash{
-      height: 160px;
+      height: 190px;
     }
 
     .content .splash-text{
