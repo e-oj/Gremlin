@@ -34,12 +34,13 @@ export default [
     "<a href='https://vuejs.org/' target='_blank'>Vue</a>, " +
     "using " +
     "<a href='https://webpack.js.org/'>Webpack</a> " +
-    "as the module bundler and " +
+    "as the module bundler, and " +
     "<a href='https://www.w3schools.com/js/js_es6.asp'>ES6</a>, " +
     "with " +
     "<a href='https://babeljs.io/' target='_blank'>Babel</a> " +
-    "as the transpiler. Google analytics is used to collect usage data about the site. " +
-    "The whole thing is hosted on an " +
+    "as the transpiler. " +
+    "<a href='https://marketingplatform.google.com/about/analytics/' target='_blank'>Google analytics</a> " +
+    "is used to collect usage data about the site, and the whole thing is hosted on an " +
     "<a href='https://aws.amazon.com/ec2/' target='_blank'>aws EC2</a> " +
     "instance. " +
     "Currently, my notable projects can be found on this site. More will be added " +
