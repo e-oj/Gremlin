@@ -202,6 +202,7 @@ export default{
 
   .content .intro a{
     font-family: Acme, cursive;
+    text-decoration: none;
   }
 
   .content .intro a:hover{
