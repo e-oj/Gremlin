@@ -12,7 +12,8 @@ let ExtPostSchema = new Schema({
   url: {type: String, required: REQUIRED},
   imgId: {type: Schema.Types.ObjectId, required: REQUIRED},
   title: {type: String, required: REQUIRED},
-  description: {type: String, required: REQUIRED}
+  description: {type: String, required: REQUIRED},
+  date: {type: String, required: REQUIRED}
 });
 
 exports.ExtPost = mongoose.model("ExtPosts", ExtPostSchema);

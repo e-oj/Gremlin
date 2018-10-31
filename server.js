@@ -9,17 +9,21 @@ let express = require("express");
 let logger = require("morgan");
 let bodyParser = require("body-parser");
 let mongoose = require("mongoose");
-mongoose.Promise = global.Promise = require("bluebird");
+let bluebird = require("bluebird");
 let cors = require("cors");
+let helmet = require("helmet");
+
+mongoose.Promise = global.Promise = bluebird;
 
 let config = require("./config");
 let apiRouter = require("./app/api");
 
-mongoose.connect(config.DB_URL);
+mongoose.connect(config.DB_URL, config.DB_OPTIONS);
 
 const STATIC = path.join(__dirname, "public");
 let app = express();
 
+app.use(helmet());
 app.use(express.static(STATIC));
 
 app.use(logger("dev"));
@@ -33,16 +37,75 @@ app.use("*", (req, res) => {
   res.sendFile(`${STATIC}/index.html`);
 });
 
-let server = app.listen(config.PORT);
+// start https or http server
+startServer();
 
-server.on("close", async err => {
-  if(err) throw err;
+/**
+ * Starts a development or production
+ * server with http or https.
+ */
+function startServer(){
+  const {PORT} = config;
+  let server;
 
-  console.log("\nClosing db connections...\n");
-  await mongoose.disconnect();
-  console.log("Server Out!! *drops mic*");
-});
+  if(process.env.NODE_ENV === "production"){
+    server = prodServer(PORT);
+  }
+  else {
+    server = devServer(PORT);
+  }
 
-process.on("SIGINT", () => server.close());
+  server.on("close", async err => {
+    if(err) throw err;
 
-console.log(`Running on port: ${config.PORT}`);
+    console.log("\nClosing db connections...\n");
+    try{
+      await mongoose.disconnect();
+    }
+    catch (e) {
+      console.error(e.message)
+    }
+    console.log("Server Out!! *drops mic*");
+  });
+
+  process.on("SIGINT", () => server.close());
+
+  console.log(`Running on port: ${PORT}`);
+}
+
+/**
+ * Starts an https server at
+ * the given port
+ *
+ * @param port - port number
+ * @return {Server}
+ */
+function prodServer(port){
+  let https = require("https");
+
+  let options = {
+    key: config.KEY,
+    cert: config.CERT
+  };
+
+  return https.createServer(options, app).listen(port)
+}
+
+/**
+ * Starts an http or, if the env vars
+ * are present, https server at the
+ * given port.
+ *
+ * @param port - port number
+ * @return {*}
+ */
+function devServer(port){
+  let cert = config.CERT;
+  let key = config.KEY;
+
+  if(cert && key){
+    return prodServer(port);
+  }
+
+  return app.listen(port);
+}

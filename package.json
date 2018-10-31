@@ -6,7 +6,9 @@
   "scripts": {
     "test": "mocha",
     "start": "nodemon server.js",
-    "test-server": "PORT=8778 COLLECTION=Mogwai node server.js"
+    "test-server": "PORT=8778 COLLECTION=Mogwai node server.js",
+    "start-https": "CERT=config/https/localhost.crt KEY=config/https/localhost.key nodemon server.js",
+    "start-prod": "NODE_ENV=production CERT=/etc/letsencrypt/live/e-oj.com/fullchain.pem KEY=/etc/letsencrypt/live/e-oj.com/privkey.pem forever start server.js"
   },
   "author": "Emmanuel Olaojo",
   "license": "MIT",
@@ -21,17 +23,18 @@
     "ffmpeg-static": "2.0.0",
     "ffprobe-static": "2.0.0",
     "file-type": "^9.0.0",
-    "fluent-ffmpeg": "2.1.2",
+    "fluent-ffmpeg": "^2.1.2",
     "gridfs-stream": "1.1.1",
-    "jsonwebtoken": "8.1.0",
-    "mongoose": "5.0.0",
+    "helmet": "^3.14.0",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^5.0.0",
     "mongoose-lean-virtuals": "0.2.0",
     "morgan": "1.9.0",
     "multer": "1.4.0",
     "nodemailer": "^4.6.8",
     "read-chunk": "^3.0.0",
     "rss-parser": "^3.5.1",
-    "validator": "9.1.1"
+    "validator": "^9.4.1"
   },
   "devDependencies": {
     "chai": "4.1.2",

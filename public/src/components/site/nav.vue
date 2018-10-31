@@ -16,7 +16,23 @@
 
 <script>
 export default {
-  props: ["isFixed"]
+  props: ["isFixed"],
+  methods: {
+    analytics(){
+      let self = this;
+
+      $(".nav-logo a").click(function(){
+        self.$ga.event("Nav logo", "open", $(this).attr("href"));
+      });
+    }
+  },
+
+  created(){
+    let self = this;
+
+    // analytics
+    self.$nextTick(() => self.analytics());
+  }
 };
 </script>
 
@@ -56,7 +72,7 @@ export default {
   .fixed-nav{
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 10;
     width: 100%;
     max-width: 1920px;
     height: 80px;
@@ -121,17 +137,28 @@ export default {
   @media screen and (max-width: 1500px){
     .fixed-nav{
       font-size: 20px;
-      height: 70px;
+      /*height: 70px;*/
     }
   }
 
   @media screen and (max-width: 640px){
     .fixed-nav{
-      font-size: 25px;
+      font-size: 18px;
+      justify-content: center;
+    }
+
+    .fixed-nav .nav{
+      margin-left: 0;
+      width: 80%;
+      justify-content: space-between;
+    }
+
+    .fixed-nav .nav li, .fixed-nav .nav li:last-child{
+      margin: 0 10px;
     }
 
     .nav-logo{
-      font-size: 30px;
+      display: none;
     }
   }
 </style>
