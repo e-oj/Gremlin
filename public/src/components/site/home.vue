@@ -340,7 +340,7 @@ export default{
 
   @media screen and (max-width: 640px){
     .content{
-      height: 250px;
+      height: 300px;
     }
 
     .content .intro{
