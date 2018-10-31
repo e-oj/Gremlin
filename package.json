@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "start": "nodemon server.js",
-    "test-server": "PORT=8778 COLLECTION=Mogwai node server.js",
+    "test-server": "PORT=8778 DB=Mogwai node server.js",
     "start-https": "CERT=config/https/localhost.crt KEY=config/https/localhost.key nodemon server.js",
     "test-prod": "NODE_ENV=production CERT=/etc/letsencrypt/live/e-oj.com/fullchain.pem KEY=/etc/letsencrypt/live/e-oj.com/privkey.pem nodemon server.js",
     "start-prod": "NODE_ENV=production CERT=/etc/letsencrypt/live/e-oj.com/fullchain.pem KEY=/etc/letsencrypt/live/e-oj.com/privkey.pem forever start server.js"
