@@ -12,6 +12,7 @@ let mongoose = require("mongoose");
 let bluebird = require("bluebird");
 let cors = require("cors");
 let helmet = require("helmet");
+let favicon = require("express-favicon");
 
 mongoose.Promise = global.Promise = bluebird;
 
@@ -24,6 +25,7 @@ const STATIC = path.join(__dirname, "public");
 let app = express();
 
 app.use(helmet());
+app.use(favicon(`${STATIC}/favicon.ico`));
 app.use(express.static(STATIC));
 
 app.use(logger("dev"));

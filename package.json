@@ -20,6 +20,7 @@
     "cors": "^2.8.4",
     "eslint-plugin-html": "4.0.1",
     "express": "4.16.2",
+    "express-favicon": "^2.0.1",
     "fawn": "^2.1.5",
     "ffmpeg-static": "2.0.0",
     "ffprobe-static": "2.0.0",
