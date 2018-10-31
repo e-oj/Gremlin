@@ -180,6 +180,7 @@ export default{
 
   .content{
     display: flex;
+    flex-shrink: 0;
     flex-direction: column;
     justify-content: space-between;
     min-height: 450px;
