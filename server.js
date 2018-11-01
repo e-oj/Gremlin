@@ -12,6 +12,7 @@ let mongoose = require("mongoose");
 let bluebird = require("bluebird");
 let cors = require("cors");
 let helmet = require("helmet");
+let compression = require("compression");
 let favicon = require("express-favicon");
 
 mongoose.Promise = global.Promise = bluebird;
@@ -25,6 +26,7 @@ const STATIC = path.join(__dirname, "public");
 let app = express();
 
 app.use(helmet());
+app.use(compression({level: 7})); // Default compression level is 6
 app.use(favicon(`${STATIC}/favicon.ico`));
 app.use(express.static(STATIC));
 
@@ -102,10 +104,7 @@ function prodServer(port){
  * @return {*}
  */
 function devServer(port){
-  let cert = config.CERT;
-  let key = config.KEY;
-
-  if(cert && key){
+  if(config.CERT && config.KEY){
     return prodServer(port);
   }
 

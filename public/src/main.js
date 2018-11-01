@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+// /* eslint-disable no-undef */
 import Vue from "vue";
 import VueResource from "vue-resource";
 import Vuex from "vuex";

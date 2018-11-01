@@ -1,17 +1,21 @@
 /* eslint-disable no-undef */
 let path = require("path");
 let webpack = require("webpack");
+let VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
-  node: {
-    fs: "empty"
-  },
+
   entry: ["babel-polyfill", "./src/main.js"],
   output: {
     path: path.resolve(__dirname, "./dist"),
     publicPath: "/dist/",
     filename: "build.js"
   },
+  mode: process.env.NODE_ENV,
+  node: {
+    fs: "empty"
+  },
+  plugins: [new VueLoaderPlugin()],
   module: {
     rules: [
       {
