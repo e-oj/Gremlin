@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "frontend": "cross-env webpack --progress --hide-modules",
+    "frontend": "cross-env webpack --mode=development --progress --hide-modules",
     "build": "cross-env webpack --mode=production --progress --hide-modules"
   },
   "dependencies": {

@@ -26,6 +26,7 @@ const STATIC = path.join(__dirname, "public");
 let app = express();
 
 app.use(helmet());
+
 app.use(compression({level: 7})); // Default compression level is 6
 app.use(favicon(`${STATIC}/favicon.ico`));
 app.use(express.static(STATIC));

@@ -21,8 +21,8 @@ export default new Router({
   mode: "history",
   routes: [
     {path: "/", component: Home},
-    {path: "/blog", component: ClientExtBlog},
     {path: "/story", component: Story},
+    {path: "/collection", component: ClientExtBlog},
     {
       path: "/admin",
       component: Admin,

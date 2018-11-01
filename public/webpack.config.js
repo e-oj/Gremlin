@@ -11,7 +11,6 @@ module.exports = {
     publicPath: "/dist/",
     filename: "build.js"
   },
-  mode: process.env.NODE_ENV,
   node: {
     fs: "empty"
   },

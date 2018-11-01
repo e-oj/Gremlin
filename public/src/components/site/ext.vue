@@ -53,7 +53,7 @@ export default {
      * @param title - post title
      */
     trackPost(title){
-      this.$ga.event("External Posts", "open", title);
+      this.$ga.event("Collection", "open", title);
     }
   },
 
