@@ -8,8 +8,8 @@
       <div class="content">
 
         <div class="intro">
-          Emmanuel Olaojo (<a href="https://github.com/e-oj"
-                              target="_blank">@e-oj</a>)
+          <h1>Emmanuel Olaojo (<a href="https://github.com/e-oj"
+                                  target="_blank" rel="me">@e-oj</a>)</h1>
         </div>
 
         <div class="splash">
@@ -19,15 +19,15 @@
         </div>
 
         <div class="links">
-          <a href="https://github.com/e-oj" target="_blank">
+          <a href="https://github.com/e-oj" target="_blank" rel="me">
             <i class="fab fa-github github-logo"></i>
           </a>
 
-          <a href="https://www.linkedin.com/in/emmanuel-olaojo/" target="_blank">
+          <a href="https://www.linkedin.com/in/emmanuel-olaojo/" target="_blank" rel="me">
             <i class="fab fa-linkedin linkedin-logo"></i>
           </a>
 
-          <a href="https://medium.com/@emmanuelolaojo" target="_blank">
+          <a href="https://medium.com/@emmanuelolaojo" target="_blank" rel="me">
             <i class="fab fa-medium medium-logo"></i>
           </a>
         </div>
@@ -35,7 +35,7 @@
       </div>
 
       <div class="oj-image">
-        <img src="/src/assets/img/oj.png" onerror="this.style.display = 'none'">
+        <img src="/src/assets/img/oj.png" onerror="this.style.display = 'none'" alt="Emmanuel Olaojo">
       </div>
     </div>
   </div>
@@ -199,6 +199,12 @@ export default{
     font-size: 30px;
     font-weight: bold;
     color: #24292e;
+  }
+
+  .content .intro h1{
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
   }
 
   .content .intro a{
