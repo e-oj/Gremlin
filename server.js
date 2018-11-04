@@ -14,6 +14,7 @@ let cors = require("cors");
 let helmet = require("helmet");
 let compression = require("compression");
 let favicon = require("express-favicon");
+let preRender = require("prerender-node");
 
 mongoose.Promise = global.Promise = bluebird;
 
@@ -27,6 +28,7 @@ let app = express();
 
 app.use(helmet());
 
+app.use(preRender.set("prerenderToken", "fW7sERGPXvzZv18ZnDCM"));
 app.use(compression({level: 7})); // Default compression level is 6
 app.use(favicon(`${STATIC}/favicon.ico`));
 app.use(express.static(STATIC));
