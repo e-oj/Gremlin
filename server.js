@@ -29,7 +29,7 @@ let app = express();
 app.use(helmet());
 
 app.use(preRender.set("prerenderToken", "fW7sERGPXvzZv18ZnDCM"));
-app.use(compression({level: 7})); // Default compression level is 6
+app.use(compression({level: 8})); // Default compression level is 6
 app.use(favicon(`${STATIC}/favicon.ico`));
 app.use(express.static(STATIC));
 
