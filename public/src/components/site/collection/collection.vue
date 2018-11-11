@@ -184,7 +184,7 @@ export default {
   }
 
   .ext-post .ext-description{
-    font-size: 14px;
+    font-size: 12px;
     margin-left: 3px;
     color: #494d50;
   }
