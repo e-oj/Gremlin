@@ -143,7 +143,9 @@ export default class MagicGrid {
       self.positionItems();
 
       $(window).resize(function(){
-        self.positionItems();
+        setTimeout(function(){
+          self.positionItems();
+        }, 200);
       });
     }
 
