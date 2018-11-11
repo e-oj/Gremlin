@@ -84,7 +84,7 @@ export default {
           container: ".client-ext-content",
           item: ".ext-post",
           size: self.posts.length,
-          gutter: 30,
+          gutter: 35,
           maxCols: 3
         }).listen();
       });
