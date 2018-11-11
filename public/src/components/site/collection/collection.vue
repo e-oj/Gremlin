@@ -36,8 +36,6 @@
 import Nav from "../nav";
 import MagicGrid from "./magic.grid";
 
-let magicGrid;
-
 export default {
   data(){
     return {
@@ -61,6 +59,12 @@ export default {
     }
   },
 
+  /**
+   * Sets up the data for this component
+   * and initializes the Magic Grid.
+   *
+   * @return {Promise<void>}
+   */
   async created(){
     let self = this;
 
@@ -76,13 +80,11 @@ export default {
       self.posts = res.body.result.posts;
 
       self.$nextTick(() => {
-        let magicGrid = new MagicGrid({
+        new MagicGrid({
           container: ".client-ext-content",
           item: ".ext-post",
           size: self.posts.length
-        });
-
-        magicGrid.listen();
+        }).listen();
       });
     }
     catch(err){
