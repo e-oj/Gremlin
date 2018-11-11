@@ -148,7 +148,7 @@ export default{
 
 <style scoped>
   .nav-ghost{
-    height: 100px;
+    height: 140px;
     flex-shrink: 0;
     opacity: 0;
   }

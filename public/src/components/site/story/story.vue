@@ -125,7 +125,7 @@ export default {
   }
 
   .nav-ghost{
-    height: 100px;
+    height: 140px;
     flex-shrink: 0;
     opacity: 0;
   }
@@ -137,11 +137,11 @@ export default {
     margin: auto;
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
   }
 
   .s-nav{
     width: 250px;
-    height: 100%;
     font-size: 12px;
     cursor: pointer;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -175,9 +175,6 @@ export default {
     height: -moz-fit-content;
     margin: 0 auto;
     padding: 20px;
-    display: flex;
-    flex-shrink: 0;
-    flex-direction: column;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   }
 
@@ -268,8 +265,14 @@ export default {
   }
 
   @media screen and (max-width: 1000px){
+    .nav-ghost{
+      display: none;
+    }
+
     .story-wrapper{
       height: 100vh;
+      position: relative;
+      top: 130px;
     }
 
     .story-content{
@@ -279,8 +282,7 @@ export default {
 
     .mobile-stories{
       width: 100%;
-      display: flex;
-      flex-direction: column;
+      display: block;
     }
 
     .mobile-stories .s-card{
@@ -318,6 +320,10 @@ export default {
     }
 
     @media screen and (max-width: 640px){
+      .story-wrapper{
+        top: 100px;
+      }
+
       .mobile-stories .s-image{
         height: 165px;
       }

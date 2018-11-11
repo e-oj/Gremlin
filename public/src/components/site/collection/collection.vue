@@ -3,6 +3,7 @@
     <nav-bar class="client-ext-nav" is-fixed="true"></nav-bar>
 
     <div class="client-ext-content">
+
       <div class="ext-post"
            v-for="post in posts"
            :key="post._id">
@@ -25,14 +26,17 @@
             </div>
           </div>
         </a>
-
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import Nav from "./nav";
+import Nav from "../nav";
+import MagicGrid from "./magic.grid";
+
+let magicGrid;
 
 export default {
   data(){
@@ -70,6 +74,16 @@ export default {
       }
 
       self.posts = res.body.result.posts;
+
+      self.$nextTick(() => {
+        let magicGrid = new MagicGrid({
+          container: ".client-ext-content",
+          item: ".ext-post",
+          size: self.posts.length
+        });
+
+        magicGrid.listen();
+      });
     }
     catch(err){
       self.err = err.message;
@@ -95,11 +109,14 @@ export default {
   }
 
   .ext-post{
-    position: relative;
-    width: 700px;
-    margin: 0 auto 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    margin: 0 17px;
     background-color: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.2s ease;
   }
 
   .ext-post:hover{
@@ -109,7 +126,7 @@ export default {
   .ext-post a{
     display: block;
     text-decoration: none;
-    padding: 20px;
+    padding: 15px;
   }
 
   .ext-post .ext-date{
@@ -117,7 +134,7 @@ export default {
     z-index: 1;
     width: fit-content;
     width: -moz-fit-content;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     padding: 5px;
     top: 10px;
@@ -130,7 +147,7 @@ export default {
   .ext-post .ext-image{
     position: relative;
     width: 100%;
-    height: 350px;
+    height: 288px;
   }
 
   .ext-post .ext-image img{
@@ -158,29 +175,13 @@ export default {
 
   .ext-post .ext-title{
     margin: 15px 0 8px;
-    font-size: 16px;
+    font-size: 14px;
     border-bottom: 2px solid #42b983;
   }
 
   .ext-post .ext-description{
     font-size: 14px;
     margin-left: 3px;
-  }
-
-  @media screen and (max-width: 1000px){
-    .ext-post{
-      width: 70%;
-      max-width: 570px;
-      min-width: 545px;
-    }
-
-    .ext-post a{
-      padding: 15px;
-    }
-
-    .ext-post .ext-image{
-      height: 270px;
-    }
   }
 
   @media screen and (max-width: 640px){
@@ -203,8 +204,7 @@ export default {
     }
 
     .ext-post .ext-title{
-      /*margin: 15px 0 8px;*/
-      font-size: 12px;
+      font-size: 10px;
     }
 
     .ext-post .ext-description{
