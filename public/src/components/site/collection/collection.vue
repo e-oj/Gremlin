@@ -83,7 +83,8 @@ export default {
         new MagicGrid({
           container: ".client-ext-content",
           item: ".ext-post",
-          size: self.posts.length
+          size: self.posts.length,
+          gutter: 35
         }).listen();
       });
     }
