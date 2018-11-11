@@ -185,7 +185,7 @@ export default {
   .ext-post .ext-description{
     font-size: 14px;
     margin-left: 3px;
-    color: #565a5d;
+    color: #494d50;
   }
 
   @media screen and (max-width: 640px){
