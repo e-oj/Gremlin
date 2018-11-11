@@ -232,7 +232,7 @@ export default {
     display: none;
   }
 
-  @media screen and (max-width: 1500px){
+  @media screen and (max-width: 1700px){
     .story-content{
       width: 980px;
       min-height: 620px;

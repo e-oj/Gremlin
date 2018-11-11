@@ -156,8 +156,8 @@ export default{
   .home{
     width: 100%;
     max-width: 1920px;
-    height: 100vh;
-    min-height: 600px;
+    height: 100%;
+    min-height: 100vh;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -292,11 +292,7 @@ export default{
     color: #24292e;
   }
 
-  @media screen and (max-width: 1500px){
-    .home{
-      min-height: 400px;
-    }
-
+  @media screen and (max-width: 1700px){
     .content, .oj-image{
       height: 450px;
       min-height: 350px;
