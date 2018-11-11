@@ -84,7 +84,8 @@ export default {
           container: ".client-ext-content",
           item: ".ext-post",
           size: self.posts.length,
-          gutter: 40
+          gutter: 40,
+          maxCols: 3
         }).listen();
       });
     }
@@ -115,7 +116,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: 600px;
+    width: 450px;
     margin: 0 17px;
     background-color: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -150,7 +151,7 @@ export default {
   .ext-post .ext-image{
     position: relative;
     width: 100%;
-    height: 288px;
+    height: 216px;
   }
 
   .ext-post .ext-image img{
