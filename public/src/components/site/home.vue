@@ -343,7 +343,7 @@ export default{
 
   @media screen and (max-width: 640px){
     .nav-ghost{
-      height: 80px;
+      height: 110px;
     }
 
     .content{
