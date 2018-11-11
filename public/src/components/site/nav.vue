@@ -9,7 +9,7 @@
     <ul class="nav">
       <li><router-link tag="a" to="/">Home</router-link></li>
       <li><router-link tag="a" to="/story">Story</router-link></li>
-      <li><router-link tag="a" to="/collection">Collection</router-link></li>
+      <li><router-link tag="a" to="/links">Links</router-link></li>
     </ul>
   </div>
 </template>

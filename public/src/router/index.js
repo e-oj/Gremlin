@@ -22,7 +22,7 @@ export default new Router({
   routes: [
     {path: "/", component: Home},
     {path: "/story", component: Story},
-    {path: "/collection", component: ClientExtBlog},
+    {path: "/links", component: ClientExtBlog},
     {
       path: "/admin",
       component: Admin,

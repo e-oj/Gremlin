@@ -173,18 +173,19 @@ export default {
     width: fit-content;
     width: -moz-fit-content;
     font-weight: bold;
-    color: #24292e;
   }
 
   .ext-post .ext-title{
     margin: 15px 0 8px;
     font-size: 14px;
+    color: #24292e;
     border-bottom: 2px solid #42b983;
   }
 
   .ext-post .ext-description{
     font-size: 14px;
     margin-left: 3px;
+    color: #565a5d;
   }
 
   @media screen and (max-width: 640px){
