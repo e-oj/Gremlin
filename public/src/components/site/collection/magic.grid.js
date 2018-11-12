@@ -61,7 +61,7 @@ export default class MagicGrid {
       cols[i] = {height: 0, top: 0, index: i}
     }
 
-    let wSpace = width - numCols * this._colWidth();
+    let wSpace = width - numCols * this._colWidth() + this.gutter;
 
     return {cols, wSpace};
   }
