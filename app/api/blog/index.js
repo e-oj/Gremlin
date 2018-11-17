@@ -23,6 +23,7 @@ blogRouter.put("/restore", blog.restorePost);
 blogRouter.route("/ext")
   .get(extPost.get)
   .post(upload.single("image"), auth.checkToken, extPost.create)
+  .put(upload.single("image"), auth.checkToken, extPost.edit)
   .delete(auth.checkToken, extPost.delete);
 
 module.exports = blogRouter;

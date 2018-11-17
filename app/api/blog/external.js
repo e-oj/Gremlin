@@ -100,3 +100,41 @@ exports.delete = async (req, res) => {
   respond(http.OK, "Post Deleted");
 };
 
+/**
+ * Edit an external post.
+ *
+ * @param req request
+ * @param res response
+ *
+ * @return {Promise<*>}
+ */
+exports.edit = async (req, res) => {
+  let respond = response.success(res);
+  let respondErr = response.failure(res, moduleId);
+  let data = req.body;
+  let props = ["title", "url", "description", "date", "rank"];
+  let img = req.file;
+  let post;
+
+  try{
+    post = await ExtPost.findById(data._id);
+
+    for(let prop of props){
+      if(data[prop]){
+        post[prop] = data[prop];
+      }
+    }
+
+    if(img){
+      let result = await files.uploadImage(img);
+      post.imgId = result._id;
+    }
+
+    post = await post.save();
+  }
+  catch (err) {
+    return respondErr(http.SERVER_ERROR, err.message, err);
+  }
+
+  respond(http.CREATED, "External Post Updated", {post});
+};

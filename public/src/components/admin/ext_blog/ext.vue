@@ -33,8 +33,12 @@
     </div>
 
     <div class="ext-post" v-for="post in posts" :key="post._id">
-      <div class="ext-delete" @click="deletePost(post)">
+      <div class="ext-action ext-delete" @click="deletePost(post)">
         <i class="fal fa-times"></i>
+      </div>
+
+      <div class="ext-action ext-update" @click="updatePost(post)">
+        <i class="fal fa-archive"></i>
       </div>
 
       <a :href="post.url" target="_blank">
@@ -78,6 +82,11 @@ export default {
   },
 
   methods: {
+    /**
+     * Sends a "new post" request to
+     * the api and adds the created post
+     * to the view
+     */
     async createPost(){
       let self = this;
       let form  = new FormData();
@@ -108,6 +117,33 @@ export default {
       }
     },
 
+    /**
+     * Sends an "edit post" request to
+     * the api and updates the edited post
+     * in the view
+     */
+    async updatePost(post){
+      let self = this;
+
+      try{
+        let data = {...post}; // convert vue obj to regular obj
+        let res = await self.$http.put("/api/b/ext", data);
+        let updated = res.body.result.post;
+
+        updated.index = post.index;
+
+        self.posts.splice(post.index, 1, updated)
+      }
+      catch (err) {
+        self.err = err.message || err.body.message;
+      }
+    },
+
+    /**
+     * Sends a "delete post" request to
+     * the api and removes the deleted post
+     * from the view
+     */
     async deletePost(post){
       let self = this;
 
@@ -148,11 +184,21 @@ export default {
   },
 
   computed: {
+    /**
+     * Checks for posts
+     *
+     * @return Boolean
+     */
     noPosts(){
       return !this.posts.length;
     }
   },
 
+  /**
+   * Initialize posts on creation
+   *
+   * @return {Promise<void>}
+   */
   async created(){
     let self = this;
 
@@ -276,12 +322,10 @@ export default {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
 
-  .ext-post .ext-delete{
+  .ext-post .ext-action{
     position: absolute;
     width: 40px;
     height: 40px;
-    top: 20px;
-    left: 20px;
     z-index: 1;
     border-radius: 50%;
     background-color: white;
@@ -292,18 +336,28 @@ export default {
     cursor: pointer;
   }
 
-  .ext-post .ext-delete:hover{
+  .ext-post .ext-action:hover{
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
 
-  .ext-post .ext-delete:hover svg{
+  .ext-post .ext-action:hover svg{
     color: #686868;
   }
 
-  .ext-post .ext-delete svg{
+  .ext-post .ext-action svg{
     width: 25px;
     height: 25px;
     color: darkgray;
+  }
+
+  .ext-post .ext-delete{
+    top: 20px;
+    left: 20px;
+  }
+
+  .ext-post .ext-update{
+    top: 20px;
+    left: 80px;
   }
 
   .ext-post a{
