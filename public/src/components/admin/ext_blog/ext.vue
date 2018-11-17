@@ -56,6 +56,11 @@
           </div>
         </div>
       </a>
+
+      <div class="ext-rank">
+        <label for="ext-rank-in">Rank:</label>
+        <input id="ext-rank-in" v-model="post.rank"/>
+      </div>
     </div>
   </div>
 </template>
@@ -358,6 +363,29 @@ export default {
   .ext-post .ext-update{
     top: 20px;
     left: 80px;
+  }
+
+  .ext-post .ext-rank{
+    position: absolute;
+    left: 20px;
+    top: 350px;
+    font-size: 14px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    padding: 5px;
+  }
+
+  .ext-post .ext-rank input{
+    outline: none;
+    border: none;
+    width: 30px;
+    font-size: 14px;
+    font-family: inherit;
+    text-align: center;
+  }
+
+  .ext-post .ext-rank label{
+    font-weight: bold;
   }
 
   .ext-post a{

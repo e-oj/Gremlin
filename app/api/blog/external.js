@@ -64,7 +64,7 @@ exports.get = async (req, res) => {
   let respondErr = response.failure(res, moduleId);
 
   try{
-    let posts = await ExtPost.find();
+    let posts = await ExtPost.find().sort("-rank").exec();
 
     respond(http.OK, "All Posts", {posts});
   }
