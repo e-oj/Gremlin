@@ -85,7 +85,7 @@ export default {
           item: ".ext-post",
           size: self.posts.length,
           gutter: 35,
-          maxCols: 3
+          maxColumns: 3
         }).listen();
       });
     }

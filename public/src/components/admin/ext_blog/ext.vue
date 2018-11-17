@@ -32,34 +32,36 @@
       </div>
     </div>
 
-    <div class="ext-post" v-for="post in posts" :key="post._id">
-      <div class="ext-action ext-delete" @click="deletePost(post)">
-        <i class="fal fa-times"></i>
-      </div>
-
-      <div class="ext-action ext-update" @click="updatePost(post)">
-        <i class="fal fa-archive"></i>
-      </div>
-
-      <a :href="post.url" target="_blank">
-        <div class="ext-image">
-          <img :src="`/api/img/?imgId=${post.imgId}`" alt="Image">
+    <div class="ext-grid">
+      <div class="ext-post" v-for="post in posts" :key="post._id">
+        <div class="ext-action ext-delete" @click="deletePost(post)">
+          <i class="fal fa-times"></i>
         </div>
 
-        <div class="ext-content">
-          <div class="ext-title">
-            {{post.title}}
-          </div>
-
-          <div class="ext-description">
-            {{post.description}}
-          </div>
+        <div class="ext-action ext-update" @click="updatePost(post)">
+          <i class="fal fa-cloud"></i>
         </div>
-      </a>
 
-      <div class="ext-rank">
-        <label for="ext-rank-in">Rank:</label>
-        <input id="ext-rank-in" v-model="post.rank"/>
+        <a :href="post.url" target="_blank">
+          <div class="ext-image">
+            <img :src="`/api/img/?imgId=${post.imgId}`" alt="Image">
+          </div>
+
+          <div class="ext-content">
+            <div class="ext-title">
+              {{post.title}}
+            </div>
+
+            <div class="ext-description">
+              {{post.description}}
+            </div>
+          </div>
+        </a>
+
+        <div class="ext-rank">
+          <label for="ext-rank-in">Rank:</label>
+          <input id="ext-rank-in" v-model="post.rank"/>
+        </div>
       </div>
     </div>
   </div>
@@ -67,6 +69,9 @@
 
 <script>
 import {readFiles} from "../../../../public.utils";
+
+let MagicGrid = require("magic-grid");
+let magicGrid;
 
 export default {
   data(){
@@ -116,6 +121,10 @@ export default {
 
         post.index = self.posts.length;
         self.posts.push(post);
+
+        self.$nextTick(() => {
+          magicGrid.positionItems();
+        });
       }
       catch(err){
         self.err = err.message || err.body.message;
@@ -217,6 +226,15 @@ export default {
       }
 
       self.posts = res.body.result.posts;
+
+      magicGrid = new MagicGrid({
+        container: ".ext-grid",
+        items: self.posts.length,
+        maxColumns: 3,
+        animate: true
+      });
+
+      magicGrid.listen();
     }
     catch(err){
       self.err = err.message;
@@ -227,7 +245,12 @@ export default {
 
 <style scoped>
   .admin-ext-posts{
-    transition: all 0.3s ease
+    max-width: 1920px;
+    margin: auto;
+    padding: 10px;
+    overflow: auto;
+    background-color: white;
+    transition: all 0.3s ease;
   }
 
   .new-ext-post .new-ext-action{
@@ -317,20 +340,21 @@ export default {
   }
 
   .ext-post{
-    position: relative;
-    width: 800px;
-    margin: 0 auto 40px;
+    position: absolute;
+    width: 450px;
+    background-color: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.2s ease;
   }
 
   .ext-post:hover{
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background-color: whitesmoke;
   }
 
   .ext-post .ext-action{
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     z-index: 1;
     border-radius: 50%;
     background-color: white;
@@ -350,26 +374,26 @@ export default {
   }
 
   .ext-post .ext-action svg{
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     color: darkgray;
   }
 
   .ext-post .ext-delete{
-    top: 20px;
-    left: 20px;
+    top: 16px;
+    left: 16px;
   }
 
   .ext-post .ext-update{
-    top: 20px;
-    left: 80px;
+    top: 16px;
+    left: 64px;
   }
 
   .ext-post .ext-rank{
     position: absolute;
-    left: 20px;
-    top: 350px;
-    font-size: 14px;
+    left: 16px;
+    top: 170px;
+    font-size: 12px;
     background-color: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     padding: 5px;
@@ -378,8 +402,8 @@ export default {
   .ext-post .ext-rank input{
     outline: none;
     border: none;
-    width: 30px;
-    font-size: 14px;
+    width: 26px;
+    font-size: 12px;
     font-family: inherit;
     text-align: center;
   }
@@ -395,26 +419,35 @@ export default {
   .ext-post .ext-image{
     position: relative;
     width: 100%;
-    height: 400px;
+    height: 216px;
   }
 
   .ext-post .ext-image img{
     width: 100%;
-    height: 400px;
+    height: 100%;
+    border-radius: 2px;
   }
 
   .ext-post .ext-content{
-    color: #454547;
-    padding: 20px;
+    padding: 10px;
+  }
+
+  .ext-post .ext-title, .ext-post .ext-description{
+    width: fit-content;
+    width: -moz-fit-content;
+    font-weight: bold;
   }
 
   .ext-post .ext-title{
-    padding-bottom: 10px;
-    font-size: 20px;
+    margin: 0 0 8px;
+    font-size: 14px;
+    color: #24292e;
+    border-bottom: 2px solid #42b983;
   }
 
   .ext-post .ext-description{
-    font-size: 16px;
+    font-size: 12px;
+    color: #494d50;
   }
 
 </style>

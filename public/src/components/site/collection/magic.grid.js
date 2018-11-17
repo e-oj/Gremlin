@@ -187,4 +187,3 @@ function getMax(cols){
 
   return max;
 }
-
