@@ -69,8 +69,8 @@
 
 <script>
 import {readFiles} from "../../../../public.utils";
+import MagicGrid from "magic-grid";
 
-let MagicGrid = require("magic-grid");
 let magicGrid;
 
 export default {
@@ -149,7 +149,6 @@ export default {
         self.posts.splice(post.index, 1, updated)
       }
       catch (err) {
-        console.log(err);
         self.err = err.message || err.body.message;
       }
     },
@@ -231,6 +230,7 @@ export default {
       magicGrid = new MagicGrid({
         container: ".ext-grid",
         items: self.posts.length,
+        gutter: 35,
         maxColumns: 3,
         animate: true
       });

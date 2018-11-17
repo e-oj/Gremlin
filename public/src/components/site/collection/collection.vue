@@ -34,7 +34,7 @@
 
 <script>
 import Nav from "../nav";
-import MagicGrid from "./magic.grid";
+import MagicGrid from "magic-grid"
 
 export default {
   data(){
@@ -82,8 +82,7 @@ export default {
       self.$nextTick(() => {
         new MagicGrid({
           container: ".client-ext-content",
-          item: ".ext-post",
-          size: self.posts.length,
+          items: self.posts.length,
           gutter: 35,
           maxColumns: 3
         }).listen();
@@ -107,17 +106,12 @@ export default {
   }
 
   .client-ext-content{
-    position: relative;
     top: 130px;
     padding-bottom: 20px;
   }
 
   .ext-post{
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 450px;
-    margin: 0 17px;
     background-color: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.2s ease;
