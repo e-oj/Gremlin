@@ -149,6 +149,7 @@ export default {
         self.posts.splice(post.index, 1, updated)
       }
       catch (err) {
+        console.log(err);
         self.err = err.message || err.body.message;
       }
     },
