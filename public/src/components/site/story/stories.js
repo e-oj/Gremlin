@@ -35,7 +35,7 @@ export default [
     "<a href='https://www.npmjs.com/package/magic-grid' target='_blank'>NPM</a>. " +
     "You can find out more about the implementation " +
     "<a href='https://codeburst.io/magic-grid-f8e2221e7cef' target='_blank'>on Codeburst</a>.",
-    imageURL: "http://drive.google.com/uc?export=view&id=172ESPZDwQIf7vLMelun-_4RaWD_-j94-"
+    imageURL: "https://drive.google.com/uc?export=view&id=172ESPZDwQIf7vLMelun-_4RaWD_-j94-"
   },
   {
     title: "Personal Website",
