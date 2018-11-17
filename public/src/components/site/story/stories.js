@@ -1,6 +1,5 @@
 export default [
   {
-    _id: 0,
     title: "Rochester Institute of Technology",
     subtitle: "Computing Student, B.S (May 2019)",
     description: "My time at RIT has presented me with a myriad " +
@@ -17,7 +16,28 @@ export default [
     image: "rit.jpg"
   },
   {
-    _id: 1,
+    title: "Magic Grid",
+    subtitle: "Author (November 2018)",
+    description: "<a href='https://www.github.com/e-oj/Magic-Grid' target='_blank'>Magic Grid</a> " +
+    "is a simple, lightweight Javascript library for creating " +
+    "dynamic grid layouts. The code is open-source and can be found on my " +
+    "<a href='https://github.com/e-oj' target='_blank'>GitHub account</a>. " +
+    "I was working on the " +
+    "<a href='/links' target='_blank'>links page</a> " +
+    "for this site and needed a responsive grid that could accommodate items of " +
+    "varying heights. This wasn't the first time I'd encountered this need. A few years " +
+    "back, I was working on a social app that organized posts in a grid on the user's homepage." +
+    "The app was built with " +
+    "<a href='https://angularjs.org/' target='_blank'>the old AngularJS</a> " +
+    "and the grid implementation was tightly coupled with other components in the view. " +
+    "I decided to rewrite the functionality in plain Javascript and make it reusable. After " +
+    "applying it to this site, I figured it could be a useful tool and published it on " +
+    "<a href='https://www.npmjs.com/package/magic-grid' target='_blank'>NPM</a>. " +
+    "You can find out more about the implementation " +
+    "<a href='https://codeburst.io/magic-grid-f8e2221e7cef' target='_blank'>on Codeburst</a>.",
+    imageURL: "http://drive.google.com/uc?export=view&id=172ESPZDwQIf7vLMelun-_4RaWD_-j94-"
+  },
+  {
     title: "Personal Website",
     subtitle: "Web Developer (October 2018)",
     description: "Sometime ago, I decided to create a website that would serve " +
@@ -48,7 +68,6 @@ export default [
     image: "e-oj.png"
   },
   {
-    _id: 2,
     title: "Stör",
     subtitle: "Co-Founder/Tech Lead (September 2017)",
     description: "Stör is a platform that connects people who have extra space " +
@@ -65,7 +84,6 @@ export default [
     image: "stor.png"
   },
   {
-    _id: 3,
     title: "Grabity",
     subtitle: "Author (September 2017)",
     description: "<a href='https://www.github.com/e-oj/grabity' target='_blank'>" +
@@ -87,7 +105,6 @@ export default [
     image: "grabity.png"
   },
   {
-    _id: 4,
     title: "Enel X",
     subtitle: "Software Engineering Intern (May 2016 - August 2016)",
     description: "In the summer of 2016, I was a software engineering " +
@@ -104,7 +121,6 @@ export default [
     image: "enel-x.jpg"
   },
   {
-    _id: 5,
     title: "Fawn",
     subtitle: "Author (May 2016)",
     description: "<a href='https://www.github.com/e-oj/Fawn' target='_blank'>Fawn</a> " +
@@ -125,7 +141,6 @@ export default [
     image: "fawn.png"
   },
   {
-    _id: 6,
     title: "Information Sciences and Technologies",
     subtitle: "Teaching Assistant (September 2015 - May 2016)",
     description: "I worked as a TA for both of the courses in the IST java " +

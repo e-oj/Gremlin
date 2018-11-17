@@ -9,7 +9,7 @@
         <div class="s-nav">
           <div v-for="(story, i) in stories"
                :class="['s-nav-item', {'s-nav-active': isActive(i)}]"
-               :key="story._id"
+               :key="i"
                @click="setActive(i)">
 
             <div class="s-nav-title">{{story.title}}</div>
@@ -19,7 +19,8 @@
 
         <div class="s-card">
           <div class="s-image">
-            <img :src="`/src/assets/img/stories/${currentStory.image}`">
+            <img v-if="currentStory.image" :src="`/src/assets/img/stories/${currentStory.image}`">
+            <img v-if="currentStory.imageURL" :src="currentStory.imageURL">
           </div>
 
           <div class="s-body">
@@ -32,12 +33,13 @@
 
 
       <div class="mobile-stories">
-        <div v-for="(story, i) in stories" :key="story._id"
+        <div v-for="(story, i) in stories" :key="i"
              :class="['s-card', {'mobile-active': isActive(i)}]"
              @click="setActive(i)">
 
           <div class="s-image" v-show="isActive(i)">
-            <img :src="`/src/assets/img/stories/${story.image}`">
+            <img v-if="story.image" :src="`/src/assets/img/stories/${story.image}`">
+            <img v-if="story.imageURL" :src="story.imageURL">
           </div>
 
           <div class="s-body">
