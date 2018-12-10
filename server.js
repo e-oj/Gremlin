@@ -40,6 +40,10 @@ app.use(cors());
 
 app.use("/api", apiRouter);
 
+app.use("/flu", (req, res) => {
+  res.sendFile(`${STATIC}/flu/index.html`)
+});
+
 app.use("*", (req, res) => {
   res.sendFile(`${STATIC}/index.html`);
 });
