@@ -35,7 +35,7 @@
     "eslint": "^5.9.0",
     "eslint-plugin-vue": "^4.7.1",
     "file-loader": "^2.0.0",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "npm": "^6.4.1",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.17",
