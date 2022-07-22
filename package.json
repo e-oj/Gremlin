@@ -25,7 +25,7 @@
     "fawn": "^2.1.5",
     "ffmpeg-static": "2.0.0",
     "ffprobe-static": "2.0.0",
-    "file-type": "^9.0.0",
+    "file-type": "^16.5.4",
     "fluent-ffmpeg": "^2.1.2",
     "gridfs-stream": "1.1.1",
     "helmet": "^3.14.0",
